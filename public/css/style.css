@@ -1,36 +1,40 @@
-  body{
-    background-image: url('../images/ShoppingBG.jpg');
+body {
+    background-image: url("../images/bg.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
 }
 
 button {
-    background-color: #0d1430;
-    border: none;
-    padding: 1rem;
-    font-size: 1rem;
-    width: 7em;
-    border-radius: 1rem;
-    color: #eee;
-    box-shadow: 0 0.4rem #dfd9d9;
+    padding: 10px 33px;
+    border-radius: 50px;
     cursor: pointer;
+    border: 0;
+    background-color: white;
+    box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-size: 15px;
+    transition: all 0.5s ease;
     margin: 3px;
-    transition: 0.2s ease-in-out;
+}
+
+button:hover {
+    letter-spacing: 3px;
+    background-color: hsl(204deg, 57%, 46%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(50, 130, 184) 0px 7px 29px 0px;
 }
 
 button:active {
-    color: white;
-    box-shadow: 0 0.2rem #dfd9d9;
-    transform: translateY(0.2rem);
+    letter-spacing: 3px;
+    background-color: hsl(204deg, 57%, 46%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(50, 130, 184) 0px 0px 0px 0px;
+    transform: translateY(10px);
+    transition: 100ms;
 }
 
-button:hover:not(:disabled) {
-    background: #6ad6a5;
-    color: #0d1430;
-}
-
-button:disabled {
-    cursor: auto;
-    color: grey;
+.bg-dark-alpha {
+    background-color: rgba(0, 0, 0, 0.199);
 }
