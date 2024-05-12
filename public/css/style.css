@@ -35,6 +35,16 @@ button:active {
     transition: 100ms;
 }
 
+.btn-cancel:hover{
+    background-color: hsl(7deg, 99%, 48%);
+    box-shadow: rgb(246, 28, 1) 0px 7px 29px 0px;
+}
+
+.btn-cancel:active{
+    background-color: hsl(7deg, 99%, 48%);
+    box-shadow: rgb(246, 28, 1) 0px 7px 29px 0px;
+}
+
 .bg-dark-alpha {
     background-color: rgba(0, 0, 0, 0.199);
 }
