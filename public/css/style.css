@@ -6,7 +6,7 @@ body {
 }
 
 button {
-    padding: 10px 33px;
+    padding: 10px 15px;
     border-radius: 50px;
     cursor: pointer;
     border: 0;
@@ -47,4 +47,17 @@ button:active {
 
 .bg-dark-alpha {
     background-color: rgba(0, 0, 0, 0.199);
+}
+
+.fas-icon{
+    width: 30px;
+    margin: 5px;
+}
+
+.card-responsive{
+    min-width: 200px;
+}
+
+@media screen and (max-width: 1260px) {
+    
 }
