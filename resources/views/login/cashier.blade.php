@@ -8,12 +8,12 @@
                 <div class="modal-body">
 
                     <div class="mb-3">
-                        <label for="email" class="form-label">Username</label>
-                        <input type="email" class="form-control" id="email">
+                        <label for="cashier_username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="cashier_username">
                     </div>
                     <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="username">
+                        <label for="cashier_password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="cashier_password">
                     </div>
                 </div>
                 <div class="modal-footer border-top-0">
