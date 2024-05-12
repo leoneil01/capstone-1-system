@@ -1,7 +1,7 @@
 @extends('layout.main')
 @section('content')
     <div class="position-absolute top-50 start-50 translate-middle">
-        <div class="card" style="max-width: 740px;">
+        <div class="card border-0 bg-dark-alpha text-white" style="max-width: 740px;">
             <div class="row g-0">
                 <div class="col-md-6">
                     <div class="carousel slide" data-bs-ride="carousel">
@@ -30,7 +30,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 d-flex align-items-end pb-4">
+                <div class="col-md-6 d-flex align-items-center">
                     <div class="card-body">
                         <h1 class="card-title">Laravel POS System</h1>
                         <p class="card-text">Please select your role.</p>
