@@ -1,4 +1,6 @@
 @extends('layout.main')
+@extends('login.admin')
+@extends('login.cashier')
 @section('content')
     <div class="position-absolute top-50 start-50 translate-middle">
         <div class="card border-0 bg-dark-alpha text-white" style="max-width: 740px;">
@@ -35,8 +37,8 @@
                         <h1 class="card-title">Laravel POS System</h1>
                         <p class="card-text">Please select your role.</p>
                         <div class="d-flex flex-row flex-wrap justify-content-center">
-                            <button>Admin</button>
-                            <button>Cashier</button>
+                            <button data-bs-toggle="modal" data-bs-target="#adminLoginModal">Admin</button>
+                            <button data-bs-toggle="modal" data-bs-target="#cashierLoginModal">Cashier</button>
                         </div>
                     </div>
                 </div>
