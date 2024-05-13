@@ -1,8 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&display=swap");
+
 body {
     background-image: url("../images/bg.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+}
+
+* {
+    font-family: "Arimo", sans-serif;
+}
+
+:root{
+    --primary: #fff;
+    --secondary: #222;
+    --blue: rgb(50, 130, 184);
+    --red: rgb(246, 28, 1);
+    --dark-alpha: rgba(0, 0, 0, 0.199);
 }
 
 button {
@@ -21,43 +35,130 @@ button {
 
 button:hover {
     letter-spacing: 3px;
-    background-color: hsl(204deg, 57%, 46%);
+    background-color: var(--blue);
     color: hsl(0, 0%, 100%);
-    box-shadow: rgb(50, 130, 184) 0px 7px 29px 0px;
+    box-shadow: var(--blue) 0px 7px 29px 0px;
 }
 
 button:active {
     letter-spacing: 3px;
-    background-color: hsl(204deg, 57%, 46%);
+    background-color: var(--blue);
     color: hsl(0, 0%, 100%);
-    box-shadow: rgb(50, 130, 184) 0px 0px 0px 0px;
+    box-shadow: var(--blue) 0px 0px 0px 0px;
     transform: translateY(10px);
     transition: 100ms;
 }
 
-.btn-cancel:hover{
-    background-color: hsl(7deg, 99%, 48%);
-    box-shadow: rgb(246, 28, 1) 0px 7px 29px 0px;
+.btn-cancel:hover {
+    background-color: var(--red);
+    box-shadow: var(--red) 0px 7px 29px 0px;
 }
 
-.btn-cancel:active{
-    background-color: hsl(7deg, 99%, 48%);
-    box-shadow: rgb(246, 28, 1) 0px 7px 29px 0px;
+.btn-cancel:active {
+    background-color: var(--red);
+    box-shadow: var(--red) 0px 7px 29px 0px;
 }
 
 .bg-dark-alpha {
-    background-color: rgba(0, 0, 0, 0.199);
+    background-color: var(--dark-alpha);
 }
 
-.fas-icon{
+.fas-icon {
     width: 30px;
     margin: 5px;
 }
 
-.card-responsive{
+.card-responsive {
     min-width: 200px;
 }
 
+.sidenav{
+    position: fixed;
+    width: 300px;
+    height: 100%;
+    background: var(--dark-alpha);
+    border-left: 10px solid var(--dark-alpha);
+    transition: 0.5s;
+    overflow: hidden;
+}
+
+.sidenav-header{
+    position: relative;
+}
+
+.sidenav ul{
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.sidenav ul li{
+    position: relative;
+    width: 100%;
+    list-style: none;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.sidenav ul li:hover{
+    background-color: var(--primary);
+}
+
+.sidenav ul li:hover a::before{
+    content: '';
+    position: absolute;
+    right: 0;
+    top: -50px;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border-radius: 50%;
+    box-shadow: 35px 35px 0 10px var(--primary);
+}
+
+.sidenav ul li:hover a::after{
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -50px;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border-radius: 50%;
+    box-shadow: 35px -35px 0 10px var(--primary);
+}
+
+.sidenav ul li a{
+    position: relative;
+    display: block;
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    color: var(--primary);
+}
+
+.sidenav ul li:hover a{
+    color: var(--secondary);
+}
+
+.sidenav ul li a .sidenav-icon{
+    position: relative;
+    display: block;
+    min-width: 60px;
+    line-height: 60px;
+    text-align: center;
+}
+
+.sidenav ul li a .sidenav-title{
+    position: relative;
+    display: block;
+    padding: 0 10px;
+    height: 60px;
+    line-height: 60px;
+    text-align: start;
+    white-space: nowrap;
+}
+
 @media screen and (max-width: 1260px) {
-    
 }
