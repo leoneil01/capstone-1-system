@@ -4,21 +4,28 @@
             <div class="modal-header border-bottom-0">
                 <h1 class="modal-title fs-5" id="adminLoginModalLabel">Admin Login</h1>
             </div>
-            <form>
+            <form action="/process/login" method="POST">
+                @csrf
                 <div class="modal-body">
 
                     <div class="mb-3">
-                        <label for="admin_username" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="admin_username">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username">
+                        @error('username')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="admin_password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="admin_password">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password">
+                        @error('password')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
                 <div class="modal-footer border-top-0">
                     <button type="button" class="btn-cancel" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button">Login</button>
+                    <button type="submit">Login</button>
                 </div>
             </form>
         </div>

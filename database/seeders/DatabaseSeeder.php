@@ -34,8 +34,8 @@ class DatabaseSeeder extends Seeder
             'first_name' => 'Juan',
             'middle_name' => 'Santos',
             'last_name' => 'Dela Cruz',
-            'gender_id' => fake()->numberBetween($min = 1, $max = 2),
-            'role_id' => fake()->numberBetween($min = 1, $max = 2),
+            'gender_id' => 1,
+            'role_id' => 1,
             'email_address' => fake()->safeEmail(),
             'username' => 'juan',
             'password' => bcrypt('1')
