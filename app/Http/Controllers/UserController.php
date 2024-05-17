@@ -14,7 +14,7 @@ class UserController extends Controller
     {
         //
 
-        $users = User::join('genders', 'users.gender_id', '=', 'genders.gender_id')
+        $users = User::leftjoin('genders', 'users.gender_id', '=', 'genders.gender_id')
         ->orderBy('users.first_name');
 
         return view('admin.index', compact('users'));
