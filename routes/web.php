@@ -3,6 +3,8 @@
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Auth;
 
 // Route::get('/', function () {
 //     return view('index');
@@ -25,6 +27,9 @@ Route::group(['middleware' => 'auth'], function() {
     });
 
     Route::get('/admin', function () {
+        $firstName = Auth::user()->first_name;
+
+        Alert::toast('Welcome, ' . $firstName . '!', 'Toast Type');
         return view('admin.index');
     });
 });
