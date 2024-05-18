@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id('supplier_id');
             $table->string('supplier_name', 55);
             $table->string('contact_name', 55);
-            $table->string('address', 55);
-            $table->string('postal_code', 255);
-            $table->string('country', 55);
+            $table->string('address', 255);
+            $table->string('postal_code', 255)->nullable();
+            $table->string('country', 255)->nullable();
             $table->string('contact_number', 55);
             $table->timestamps();
         });
