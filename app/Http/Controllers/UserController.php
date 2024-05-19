@@ -15,7 +15,7 @@ class UserController extends Controller
         //
 
         $users = User::leftjoin('genders', 'users.gender_id', '=', 'genders.gender_id')
-        ->orderBy('users.first_name');
+            ->orderBy('users.first_name');
 
         return view('admin.index', compact('users'));
     }
@@ -68,11 +68,18 @@ class UserController extends Controller
         //
     }
 
-    public function login() {
+    public function login()
+    {
         return view('index');
     }
 
-    public function processLogin(Request $request, $role) {
+    public function processLogin(Request $request, $role)
+    {
+        //This code sets the 'showLoginModal" session variable to the value of $role.
+        //This allows the $role to be accessed in the view if the validation fails.
+        //The $role will be used to ensure that only the appropriate modal is toggled.
+        session(['showLoginModal' => $role]);
+
         $validated = $request->validate([
             'username' => ['required'],
             'password' => ['required']
@@ -82,16 +89,18 @@ class UserController extends Controller
             ->where('username', $validated['username'])
             ->first();
 
-        if($user && auth()->attempt($validated)) {
-            if($user->role_id == $role) {
+        if ($user && auth()->attempt($validated)) {
+            if ($user->role_id == $role) {
                 auth()->login($user);
                 $request->session()->regenerate();
                 return redirect('/' . ($role == 1 ? 'admin' : 'cashier'));
             } else {
-                return back()->with('message_error', 'Your role does not have access to this system.');
+                return back()->with('message_error', 'Your role does not have access to this system.')
+                    ->with('showLoginModal', $role); //Toggles the modal again.
             }
         } else {
-            return back()->with('message_error', 'The provided credentials do not match our records.');
+            return back()->with('message_error', 'The provided credentials do not match our records.')
+                ->with('showLoginModal', $role); //Toggles the modal again.
         }
     }
 }
