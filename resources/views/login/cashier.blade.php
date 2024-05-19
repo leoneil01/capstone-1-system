@@ -24,3 +24,13 @@
         </div>
     </div>
 </div>
+@if('showLoginModal' == 2 || ($errors->any() && ($errors->any() && session('showLoginModal') == 2))) {{-- Checks if the role of show modal is cashier and there are any errors--}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var myModal = new bootstrap.Modal(document.getElementById('adminLoginModal'), {
+                backdrop: 'static'
+            });
+            myModal.show();
+        });
+    </script>
+@endif

@@ -7,7 +7,6 @@
             <form action="/process/login" method="POST">
                 @csrf
                 <div class="modal-body">
-
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
                         <input type="text" class="form-control" id="username" name="username">
@@ -31,3 +30,14 @@
         </div>
     </div>
 </div>
+
+@if('showLoginModal' == 1 || ($errors->any() && session('showLoginModal') == 1)) {{-- Checks if the role of show modal is admin and there are any errors--}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var adminModal = new bootstrap.Modal(document.getElementById('adminLoginModal'), {
+                backdrop: 'static'
+            });
+            adminModal.show();
+        });
+    </script>
+@endif
