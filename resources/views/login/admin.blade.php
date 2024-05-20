@@ -4,7 +4,7 @@
             <div class="modal-header border-bottom-0">
                 <h1 class="modal-title fs-5" id="adminLoginModalLabel">Admin Login</h1>
             </div>
-            <form action="/process/login" method="POST">
+            <form action="/process/login/admin" method="POST">
                 @csrf
                 <div class="modal-body">
 
