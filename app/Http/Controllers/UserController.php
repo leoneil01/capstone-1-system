@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -88,10 +89,12 @@ class UserController extends Controller
                 $request->session()->regenerate();
                 return redirect('/' . ($role == 1 ? 'admin' : 'cashier'));
             } else {
-                return back()->with('message_error', 'Your role does not have access to this system.');
+                alert()->error('Error', 'Your role does not have access to this system.');
+                return back();
             }
         } else {
-            return back()->with('message_error', 'The provided credentials do not match our records.');
+            alert()->error('Error', 'The provided credentials do not match our records.');
+            return back();
         }
     }
 }
