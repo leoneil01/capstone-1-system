@@ -1,7 +1,7 @@
 @extends('layout.main')
 @extends('login.admin')
 @extends('login.cashier')
-@section('content')
+@section('login')
     <title>POS System</title>
     <div class="position-absolute top-50 start-50 translate-middle">
         <div class="card border-0 bg-dark-alpha text-white card-responsive" style="max-width: 900px;">
