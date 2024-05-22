@@ -8,11 +8,17 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="">
+
+    <div class="main">
         @yield('content')
-        <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
-        <script src="js/script.js"></script>
     </div>
+
+    <div class="login-page">
+        @yield('login')
+    </div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
 
     @include('sweetalert::alert')
 </body>
