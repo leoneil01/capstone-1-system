@@ -1,11 +1,12 @@
-let links = document.querySelectorAll(".sidenav li");
+let toggle = document.querySelector(".toggle");
+let navigation = document.querySelector(".sidenav");
+let main = document.querySelector(".main");
+let logo_title = document.querySelector(".logo-title");
+let logo = document.querySelector(".logo")
 
-function activeLink(){
-    links.forEach((item) => {
-        item.classList.remove("hovered");
-    });
-
-    this.classList.add("hovered");
+toggle.onclick = function() {
+    navigation.classList.toggle("active");
+    main.classList.toggle('active');
+    logo_title.classList.toggle('hide');
+    logo.classList.toggle('active')
 }
-
-links.forEach((item) => item.addEventListener("mouseover", activeLink))
