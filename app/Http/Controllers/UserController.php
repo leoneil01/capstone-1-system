@@ -96,21 +96,12 @@ class UserController extends Controller
                 $request->session()->regenerate();
                 return redirect('/' . ($role == 1 ? 'admin' : 'cashier'));
             } else {
-<<<<<<< HEAD
-                return back()->with('message_error', 'Your role does not have access to this system.')
-                    ->with('showLoginModal', $role); //Toggles the modal again.
-            }
-        } else {
-            return back()->with('message_error', 'The provided credentials do not match our records.')
-                ->with('showLoginModal', $role); //Toggles the modal again.
-=======
                 alert()->error('Error', 'Your role does not have access to this system.');
                 return back();
             }
         } else {
             alert()->error('Error', 'The provided credentials do not match our records.');
             return back();
->>>>>>> e45ed93 (add sweetalert when error detected)
         }
     }
 }
