@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -14,6 +15,8 @@ class UserController extends Controller
     public function index(Request $request)
     {
         //
+        $firstName = Auth::user()->first_name;
+        Alert::toast('Welcome, ' . $firstName . '!', 'Toast Type');
 
         $users = User::leftjoin('genders', 'users.gender_id', '=', 'genders.gender_id')
         ->orderBy('users.first_name');
