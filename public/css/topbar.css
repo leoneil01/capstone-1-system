@@ -1,0 +1,36 @@
+.topbar{
+    background-color: var(--darker-alpha);
+    color: var(--primary);
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 2.5rem;
+    padding: 0 20px;
+}
+
+.topbar .toggle{
+    z-index: 2;
+}
+
+.topbar .user{
+    display: flex;
+    align-items: center;
+}
+
+.topbar .user .user-img{
+    width: 30px;
+    border-radius: 100%;
+}
+
+.topbar .user .fullname{
+    font-size: 1.2rem;
+    margin-right: 20px;
+}
+
+@media screen and (max-width: 600px) {
+    .fullname{
+        visibility: hidden;
+    }
+}
