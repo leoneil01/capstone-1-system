@@ -1,0 +1,10 @@
+.card-lg{
+    position: relative;
+    background-color: var(--primary);
+    border-radius: 20px;
+    min-height: 300px;
+    padding: 10px;
+    overflow-x: auto;
+    margin: 5px;
+    white-space: nowrap;
+}
