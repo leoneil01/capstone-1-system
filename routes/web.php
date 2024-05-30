@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -42,5 +43,9 @@ Route::group(['middleware' => 'auth'], function() {
 
         Alert::toast('Welcome, ' . $firstName . '!', 'Toast Type');
         return view('admin.index');
+    });
+
+    Route::controller(ProductController::class)->group(function() {
+        Route::get('/admin/products', 'index');
     });
 });
