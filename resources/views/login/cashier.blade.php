@@ -24,8 +24,8 @@
                     </div>
                 </div>
                 <div class="modal-footer border-top-0">
-                    <button type="button" class="btn-cancel" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit">Login</button>
+                    <button class="btn btn-cancel" type="button" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn" type="submit">Login</button>
                 </div>
             </form>
         </div>
