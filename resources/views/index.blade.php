@@ -38,8 +38,8 @@
                         <h1 class="card-title">Laravel POS System</h1>
                         <p class="card-text">Please select your role.</p>
                         <div class="d-flex flex-row flex-wrap justify-content-center">
-                            <button data-bs-toggle="modal" data-bs-target="#adminLoginModal"><x-fas-user-tie class="fas-icon"/>Admin</button>
-                            <button data-bs-toggle="modal" data-bs-target="#cashierLoginModal"><x-fas-cash-register class="fas-icon" />Cashier</button>
+                            <button class="btn" data-bs-toggle="modal" data-bs-target="#adminLoginModal"><x-fas-user-tie class="fas-icon"/>Admin</button>
+                            <button class="btn" data-bs-toggle="modal" data-bs-target="#cashierLoginModal"><x-fas-cash-register class="fas-icon" />Cashier</button>
                         </div>
                     </div>
                 </div>
