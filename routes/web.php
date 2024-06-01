@@ -28,7 +28,7 @@ Route::controller(UserController::class)->group(function() {
 Route::group(['middleware' => 'auth'], function() {
     Route::controller(UserController::class)->group(function() {
         Route::get('/admin', 'admin.index');
-        Route::get('/cashier', 'admin.index');
+        Route::get('/cashier', 'cashier.index');
     });
 
     Route::get('/admin', function () {
@@ -42,7 +42,7 @@ Route::group(['middleware' => 'auth'], function() {
         $firstName = Auth::user()->first_name;
 
         Alert::toast('Welcome, ' . $firstName . '!', 'Toast Type');
-        return view('admin.index');
+        return view('cashier.index');
     });
 
     Route::controller(ProductController::class)->group(function() {
