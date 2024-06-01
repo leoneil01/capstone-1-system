@@ -14,6 +14,16 @@
     z-index: 2;
 }
 
+.topbar .topbar-header{
+    display: flex;
+    align-items: center;
+}
+
+.topbar .topbar-logo{
+    width: 40px;
+    margin-right: 20px;
+}
+
 .topbar .user{
     display: flex;
     align-items: center;
@@ -33,4 +43,8 @@
     .fullname{
         visibility: hidden;
     }
+
+    .topbar .topbar-header{
+        visibility: hidden;
+    }    
 }
