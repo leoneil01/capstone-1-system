@@ -1,4 +1,3 @@
-/*============Main==============*/
 .btn {
     padding: 10px 15px;
     border-radius: 50px;
@@ -55,4 +54,12 @@
 .fab:hover {
     background-color: var(--green);
     box-shadow: var(--green) 0px 7px 29px 0px;
+}
+
+.btn-simple{
+    border: none;
+    width: 200px;
+    height: 50px;
+    background-color: var(--blue);
+    color: white;
 }
