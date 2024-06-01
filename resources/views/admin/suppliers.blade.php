@@ -1,5 +1,5 @@
 @extends('layout.main')
-@section('content')
+@section('admin-content')
     @include('include.sidenav')
     @include('include.topbar')
     <div class="card-lg">
