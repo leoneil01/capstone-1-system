@@ -14,8 +14,12 @@
 </head>
 <body>
 
-    <div class="main">
-        @yield('content')
+    <div class="admin-page">
+        @yield('admin-content')
+    </div>
+
+    <div class="cashier-page">
+        @yield('cashier-content')
     </div>
 
     <div class="login-page">
