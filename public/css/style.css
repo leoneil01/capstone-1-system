@@ -13,9 +13,10 @@ body {
 
 /*==============Colors=============*/
 
-:root{
+:root {
     --primary: #fff;
     --secondary: #222;
+    --tertiary: #e0e0e0;
     --blue: rgb(50, 130, 184);
     --red: rgb(246, 28, 1);
     --green: rgb(1, 246, 21);
@@ -25,7 +26,7 @@ body {
     --darkest-alpha: rgba(0, 0, 0, 0.599);
 }
 
-.main{
+.admin-page {
     position: absolute;
     width: calc(100% - 270px);
     left: 270px;
@@ -33,7 +34,7 @@ body {
     transition: 0.5s;
 }
 
-.main.active{
+.admin-page.active {
     left: 80px;
     width: calc(100% - 80px);
 }
@@ -51,28 +52,119 @@ body {
     min-width: 200px;
 }
 
-.input-search{
+.input-search {
     border: none;
     border-bottom: 1px solid var(--disabled);
 }
 
-.input-search:focus{
+.input-search:focus {
     border: none;
     outline: none;
     border-bottom: 1px solid var(--disabled);
 }
 
-.actions{
+.actions {
     padding: 10px;
 }
 
+.side-panel {
+    position: absolute;
+    height: calc(100vh - 60px);
+    width: 500px;
+    top: 60px;
+    right: 0;
+    background-color: var(--primary);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.side-panel .order-list {
+    padding: 5px 5px 0 5px;
+    position: relative;
+    margin: 10px auto;
+    width: 450px;
+    height: 300px;
+    background-color: var(--tertiary);
+    border-radius: 10px;
+    overflow-x: auto;
+}
+
+.side-panel .order-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.side-panel .order-list ul li {
+    background-color: var(--primary);
+    height: 70px;
+    border-radius: 10px;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.side-panel .order-list ul li img {
+    position: absolute;
+    object-fit: contain;
+    border-radius: 10px;
+}
+.side-panel .order-list ul li .product-details{
+    position: absolute;
+    left: 70px;
+}
+.side-panel .order-list ul li .product-details h1 {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.side-panel .order-list ul li .product-details h2 {
+    font-size: 1rem;
+}
+
+.side-panel .order-list ul li p {
+    position: absolute;
+    right: 10px;
+    font-size: 1rem;
+}
+
+.side-panel .calculator {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.side-panel .calculator input {
+    margin-right: 30px;
+    margin-bottom: 3px;
+    border: none;
+    background-color: black;
+    width: 250px;
+    height: 50px;
+    text-align: center;
+    font-size: 3rem;
+}
+
+.side-panel .calculator label {
+    font-size: 1.5rem;
+}
+
+.side-panel .footer {
+    margin-bottom: 10px;
+    align-self: center;
+}
+
+.text-green {
+    color: var(--green);
+}
+
 @media screen and (max-width: 600px) {
-    .main{
+    .main {
         left: 0;
         width: 100%;
     }
 
-    .main.active{
+    .main.active {
         left: 0;
         width: 100%;
     }
