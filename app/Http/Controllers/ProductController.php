@@ -12,7 +12,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('admin.products');
+        $products = Product::leftjoin('suppliers', 'products.supplier_id', '=', 'suppliers.supplier_id')
+                            ->leftjoin('categories', 'products.category_id', '=', 'categories.category_id')
+                            ->leftjoin('brands', 'products.brand_id', '=', 'brands.brand_id')
+                            ->orderBy('products.product_name')
+                            ->select('products.*', 'suppliers.name as supplier_name', 'categories.name as category_name', 'brands.name as brand_name')
+                            ->get();
+
+        return view('admin.products', compact('products'));
     }
 
     /**
