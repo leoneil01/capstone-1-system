@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
@@ -80,7 +81,6 @@ class UserController extends Controller
         //This allows the $role to be accessed in the view if the validation fails.
         //The $role will be used to ensure that only the appropriate modal is toggled.
         session(['showLoginModal' => $role]);
-
         $validated = $request->validate([
             'username' => ['required'],
             'password' => ['required']
