@@ -15,13 +15,6 @@ class UserController extends Controller
     public function index(Request $request)
     {
         //
-        $firstName = Auth::user()->first_name;
-        Alert::toast('Welcome, ' . $firstName . '!', 'Toast Type');
-
-        $users = User::leftjoin('genders', 'users.gender_id', '=', 'genders.gender_id')
-        ->orderBy('users.first_name');
-
-        return view('admin.index', compact('users'));
     }
 
     /**
@@ -76,7 +69,8 @@ class UserController extends Controller
         return view('index');
     }
 
-    public function processLogin(Request $request, $role) {
+    public function processLogin(Request $request, $role)
+    {
         $validated = $request->validate([
             'username' => ['required'],
             'password' => ['required']
@@ -86,8 +80,8 @@ class UserController extends Controller
             ->where('username', $validated['username'])
             ->first();
 
-        if($user && auth()->attempt($validated)) {
-            if($user->role_id == $role) {
+        if ($user && auth()->attempt($validated)) {
+            if ($user->role_id == $role) {
                 auth()->login($user);
                 $request->session()->regenerate();
                 return redirect('/' . ($role == 1 ? 'admin' : 'cashier'));
