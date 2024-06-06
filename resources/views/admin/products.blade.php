@@ -23,23 +23,26 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Milo</td>
-                    <td>Nestle</td>
-                    <td>Powdered Drink</td>
-                    <td>Nestle</td>
-                    <td>50122115</td>
-                    <td>12.00</td>
-                    <td>100</td>
-                    <td>
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <a href="#" class="btn btn-outline-primary">View</a>
-                            <a href="#" class="btn btn-outline-primary">Edit</a>
-                            <a href="#" class="btn btn-outline-primary">Delete</a>
-                        </div>
-                    </td>
 
-                </tr>
+                @foreach($products as $product)
+                    <tr>
+                        <td>{{ $product->product_name }}</td>
+                        <td>{{ $product->supplier_name }}</td>
+                        <td>{{ $product->category_name }}</td>
+                        <td>{{ $product->brand_name }}</td>
+                        <td>{{ $product->barcode }}</td>
+                        <td>{{ $product->unit_price }}</td>
+                        <td>{{ $product->unit_in_stock }}</td>
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <a href="#" class="btn btn-outline-primary">View</a>
+                                <a href="#" class="btn btn-outline-primary">Edit</a>
+                                <a href="#" class="btn btn-outline-primary">Delete</a>
+                            </div>
+                        </td>
+
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

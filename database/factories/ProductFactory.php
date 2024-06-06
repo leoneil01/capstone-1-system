@@ -18,6 +18,14 @@ class ProductFactory extends Factory
     {
         return [
             //
+
+            'product_name' => fake()->word(),
+            'supplier_id' => fake()->numberBetween($min = 1, $max = 7),
+            'category_id' => fake()->numberBetween($min = 1, $max = 16),
+            'brand_id' => fake()->numberBetween($min = 1, $max = 25),
+            'barcode' => fake()->isbn13(),
+            'unit_price' => fake()->randomFloat($nbMaxDecimals = 2, $min = 5, $max = 1000),
+            'unit_in_stock' => fake()->numberBetween($min = 1, $max = 500)
         ];
     }
 }
