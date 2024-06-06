@@ -45,6 +45,7 @@
                 @endforeach
             </tbody>
         </table>
+        {{$products->links()}}
     </div>
 <!--Floating Action Button-->
 <button class="btn fab">Add Product<x-fas-plus class="fas-icon"/></button>
