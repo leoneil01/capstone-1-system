@@ -17,7 +17,8 @@ class ProductController extends Controller
                             ->leftjoin('brands', 'products.brand_id', '=', 'brands.brand_id')
                             ->orderBy('products.product_name')
                             ->select('products.*', 'suppliers.supplier_name as supplier_name', 'categories.category_name as category_name', 'brands.brand_name as brand_name')
-                            ->get();
+                            ->paginate(7)
+                            ->appends(['search' => request()->get('search')]);
 
         return view('admin.products', compact('products'));
     }
