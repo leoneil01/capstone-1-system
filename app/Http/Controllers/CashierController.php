@@ -22,7 +22,7 @@ class CashierController extends Controller
         $users = User::leftjoin('genders', 'users.gender_id', '=', 'genders.gender_id')
         ->orderBy('users.first_name');
 
-        return view('admin.index', compact('users'));
+        return view('cashier.index', compact('users'));
     }
 
     /**
