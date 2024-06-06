@@ -160,12 +160,12 @@ body {
 }
 
 @media screen and (max-width: 600px) {
-    .main {
+    .admin-page {
         left: 0;
         width: 100%;
     }
 
-    .main.active {
+    .admin-page.active {
         left: 0;
         width: 100%;
     }

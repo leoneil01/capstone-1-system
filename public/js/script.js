@@ -1,6 +1,6 @@
 let toggle = document.querySelector(".toggle");
 let navigation = document.querySelector(".sidenav");
-let main = document.querySelector(".main");
+let main = document.querySelector(".admin-page");
 let logo_title = document.querySelector(".logo-title");
 let logo = document.querySelector(".logo")
 
