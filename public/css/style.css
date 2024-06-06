@@ -98,7 +98,7 @@ body {
 
 .side-panel .order-list ul li {
     background-color: var(--primary);
-    height: 70px;
+    height: 50px;
     border-radius: 10px;
     padding: 5px;
     margin-bottom: 5px;
@@ -108,18 +108,19 @@ body {
     position: absolute;
     object-fit: contain;
     border-radius: 10px;
+    width: 35px;
 }
 .side-panel .order-list ul li .product-details{
     position: absolute;
-    left: 70px;
+    left: 60px;
 }
 .side-panel .order-list ul li .product-details h1 {
-    font-size: 1.5rem;
+    font-size: 1rem;
     margin: 0;
 }
 
 .side-panel .order-list ul li .product-details h2 {
-    font-size: 1rem;
+    font-size: 0.5rem;
 }
 
 .side-panel .order-list ul li p {
@@ -139,10 +140,10 @@ body {
     margin-bottom: 3px;
     border: none;
     background-color: black;
-    width: 250px;
-    height: 50px;
+    width: 200px;
+    height: 35px;
     text-align: center;
-    font-size: 3rem;
+    font-size: 2rem;
 }
 
 .side-panel .calculator label {

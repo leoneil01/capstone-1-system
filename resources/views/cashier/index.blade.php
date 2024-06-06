@@ -16,7 +16,7 @@
         <div class="order-list">
             <ul>
                 <li>
-                    <img src="{{asset("images/sample_image.jpg")}}" alt="Product Image" width="50px" draggable="false">
+                    <img src="{{asset("images/sample_image.jpg")}}" alt="Product Image" draggable="false">
                     <div class="product-details">
                         <h1>Milo</h1>
                         <h2>12.00</h2>
@@ -24,7 +24,7 @@
                     <p>Qty: x5</p>
                 </li>
                 <li>
-                    <img src="{{asset("images/sample_image.jpg")}}" alt="Product Image" width="50px" draggable="false">
+                    <img src="{{asset("images/sample_image.jpg")}}" alt="Product Image" draggable="false">
                     <div class="product-details">
                         <h1>Milo</h1>
                         <h2>12.00</h2>
@@ -32,7 +32,7 @@
                     <p>Qty: x5</p>
                 </li>
                 <li>
-                    <img src="{{asset("images/sample_image.jpg")}}" alt="Product Image" width="50px" draggable="false">
+                    <img src="{{asset("images/sample_image.jpg")}}" alt="Product Image" draggable="false">
                     <div class="product-details">
                         <h1>Milo</h1>
                         <h2>12.00</h2>
@@ -40,7 +40,7 @@
                     <p>Qty: x5</p>
                 </li>
                 <li>
-                    <img src="{{asset("images/sample_image.jpg")}}" alt="Product Image" width="50px" draggable="false">
+                    <img src="{{asset("images/sample_image.jpg")}}" alt="Product Image" draggable="false">
                     <div class="product-details">
                         <h1>Milo</h1>
                         <h2>12.00</h2>
@@ -48,7 +48,31 @@
                     <p>Qty: x5</p>
                 </li>
                 <li>
-                    <img src="{{asset("images/sample_image.jpg")}}" alt="Product Image" width="50px" draggable="false">
+                    <img src="{{asset("images/sample_image.jpg")}}" alt="Product Image" draggable="false">
+                    <div class="product-details">
+                        <h1>Milo</h1>
+                        <h2>12.00</h2>
+                    </div>
+                    <p>Qty: x5</p>
+                </li>
+                <li>
+                    <img src="{{asset("images/sample_image.jpg")}}" alt="Product Image" draggable="false">
+                    <div class="product-details">
+                        <h1>Milo</h1>
+                        <h2>12.00</h2>
+                    </div>
+                    <p>Qty: x5</p>
+                </li>
+                <li>
+                    <img src="{{asset("images/sample_image.jpg")}}" alt="Product Image" draggable="false">
+                    <div class="product-details">
+                        <h1>Milo</h1>
+                        <h2>12.00</h2>
+                    </div>
+                    <p>Qty: x5</p>
+                </li>
+                <li>
+                    <img src="{{asset("images/sample_image.jpg")}}" alt="Product Image" draggable="false">
                     <div class="product-details">
                         <h1>Milo</h1>
                         <h2>12.00</h2>
