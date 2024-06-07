@@ -20,7 +20,7 @@ class ProductController extends Controller
                             ->paginate(7)
                             ->appends(['search' => request()->get('search')]);
 
-        return view('admin.products', compact('products'));
+        return view('products.index', compact('products'));
     }
 
     /**
