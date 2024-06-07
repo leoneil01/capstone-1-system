@@ -4,6 +4,16 @@
     @include('include.topbar')
     <div class="card-lg">
         <table class="table">
+            <div class="card-header">
+                <form action="" method="post">
+                    <input type="text" class="input-search" placeholder="Search user...">
+                    <button class="btn-search"><x-fas-search class="fas-icon" /></button>
+                </form>
+                <button class="action" data-bs-toggle="modal" data-bs-target="#createUser">
+                    Add User
+                    <x-fas-plus class="fas-icon" />
+                </button>
+            </div>
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Fullname</th>
@@ -40,6 +50,7 @@
             </tbody>
         </table>
     </div>
+@extends('users.create')
 @extends('users.show')
 @extends('users.edit')
 @extends('users.delete')
