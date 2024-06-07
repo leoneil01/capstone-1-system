@@ -3,11 +3,15 @@
     @include('include.sidenav')
     @include('include.topbar')
     <div class="card-lg">
-        <div class="actions">
+        <div class="card-header">
             <form action="" method="post">
-                <input type="text" class="input-search" placeholder="Search..."><button class="btn-search"><x-fas-search
-                        class="fas-icon" /></button>
+                <input type="text" class="input-search" placeholder="Search...">
+                <button class="btn-search"><x-fas-search class="fas-icon" /></button>
             </form>
+            <button class="action" data-bs-toggle="modal" data-bs-target="#createProduct">
+                Add Product
+                <x-fas-plus class="fas-icon" />
+            </button>
         </div>
         <table class="table">
             <thead class="thead-dark">
@@ -24,7 +28,7 @@
             </thead>
             <tbody>
 
-                @foreach($products as $product)
+                @foreach ($products as $product)
                     <tr>
                         <td>{{ $product->product_name }}</td>
                         <td>{{ $product->supplier_name }}</td>
@@ -35,9 +39,12 @@
                         <td>{{ $product->unit_in_stock }}</td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#showProduct">View</button>
-                                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editProduct">Edit</button>
-                                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#deleteProduct">Delete</button>
+                                <button class="btn btn-outline-primary" data-bs-toggle="modal"
+                                    data-bs-target="#showProduct">View</button>
+                                <button class="btn btn-outline-primary" data-bs-toggle="modal"
+                                    data-bs-target="#editProduct">Edit</button>
+                                <button class="btn btn-outline-primary" data-bs-toggle="modal"
+                                    data-bs-target="#deleteProduct">Delete</button>
                             </div>
                         </td>
 
@@ -46,13 +53,11 @@
             </tbody>
         </table>
         <div class="paginator">
-            {{$products->links()}}
+            {{ $products->links() }}
         </div>
     </div>
-<!--Floating Action Button-->
-<button class="btn fab">Add Product</button>
-
-@extends('products.show')
-@extends('products.edit')
-@extends('products.delete')
+    @extends('products.create')
+    @extends('products.show')
+    @extends('products.edit')
+    @extends('products.delete')
 @endsection
