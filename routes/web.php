@@ -41,5 +41,9 @@ Route::group(['middleware' => 'auth'], function() {
     Route::controller(ProductController::class)->group(function() {
         Route::get('/admin/products', 'index');
     });
+
+    Route::controller(UserController::class)->group(function() {
+        Route::get('/admin/users', 'index');
+    });
 });
 
