@@ -40,11 +40,12 @@
 
 .fab{
     align-items: center;
-    position: absolute;
+    position: fixed;
     background-color: var(--green);
     color: var(--secondary);
     right: 40px;
     bottom: 50px;
+    z-index: 8;
 }
 
 .fab .fas-icon{
