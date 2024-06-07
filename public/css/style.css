@@ -52,21 +52,6 @@ body {
     min-width: 200px;
 }
 
-.input-search {
-    border: none;
-    border-bottom: 1px solid var(--disabled);
-}
-
-.input-search:focus {
-    border: none;
-    outline: none;
-    border-bottom: 1px solid var(--disabled);
-}
-
-.actions {
-    padding: 10px;
-}
-
 .paginator{
     max-width: 500px;
 }
