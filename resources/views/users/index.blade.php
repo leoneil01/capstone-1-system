@@ -13,22 +13,26 @@
                     <th scope="col">Birthdate</th>
                     <th scope="col">Email</th>
                     <th scope="col">Username</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>{{$user->first_name . " " . substr($user->middle_name, 0, 1) . ". " . $user->last_name}}</td>
-                    <td>No</td>
-                    <td>Powdered Drink</td>
-                    <td>Nestle</td>
-                    <td>50122115</td>
-                    <td>12.00</td>
-                    <td>100</td>
+                    <td>Juan Dela Cruz</td>
+                    <td>Male</td>
+                    <td>Admin</td>
+                    <td>Roxas City</td>
+                    <td>01/01/2024</td>
+                    <td>juan@gmail.com</td>
+                    <td>juan</td>
                     <td>
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <a href="#" class="btn btn-outline-primary">View</a>
-                            <a href="#" class="btn btn-outline-primary">Edit</a>
-                            <a href="#" class="btn btn-outline-primary">Delete</a>
+                            <button class="btn btn-outline-primary" data-bs-toggle="modal"
+                                data-bs-target="#showUser">View</button>
+                            <button class="btn btn-outline-primary" data-bs-toggle="modal"
+                                data-bs-target="#editUser">Edit</button>
+                            <button class="btn btn-outline-primary" data-bs-toggle="modal"
+                                data-bs-target="#deleteUser">Delete</button>
                         </div>
                     </td>
 
@@ -36,4 +40,7 @@
             </tbody>
         </table>
     </div>
+@extends('users.show')
+@extends('users.edit')
+@extends('users.delete')
 @endsection
