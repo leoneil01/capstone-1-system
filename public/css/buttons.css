@@ -40,11 +40,11 @@
 
 .fab{
     align-items: center;
-    position: fixed;
+    position: absolute;
     background-color: var(--green);
     color: var(--secondary);
-    right: 40px;
-    bottom: 50px;
+    right: 20px;
+    top: 20px;
     z-index: 8;
 }
 
