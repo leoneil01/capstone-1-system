@@ -67,6 +67,10 @@ body {
     padding: 10px;
 }
 
+.paginator{
+    max-width: 500px;
+}
+
 .side-panel {
     position: absolute;
     height: calc(100vh - 60px);
