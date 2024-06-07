@@ -35,9 +35,9 @@
                         <td>{{ $product->unit_in_stock }}</td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <a href="#" class="btn btn-outline-primary">View</a>
-                                <a href="#" class="btn btn-outline-primary">Edit</a>
-                                <a href="#" class="btn btn-outline-primary">Delete</a>
+                                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#showProduct">View</button>
+                                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editProduct">Edit</button>
+                                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#deleteProduct">Delete</button>
                             </div>
                         </td>
 
@@ -45,8 +45,14 @@
                 @endforeach
             </tbody>
         </table>
-        {{$products->links()}}
+        <div class="paginator">
+            {{$products->links()}}
+        </div>
     </div>
 <!--Floating Action Button-->
-<button class="btn fab">Add Product<x-fas-plus class="fas-icon"/></button>
+<button class="btn fab">Add Product</button>
+
+@extends('products.show')
+@extends('products.edit')
+@extends('products.delete')
 @endsection
