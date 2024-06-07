@@ -1,4 +1,4 @@
-.card-lg{
+.card-lg {
     position: relative;
     background-color: var(--primary);
     border-radius: 20px;
@@ -7,4 +7,36 @@
     overflow-x: auto;
     margin: 10px;
     white-space: nowrap;
+}
+
+.card-header {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.card-header form{
+    margin-bottom: 0;
+    margin-right: 20px;
+}
+
+.card-header .input-search {
+    border: none;
+    border-bottom: 1px solid var(--disabled);
+}
+
+.card-header .input-search:focus {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid var(--disabled);
+}
+
+.card-header .action {
+    border: none;
+    background: none;
+    color: var(--disabled);
+}
+
+.card-header .action .fas-icon {
+    width: 25px;
 }
