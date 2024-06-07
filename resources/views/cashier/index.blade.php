@@ -6,7 +6,7 @@
             <h3 class="topbar-title">ShopNinja</h3>
         </div>
         <div class="user">
-            <span class="fullname">Full Name</span>
+            <span class="fullname">{{Auth::user()->first_name . ' ' . Auth::user()->last_name}}</span>
             <img src="{{ asset('images/default_profile_image.jpg') }}" alt="User Image" class="user-img" draggable="false">
         </div>
     </div>
