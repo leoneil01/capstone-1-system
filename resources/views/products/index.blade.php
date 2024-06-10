@@ -38,15 +38,15 @@
                         <td>{{ $product->unit_price }}</td>
                         <td>{{ $product->unit_in_stock }}</td>
                         <td>
-                            <div class="btn-group" role="group" aria-label="Basic example">
-                                <button class="btn btn-outline-primary" data-bs-toggle="modal"
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <button class="btn btn-outline-primary" data-bs-toggle="modal"
                                     data-bs-target="#showProduct">View</button>
-                                <button class="btn btn-outline-primary" data-bs-toggle="modal"
-                                    data-bs-target="#editProduct">Edit</button>
-                                <button class="btn btn-outline-primary" data-bs-toggle="modal"
-                                    data-bs-target="#deleteProduct">Delete</button>
-                            </div>
-                        </td>
+        <button class="btn btn-outline-primary" data-bs-toggle="modal"
+            data-bs-target="#editProduct">Edit</button>
+        <button class="btn btn-outline-primary" data-bs-toggle="modal"
+            data-bs-target="#deleteProduct">Delete</button>
+    </div>
+</td>
 
                     </tr>
                 @endforeach
