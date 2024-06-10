@@ -24,13 +24,13 @@
             </a>
         </li>
         <li>
-            <a href="/admin/supplier">
+            <a href="/admin/suppliers">
                 <span class="sidenav-icon"><x-fas-truck-ramp-box class="fas-icon" /></span>
                 <span class="sidenav-title">Supplier</span>
             </a>
         </li>
         <li>
-            <a href="/admin/transaction">
+            <a href="/admin/transactions">
                 <span class="sidenav-icon"><x-fas-receipt class="fas-icon" /></span>
                 <span class="sidenav-title">Transactions</span>
             </a>

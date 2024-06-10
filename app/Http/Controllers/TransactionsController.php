@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Supplier;
+use App\Models\Transactions;
 use Illuminate\Http\Request;
 
-class SupplierController extends Controller
+class TransactionsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('supplier.index');
+        return view('transactions.index');
     }
 
     /**
@@ -34,7 +34,7 @@ class SupplierController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Supplier $supplier)
+    public function show(Transactions $transactions)
     {
         //
     }
@@ -42,7 +42,7 @@ class SupplierController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Supplier $supplier)
+    public function edit(Transactions $transactions)
     {
         //
     }
@@ -50,7 +50,7 @@ class SupplierController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Supplier $supplier)
+    public function update(Request $request, Transactions $transactions)
     {
         //
     }
@@ -58,7 +58,7 @@ class SupplierController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Supplier $supplier)
+    public function destroy(Transactions $transactions)
     {
         //
     }

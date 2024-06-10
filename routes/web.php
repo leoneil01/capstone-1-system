@@ -3,6 +3,8 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CashierController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\TransactionsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -40,6 +42,14 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::controller(ProductController::class)->group(function() {
         Route::get('/admin/products', 'index');
+    });
+
+    Route::controller(SupplierController::class)->group(function() {
+        Route::get('/admin/suppliers', 'index');
+    });
+
+    Route::controller(TransactionsController::class)->group(function() {
+        Route::get('/admin/transactions', 'index');
     });
 
     Route::controller(UserController::class)->group(function() {
