@@ -39,18 +39,9 @@
                         <td>{{ $product->barcode }}</td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
-<<<<<<< HEAD
-                                <button class="btn btn-outline-primary" data-bs-toggle="modal"
-                                    data-bs-target="#showProduct">View</button>
-                                <button class="btn btn-outline-primary" data-bs-toggle="modal"
-                                    data-bs-target="#editProduct">Edit</button>
-                                <button class="btn btn-outline-primary" data-bs-toggle="modal"
-                                    data-bs-target="#deleteProduct">Delete</button>
-=======
                                 <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#showProduct" data-bs-whatever={{$product->product_id}}>View</button>
                                 <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editProduct">Edit</button>
                                 <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#deleteProduct">Delete</button>
->>>>>>> 0feb377 (modify table)
                             </div>
                         </td>
 
