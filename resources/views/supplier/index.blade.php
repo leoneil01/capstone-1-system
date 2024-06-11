@@ -21,21 +21,24 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Coca-Cola Beverages</td>
-                    <td>Taguig, Manila</td>
-                    <td>
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <button class="btn btn-outline-primary" data-bs-toggle="modal"
-                                data-bs-target="#showSupplier">View</button>
-                            <button class="btn btn-outline-primary" data-bs-toggle="modal"
-                                data-bs-target="#editSupplier">Edit</button>
-                            <button class="btn btn-outline-primary" data-bs-toggle="modal"
-                                data-bs-target="#deleteSupplier">Delete</button>
-                        </div>
-                    </td>
+                
+                @foreach($suppliers as $supplier)
+                    <tr>
+                        <td>{{ $supplier->supplier_name}}</td>
+                        <td>{{ $supplier->address}}</td>
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button class="btn btn-outline-primary" data-bs-toggle="modal"
+                                    data-bs-target="#showSupplier">View</button>
+                                <button class="btn btn-outline-primary" data-bs-toggle="modal"
+                                    data-bs-target="#editSupplier">Edit</button>
+                                <button class="btn btn-outline-primary" data-bs-toggle="modal"
+                                    data-bs-target="#deleteSupplier">Delete</button>
+                            </div>
+                        </td>
 
-                </tr>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
