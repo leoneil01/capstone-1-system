@@ -23,22 +23,25 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Juan Dela Cruz</td>
-                    <td>Admin</td>
-                    <td>juan@gmail.com</td>
-                    <td>
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <button class="btn btn-outline-primary" data-bs-toggle="modal"
-                                data-bs-target="#showUser">View</button>
-                            <button class="btn btn-outline-primary" data-bs-toggle="modal"
-                                data-bs-target="#editUser">Edit</button>
-                            <button class="btn btn-outline-primary" data-bs-toggle="modal"
-                                data-bs-target="#deleteUser">Delete</button>
-                        </div>
-                    </td>
 
-                </tr>
+                @foreach($users as $user)
+                    <tr>
+                        <td>{{ $user->first_name . ' ' . $user->last_name }}</td>
+                        <td>{{ $user->role }}</td>
+                        <td>{{ $user->email_address}}</td>
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button class="btn btn-outline-primary" data-bs-toggle="modal"
+                                    data-bs-target="#showUser">View</button>
+                                <button class="btn btn-outline-primary" data-bs-toggle="modal"
+                                    data-bs-target="#editUser">Edit</button>
+                                <button class="btn btn-outline-primary" data-bs-toggle="modal"
+                                    data-bs-target="#deleteUser">Delete</button>
+                            </div>
+                        </td>
+
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
