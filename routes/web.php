@@ -42,18 +42,22 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::controller(ProductController::class)->group(function() {
         Route::get('/admin/products', 'index');
+        Route::get('/admin/product/edit', 'edit');
     });
 
     Route::controller(SupplierController::class)->group(function() {
         Route::get('/admin/suppliers', 'index');
+        Route::get('/admin/supplier/edit', 'edit');
     });
 
     Route::controller(TransactionsController::class)->group(function() {
         Route::get('/admin/transactions', 'index');
+        Route::get('/admin/transaction/edit', 'edit');
     });
 
     Route::controller(UserController::class)->group(function() {
         Route::get('/admin/users', 'index');
+        Route::get('/admin/user/edit', 'edit');
     });
 });
 

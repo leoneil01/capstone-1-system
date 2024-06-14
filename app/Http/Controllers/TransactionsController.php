@@ -44,7 +44,7 @@ class TransactionsController extends Controller
      */
     public function edit(Transactions $transactions)
     {
-        //
+        return view('transactions.edit');
     }
 
     /**
