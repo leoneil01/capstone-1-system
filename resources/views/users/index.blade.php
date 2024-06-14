@@ -6,6 +6,7 @@
         <table class="table">
             <div class="card-header">
                 <form action="" method="post">
+                    @csrf
                     <input type="text" class="input-search" placeholder="Search user...">
                     <button class="btn-search"><x-fas-search class="fas-icon" /></button>
                 </form>
@@ -33,8 +34,7 @@
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <button class="btn btn-outline-primary" data-bs-toggle="modal"
                                     data-bs-target="#showUser">View</button>
-                                <button class="btn btn-outline-primary" data-bs-toggle="modal"
-                                    data-bs-target="#editUser">Edit</button>
+                                <a href="/admin/user/edit" class="btn btn-outline-primary">Edit</a>
                                 <button class="btn btn-outline-primary" data-bs-toggle="modal"
                                     data-bs-target="#deleteUser">Delete</button>
                             </div>
@@ -47,6 +47,5 @@
     </div>
 @extends('users.create')
 @extends('users.show')
-@extends('users.edit')
 @extends('users.delete')
 @endsection

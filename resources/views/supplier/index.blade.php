@@ -18,6 +18,7 @@
                 <tr>
                     <th scope="col">Supplier Name</th>
                     <th scope="col">Address</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,8 +31,7 @@
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <button class="btn btn-outline-primary" data-bs-toggle="modal"
                                     data-bs-target="#showSupplier">View</button>
-                                <button class="btn btn-outline-primary" data-bs-toggle="modal"
-                                    data-bs-target="#editSupplier">Edit</button>
+                                <a href="/admin/supplier/edit" class="btn btn-outline-primary">Edit</a>
                                 <button class="btn btn-outline-primary" data-bs-toggle="modal"
                                     data-bs-target="#deleteSupplier">Delete</button>
                             </div>
@@ -44,6 +44,5 @@
     </div>
 @extends('supplier.create')
 @extends('supplier.show')
-@extends('supplier.edit')
 @extends('supplier.delete')
 @endsection

@@ -58,9 +58,37 @@
 }
 
 .btn-simple{
+    border-radius: 5px;
+    display: inline-block;
     border: none;
-    width: 200px;
-    height: 50px;
+    font-size: 1rem;
+    padding: 10px 30px;
     background-color: var(--blue);
     color: white;
+    margin: 5px;
+    text-decoration: none;
+}
+
+.btn-simple:hover{
+    color: var(--blue);
+    background-color: transparent;
+    border: 1px solid var(--blue);
+}
+
+.btn-simple-cancel{
+    border-radius: 5px;
+    display: inline-block;
+    border: none;
+    font-size: 1rem;
+    padding: 10px 30px;
+    background-color: var(--red);
+    color: white;
+    margin: 5px;
+    text-decoration: none;
+}
+
+.btn-simple-cancel:hover{
+    color: var(--red);
+    background-color: transparent;
+    border: 1px solid var(--red);
 }

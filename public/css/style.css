@@ -148,6 +148,34 @@ body {
     color: var(--green);
 }
 
+.modal-body img{
+    height: 250px;
+    width: 250px;
+}
+
+.modal-body input:disabled{
+    border: none;
+    background: none;
+}
+.modal-body select:disabled{
+    border: none;
+    background: none;
+}
+
+.modal-lg{
+    min-width: 300px;
+}
+
+.modal-content{
+    overflow-x: auto;
+}
+
+.img-display{
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+}
+
 @media screen and (max-width: 600px) {
     .admin-page {
         left: 0;

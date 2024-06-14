@@ -22,8 +22,8 @@
                     {{-- <th scope="col">Brand</th> --}}
                     <th scope="col">Price</th>
                     <th scope="col">Stock</th>
-                    <th scope="col">Barcode</th>
-                    <th scope="col">Action</th>
+                    {{-- <th scope="col">Barcode</th> --}}
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -36,15 +36,14 @@
                         {{-- <td>{{ $product->brand_name }}</td> --}}
                         <td>{{ $product->unit_price }}</td>
                         <td>{{ $product->unit_in_stock }}</td>
-                        <td>{{ $product->barcode }}</td>
+                        {{--<td>{{ $product->barcode }}</td> --}}
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#showProduct" data-bs-whatever={{$product->product_id}}>View</button>
-                                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editProduct">Edit</button>
+                                <a href="/admin/product/edit" class="btn btn-outline-primary">Edit</a>
                                 <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#deleteProduct">Delete</button>
                             </div>
                         </td>
-
                     </tr>
                 @endforeach
             </tbody>
@@ -55,6 +54,5 @@
     </div>
     @extends('products.create')
     @extends('products.show')
-    @extends('products.edit')
     @extends('products.delete')
 @endsection

@@ -9,29 +9,25 @@
                     <input type="text" class="input-search" placeholder="Search suppliers...">
                     <button class="btn-search"><x-fas-search class="fas-icon" /></button>
                 </form>
-                <button class="action" data-bs-toggle="modal" data-bs-target="#createSupplier">
-                    Add Supplier
-                    <x-fas-plus class="fas-icon" />
-                </button>
             </div>
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Supplier Name</th>
-                    <th scope="col">Address</th>
+                    <th scope="col">Transaction Number</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Coca-Cola Beverages</td>
-                    <td>Taguig, Manila</td>
+                    <td>123456789</td>
+                    <td>Janury 1, 2024</td>
                     <td>
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <button class="btn btn-outline-primary" data-bs-toggle="modal"
-                                data-bs-target="#showSupplier">View</button>
+                                data-bs-target="#showTransaction">View</button>
+                            <a href="/admin/transaction/edit" class="btn btn-outline-primary">Edit</a>
                             <button class="btn btn-outline-primary" data-bs-toggle="modal"
-                                data-bs-target="#editSupplier">Edit</button>
-                            <button class="btn btn-outline-primary" data-bs-toggle="modal"
-                                data-bs-target="#deleteSupplier">Delete</button>
+                                data-bs-target="#deleteTransaction">Delete</button>
                         </div>
                     </td>
 
@@ -39,8 +35,6 @@
             </tbody>
         </table>
     </div>
-@extends('supplier.create')
-@extends('supplier.show')
-@extends('supplier.edit')
-@extends('supplier.delete')
+@extends('transactions.show')
+@extends('transactions.delete')
 @endsection

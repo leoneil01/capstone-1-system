@@ -2,35 +2,38 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createSupplierLabel">View Supplier</h5>
+                <h5 class="modal-title" id="createSupplierLabel">Add Supplier</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body p-5">
                 <form action="">
-                    <div>
-                        <label for="supplier_name">Supplier:</label>
-                        <input type="text" id="supplier_name" name="supplier_name">
+                    <div class="col mb-5">
+                        <div class="row mb-3">
+                            <label class="col" for="supplier_name">Supplier:</label>
+                            <input class="col" type="text" id="supplier_name" name="supplier_name">
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col" for="contact_name">Contact Name:</label>
+                            <input class="col" type="date" id="contact_name" name="contact_name">
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col" for="address">Address:</label>
+                            <input class="col" type="text" id="address" name="address">
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col" for="postal_code">Postal Code:</label>
+                            <input class="col" type="text" id="postal_code" name="postal_code">
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col" for="country">Country:</label>
+                            <input class="col" type="text" id="country" name="country">
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col" for="contact_number">Contact Number:</label>
+                            <input class="col" type="text" id="contact_number" name="contact_number">
+                        </div>
                     </div>
-                    <div>
-                        <label for="contact_name">Contact Name:</label>
-                        <input type="date" id="contact_name" name="contact_name">
-                    </div>
-                    <div>
-                        <label for="address">Address:</label>
-                        <input type="text" id="address" name="address">
-                    </div>
-                    <div>
-                        <label for="postal_code">Postal Code:</label>
-                        <input type="text" id="postal_code" name="postal_code"></div>
-                    <div>
-                        <label for="country">Country:</label>
-                        <input type="text" id="country" name="country">
-                    </div>
-                    <div>
-                        <label for="contact_number">Contact Number:</label>
-                        <input type="text" id="contact_number" name="contact_number">
-                    </div>
-                    <button class="btn-simple">Save</button>
+                    <button class="btn-simple">Add</button>
                 </form>
             </div>
         </div>

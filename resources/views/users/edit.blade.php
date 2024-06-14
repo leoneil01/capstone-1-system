@@ -1,55 +1,59 @@
-<div class="modal fade" id="editUser" tabindex="-1" aria-labelledby="editUserLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editUserLabel">View User</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="">
+@extends('layout.main')
+@section('admin-content')
+    @include('include.sidenav')
+    @include('include.topbar')
+    <div class="card-lg p-5">
+        <form action="">
+            <div class="row mb-5">
+                <div class="col mb-3">
                     <div>
-                        <img src="{{ asset('images/default_profile_image.jpg') }}" id="image" alt="User Image">
+                        <img class="img-display" src="{{ asset('images/default_profile_image.jpg') }}" id="image"
+                            alt="User Image">
                     </div>
                     <div>
                         <label for="new-image">Upload Image:</label>
                         <input id="new-image" type="file">
                     </div>
-                    <div>
-                        <label for="fullname">Fullname:</label>
-                        <input type="text" id="fullname" value="Juan Dela Cruz">
+                </div>
+                <div class="col">
+                    <div class="row mb-3">
+                        <label class="col" for="fullname">Fullname:</label>
+                        <input class="col" type="text" id="fullname" value="Juan Dela Cruz">
                     </div>
-                    <div>
-                        <label for="gender">Gender:</label>
-                        <select name="gender" id="gender">
+                    <div class="row mb-3">
+                        <label class="col" for="gender">Gender:</label>
+                        <select class="col" name="gender" id="gender">
                             <option value="1" selected>Male</option>
                             <option value="2">Female</option>
                         </select>
                     </div>
-                    <div>
-                        <label for="role">Role:</label>
-                        <select name="role" id="role">
+                    <div class="row mb-3">
+                        <label class="col" for="role">Role:</label>
+                        <select class="col" name="role" id="role">
                             <option value="1" selected>Admin</option>
                             <option value="2">Cashier</option>
                         </select>
                     </div>
-                    <div>
-                        <label for="address">Address:</label>
-                        <input type="text" id="address" value="Roxas City">
+                    <div class="row mb-3">
+                        <label class="col" for="address">Address:</label>
+                        <input class="col" type="text" id="address" value="Roxas City">
                     </div>
-                    <div>
-                        <label for="birthdate">Birthdate:</label>
-                        <input type="date" id="birthdate">
+                    <div class="row mb-3">
+                        <label class="col" for="birthdate">Birthdate:</label>
+                        <input class="col" type="date" id="birthdate">
                     </div>
-                    <div>
-                        <label for="email">Email</label>
-                        <input type="text" id="email" value="juan@gmail.com"></div>
-                    <div>
-                        <label for="username">Username</label>
-                        <input type="text" id="username" value="juan">
+                    <div class="row mb-3">
+                        <label class="col" for="email">Email</label>
+                        <input class="col" type="text" id="email" value="juan@gmail.com">
                     </div>
-                    <button class="btn-simple">Save</button>
-                </form>
+                    <div class="row mb-3">
+                        <label class="col" for="username">Username</label>
+                        <input class="col" type="text" id="username" value="juan">
+                    </div>
+                </div>
             </div>
-        </div>
+            <button class="btn-simple">Save</button>
+            <a class="btn-simple-cancel" href="/admin/users">Cancel</a>
+        </form>
     </div>
-</div>
+@endsection
