@@ -57,23 +57,21 @@ body {
 }
 
 .side-panel {
-    position: absolute;
+    position: fixed;
+    overflow-y: auto;
     height: calc(100vh - 60px);
-    width: 500px;
+    max-width: 900px;
     top: 60px;
     right: 0;
     background-color: var(--primary);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 }
 
 .side-panel .order-list {
     padding: 5px 5px 0 5px;
     position: relative;
     margin: 10px auto;
-    width: 450px;
-    height: 300px;
+    width: 350px;
+    height: 400px;
     background-color: var(--tertiary);
     border-radius: 10px;
     overflow-x: auto;
@@ -136,12 +134,7 @@ body {
 }
 
 .side-panel .calculator label {
-    font-size: 1.5rem;
-}
-
-.side-panel .footer {
-    margin-bottom: 10px;
-    align-self: center;
+    font-size: 1rem;
 }
 
 .text-green {
