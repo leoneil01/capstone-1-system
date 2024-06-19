@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Cashier;
 use App\Models\Product;
 use App\Models\User;
@@ -25,7 +26,12 @@ class CashierController extends Controller
 
         $products = Product::all();
 
-        return view('cashier.index', compact('users', 'products'));
+        $cart = Cart::where('cashier_id', Auth::user()->user_id)
+        ->Leftjoin('products', 'carts.product_id', "=", 'products.product_id')->get(); //Returns all item added to cart by cashier
+
+        $totalPrice = $cart->sum('unit_price');
+
+        return view('cashier.index', compact('users', 'products', 'cart', 'totalPrice'));
     }
 
     /**

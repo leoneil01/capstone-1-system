@@ -71,7 +71,7 @@ body {
     position: relative;
     margin: 10px auto;
     width: 350px;
-    height: 400px;
+    height: 350px;
     background-color: var(--tertiary);
     border-radius: 10px;
     overflow-x: auto;
@@ -90,7 +90,7 @@ body {
     padding: 5px;
     margin-bottom: 5px;
     display: grid;
-    grid-template-columns: 35px 170px 30px 50px;
+    grid-template-columns: 35px 150px 30px 50px;
     grid-template-rows: 30px;
 }
 
@@ -118,7 +118,7 @@ body {
     align-items: end;
 }
 
-.side-panel .calculator input{
+.side-panel .calculator input #barcode{
     margin-right: 30px;
     margin-bottom: 3px;
     border: none;

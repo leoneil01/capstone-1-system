@@ -11,30 +11,48 @@
         </div>
     </div>
 
+    <div class="product-list">
+        @foreach ($products as $product)
+            <li>
+                {{ $product->product_name }}
+                {{ $product->unit_price }}
+                {{ $product->barcode }}
+            </li>
+            </tr>
+        @endforeach
+    </div>
+
     <div class="side-panel row p-3">
         <div class="col">
             <div>
-                <form action="">
+                <form action="/cashier/add-to-cart" method="post">
+                    @csrf
                     <label for="barcode">Barcode:</label>
                     <input type="text" id="barcode" name="barcode" readonly>
                     <input type="submit" value="Add" class="btn-simple">
                 </form>
+                @include('include.messages')
             </div>
             Cart:
             <div class="order-list">
                 <ul>
                     <!-- Cart items -->
-                    @for ($i = 0; $i < 8; $i++)
-                        <li>
+                    @foreach ($cart as $item)
+                        <li id="item">
                             <img src="{{ asset('images/sample_image.jpg') }}" alt="Product Image" draggable="false">
                             <div class="product-details">
-                                <h1>Milo</h1>
-                                <h2>12.00</h2>
+                                <h1>{{ $item->product_name }}</h1>
+                                <h2 id="unit-price">{{ $item->unit_price }}</h2>
                             </div>
                             <p>Qty:</p>
-                            <input class="text-center" type="text" id="quantity" value="1" readonly>
+                            <form action="/cashier/edit-quantity" method="post">
+                                @method('PUT')
+                                @csrf
+                                <input class="text-center quantity-input" type="text" id="quantity" value="1"
+                                    name="qty" readonly>
+                            </form>
                         </li>
-                    @endfor
+                    @endforeach
                 </ul>
             </div>
             <div class="row">
@@ -61,7 +79,8 @@
         <div class="calculator col">
             <div class="row">
                 <label for="total" class="col">Total: </label>
-                <input class="text-white col" type="text" id="total" value="0.00" disabled>
+                <input class="text-white col" type="text" id="total" value="{{ $totalPrice ? $totalPrice : '0.00' }}"
+                    disabled>
             </div>
             <div class="row">
                 <label for="cash" class="col">Cash: </label>
@@ -117,13 +136,27 @@
         document.addEventListener('DOMContentLoaded', function() {
             const cashInput = document.getElementById('cash');
             const numKeys = document.querySelectorAll('.num-key');
+            const changeInput = document.getElementById('change');
+            const totalInput = document.getElementById('total');
             let activeInput = document.getElementById('cash');
+            let change = 0.00;
 
             document.querySelectorAll('input').forEach(input => {
                 input.addEventListener('focus', function() {
                     activeInput = this;
                 })
             })
+
+            function computeChange() {
+                if (activeInput.id == "cash") {
+                    change = cashInput.value - totalInput.value;
+                    if (change > 0) {
+                        changeInput.value = change.toFixed(2);
+                    } else {
+                        changeInput.value = "0.00"
+                    }
+                }
+            }
 
             cashInput.addEventListener('click', function() {
                 activeInput = cashInput;
@@ -134,6 +167,7 @@
                 if (value === 'C') {
                     if (activeInput.id == 'cash') {
                         activeInput.value = '0.00'
+                        changeInput.value = '0.00'
                     } else {
                         activeInput.value = '';
                     }
@@ -142,6 +176,7 @@
                         activeInput.value = value;
                     } else {
                         activeInput.value += value;
+                        computeChange();
                     }
                 }
             }
@@ -155,8 +190,9 @@
 
             document.addEventListener('keydown', function(event) {
                 const key = event.key;
-                if (key === 'Backspace'){
+                if (key === 'Backspace') {
                     activeInput.value = activeInput.value.slice(0, -1);
+                    computeChange();
                 }
 
                 if (!isNaN(key) || key === '.') {
@@ -166,9 +202,7 @@
                 if (key === 'Enter') {
                     if (activeInput.id == 'cash') {
                         activeInput.value = '0.00';
-                    } else {
-                        activeInput.value = ''
-
+                        changeInput.value = '0.00'
                     }
                 }
             });
