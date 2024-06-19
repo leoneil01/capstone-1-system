@@ -29,7 +29,10 @@ class CashierController extends Controller
         $cart = Cart::where('cashier_id', Auth::user()->user_id)
         ->Leftjoin('products', 'carts.product_id', "=", 'products.product_id')->get(); //Returns all item added to cart by cashier
 
-        $totalPrice = $cart->sum('unit_price');
+        $totalPrice = 0.00;
+        foreach($cart as $item){
+            $totalPrice += $item->unit_price * $item->qty;
+        }
 
         return view('cashier.index', compact('users', 'products', 'cart', 'totalPrice'));
     }

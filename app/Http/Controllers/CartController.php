@@ -29,4 +29,13 @@ class CartController extends Controller
         return redirect('/cashier');
 
     }
+
+    public function update(Request $request, $id){
+        $validated = $request->validate(['qty' => ['required', 'numeric']]);
+        if($validated){
+            Cart::find($id)->update($validated);
+        }
+
+        return redirect('/cashier');
+    }
 }

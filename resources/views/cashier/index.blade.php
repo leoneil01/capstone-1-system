@@ -42,13 +42,13 @@
                             <img src="{{ asset('images/sample_image.jpg') }}" alt="Product Image" draggable="false">
                             <div class="product-details">
                                 <h1>{{ $item->product_name }}</h1>
-                                <h2 id="unit-price">{{ $item->unit_price }}</h2>
+                                <h2 id="unit-price">{{ $item->unit_price * $item->qty }}</h2>
                             </div>
                             <p>Qty:</p>
-                            <form action="/cashier/edit-quantity" method="post">
+                            <form action="/cashier/edit-qty/{{$item->item_id}}" method="post">
                                 @method('PUT')
                                 @csrf
-                                <input class="text-center quantity-input" type="text" id="quantity" value="1"
+                                <input class="text-center quantity-input" type="text" id="quantity" value="{{$item->qty}}"
                                     name="qty" style="width: 50px" readonly>
                             </form>
                         </li>
