@@ -14,8 +14,11 @@
     <div class="side-panel row p-3">
         <div class="col">
             <div>
-                <label for="barcode">Barcode:</label>
-                <input type="number" id="barcode" name="barcode" readonly>
+                <form action="">
+                    <label for="barcode">Barcode:</label>
+                    <input type="text" id="barcode" name="barcode" readonly>
+                    <input type="submit" value="Add" class="btn-simple">
+                </form>
             </div>
             Cart:
             <div class="order-list">
@@ -29,7 +32,7 @@
                                 <h2>12.00</h2>
                             </div>
                             <p>Qty:</p>
-                            <input class="text-center" type="number" id="quantity" value="1" readonly>
+                            <input class="text-center" type="text" id="quantity" value="1" readonly>
                         </li>
                     @endfor
                 </ul>
@@ -62,7 +65,7 @@
             </div>
             <div class="row">
                 <label for="cash" class="col">Cash: </label>
-                <input class="text-green col" type="number" id="cash" value="0.00" readonly>
+                <input class="text-green col" type="text" id="cash" value="0.00" readonly>
             </div>
             <div class="row">
                 <label for="change" class="col">Change: </label>
@@ -152,6 +155,10 @@
 
             document.addEventListener('keydown', function(event) {
                 const key = event.key;
+                if (key === 'Backspace'){
+                    activeInput.value = activeInput.value.slice(0, -1);
+                }
+
                 if (!isNaN(key) || key === '.') {
                     updateInput(key);
                 }
