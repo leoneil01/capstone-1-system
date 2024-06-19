@@ -118,7 +118,7 @@ body {
     align-items: end;
 }
 
-.side-panel .calculator input #barcode{
+.side-panel .calculator input{
     margin-right: 30px;
     margin-bottom: 3px;
     border: none;

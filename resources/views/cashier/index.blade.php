@@ -49,7 +49,7 @@
                                 @method('PUT')
                                 @csrf
                                 <input class="text-center quantity-input" type="text" id="quantity" value="1"
-                                    name="qty" readonly>
+                                    name="qty" style="width: 50px" readonly>
                             </form>
                         </li>
                     @endforeach
