@@ -67,6 +67,7 @@
     color: white;
     margin: 5px;
     text-decoration: none;
+    border: 1px solid transparent;
 }
 
 .btn-simple:hover{
@@ -85,6 +86,7 @@
     color: white;
     margin: 5px;
     text-decoration: none;
+    border: 1px solid transparent;
 }
 
 .btn-simple-cancel:hover{

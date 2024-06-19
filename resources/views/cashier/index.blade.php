@@ -15,8 +15,9 @@
         <div class="col">
             <div>
                 <label for="barcode">Barcode:</label>
-                <input type="text" id="barcode" name="barcode">
+                <input type="number" id="barcode" name="barcode" readonly>
             </div>
+            Cart:
             <div class="order-list">
                 <ul>
                     <!-- Cart items -->
@@ -27,38 +28,59 @@
                                 <h1>Milo</h1>
                                 <h2>12.00</h2>
                             </div>
-                            <p>Qty: x5</p>
+                            <p>Qty:</p>
+                            <input class="text-center" type="number" id="quantity" value="1" readonly>
                         </li>
                     @endfor
                 </ul>
             </div>
+            <div class="row">
+                <div class="col">
+                    <label class="row" for="payment">Payment</label>
+                    <select class="row" name="payment" id="payment">
+                        <option value="cash" selected>Cash</option>
+                        <option value="gcash">G-Cash</option>
+                        <option value="paypal">PayPal</option>
+                        <option value="credit_card">Credit Card</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="row" for="discount">Discount</label>
+                    <select class="row" name="discount" id="discount">
+                        <option value="none" selected>None</option>
+                        <option value="10%">Senior Citizen</option>
+                        <option value="50%">50% Sale</option>
+                        <option value="5%">Loyal Customer Discount</option>
+                    </select>
+                </div>
+            </div>
         </div>
         <div class="calculator col">
-            <div>
-                <label for="total">Total: </label>
-                <input class="text-white" type="text" id="total" value="0.00" disabled>
+            <div class="row">
+                <label for="total" class="col">Total: </label>
+                <input class="text-white col" type="text" id="total" value="0.00" disabled>
             </div>
-            <div>
-                <label for="cash">Cash: </label>
-                <input class="text-green" type="text" id="cash" value="0.00">
+            <div class="row">
+                <label for="cash" class="col">Cash: </label>
+                <input class="text-green col" type="number" id="cash" value="0.00" readonly>
             </div>
-            <div>
-                <label for="change">Change: </label>
-                <input class="text-danger" type="text" id="change" value="0.00" disabled>
-            </div>
-            <div>
-                <button class="btn-simple-cancel">Hold</button>
-                <button class="btn-simple align-self-center">Generate Receipt</button>     
+            <div class="row">
+                <label for="change" class="col">Change: </label>
+                <input class="text-danger col" type="text" id="change" value="0.00" disabled>
             </div>
 
             <!-- On-screen number keys -->
-            <div class="num-keys-grid">
+            <div class="num-keys-grid mb-3">
                 @for ($i = 1; $i <= 9; $i++)
                     <button class="num-key" data-value="{{ $i }}">{{ $i }}</button>
                 @endfor
                 <button class="num-key" data-value="0">0</button>
                 <button class="num-key" data-value=".">.</button>
                 <button class="num-key" data-value="C">C</button>
+            </div>
+            <div class="row">
+                <button class="btn-simple-cancel col">Hold</button>
+                <button class="btn-simple col">Generate Receipt</button>
             </div>
         </div>
     </div>
@@ -92,15 +114,31 @@
         document.addEventListener('DOMContentLoaded', function() {
             const cashInput = document.getElementById('cash');
             const numKeys = document.querySelectorAll('.num-key');
+            let activeInput = document.getElementById('cash');
 
-            function updateCashInput(value) {
+            document.querySelectorAll('input').forEach(input => {
+                input.addEventListener('focus', function() {
+                    activeInput = this;
+                })
+            })
+
+            cashInput.addEventListener('click', function() {
+                activeInput = cashInput;
+            })
+
+            function updateInput(value) {
+                console.log(value)
                 if (value === 'C') {
-                    cashInput.value = '0.00';
-                } else {
-                    if (cashInput.value === '0.00') {
-                        cashInput.value = value;
+                    if (activeInput.id == 'cash') {
+                        activeInput.value = '0.00'
                     } else {
-                        cashInput.value += value;
+                        activeInput.value = '';
+                    }
+                } else {
+                    if (activeInput.value === '0.00' && activeInput.id == 'cash') {
+                        activeInput.value = value;
+                    } else {
+                        activeInput.value += value;
                     }
                 }
             }
@@ -108,17 +146,23 @@
             numKeys.forEach(key => {
                 key.addEventListener('click', function() {
                     const value = this.getAttribute('data-value');
-                    updateCashInput(value);
+                    updateInput(value);
                 });
             });
 
             document.addEventListener('keydown', function(event) {
                 const key = event.key;
                 if (!isNaN(key) || key === '.') {
-                    updateCashInput(key);
+                    updateInput(key);
                 }
+
                 if (key === 'Enter') {
-                    cashInput.value = '0.00';
+                    if (activeInput.id == 'cash') {
+                        activeInput.value = '0.00';
+                    } else {
+                        activeInput.value = ''
+
+                    }
                 }
             });
         });
