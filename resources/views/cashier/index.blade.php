@@ -51,6 +51,11 @@
                                 <input class="text-center quantity-input" type="text" id="quantity" value="{{$item->qty}}"
                                     name="qty" style="width: 50px" readonly>
                             </form>
+                            <form action="/cashier/remove-item/{{$item->item_id}}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit">Remove</button>
+                            </form>
                         </li>
                     @endforeach
                 </ul>

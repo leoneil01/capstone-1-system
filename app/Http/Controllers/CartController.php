@@ -38,4 +38,9 @@ class CartController extends Controller
 
         return redirect('/cashier');
     }
+
+    public function destroy($id){
+        Cart::find($id)->delete();
+        return redirect('/cashier');
+    }
 }

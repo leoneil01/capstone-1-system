@@ -44,6 +44,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::controller(CartController::class)->group(function () {
         Route::post('/cashier/add-to-cart', 'store');
         Route::put('/cashier/edit-qty/{id}', 'update');
+        Route::delete('/cashier/remove-item/{id}', 'destroy');
     });
 
     Route::controller(ProductController::class)->group(function () {
