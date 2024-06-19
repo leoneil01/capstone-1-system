@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cashier;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -22,7 +23,9 @@ class CashierController extends Controller
         $users = User::leftjoin('genders', 'users.gender_id', '=', 'genders.gender_id')
         ->orderBy('users.first_name');
 
-        return view('cashier.index', compact('users'));
+        $products = Product::all();
+
+        return view('cashier.index', compact('users', 'products'));
     }
 
     /**
