@@ -11,109 +11,113 @@
         </div>
     </div>
 
-    <div class="card-list-container">
-        @foreach ($products as $product)
-            <li class="card-item">
-                <div><img src="{{ asset('images/sample_image.jpg') }}" alt="Product Image" draggable="false" width="50px"></div>
-                <div>{{ $product->product_name }}</div>
-                <div>{{ $product->unit_price }}</div>
-                <div><button class="btn-simple">Add to cart</button></div>
-            </li>
-            </tr>
-        @endforeach
+    <div class="row">
+        <div class="col-4 card-list-container">
+            @foreach ($products as $product)
+                <li class="card-item">
+                    <div><img src="{{ asset('images/sample_image.jpg') }}" alt="Product Image" draggable="false"
+                            width="50px"></div>
+                    <div>{{ $product->product_name }}</div>
+                    <div>{{ $product->unit_price }}</div>
+                    <div><button class="btn-simple">Add to cart</button></div>
+                </li>
+                </tr>
+            @endforeach
+        </div>
+
+        <div class="col-6 cashier-panel p-3">
+            <div class="row">
+            <div class="col">
+                <div>
+                    <form action="/cashier/add-to-cart" method="post">
+                        @csrf
+                        <label for="barcode">Barcode:</label>
+                        <input type="text" id="barcode" name="barcode" readonly>
+                        <input type="submit" value="Add" class="btn-simple">
+                    </form>
+                    @include('include.messages')
+                </div>
+                Cart:
+                <div class="order-list">
+                    <ul>
+                        <!-- Cart items -->
+                        @foreach ($cart as $item)
+                            <li id="item">
+                                <img src="{{ asset('images/sample_image.jpg') }}" alt="Product Image" draggable="false">
+                                <div class="product-details">
+                                    <h1>{{ $item->product_name }}</h1>
+                                    <h2 id="unit-price">{{ $item->unit_price }}</h2>
+                                </div>
+                                <p>Qty:</p>
+                                <form action="/cashier/edit-qty/{{ $item->item_id }}" method="post">
+                                    @method('PUT')
+                                    @csrf
+                                    <input class="text-center quantity-input" type="text" id="quantity"
+                                        value="{{ $item->qty }}" name="qty" style="width: 50px" readonly>
+                                </form>
+                                <form action="/cashier/remove-item/{{ $item->item_id }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">Remove</button>
+                                </form>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label class="row" for="payment">Payment</label>
+                        <select class="row" name="payment" id="payment">
+                            <option value="cash" selected>Cash</option>
+                            <option value="gcash">G-Cash</option>
+                            <option value="paypal">PayPal</option>
+                            <option value="credit_card">Credit Card</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label class="row" for="discount">Discount</label>
+                        <select class="row" name="discount" id="discount">
+                            <option value="none" selected>None</option>
+                            <option value=".10">Senior Citizen</option>
+                            <option value=".50">50% Sale</option>
+                            <option value=".05">Loyal Customer Discount</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col calculator">
+                <div class="row">
+                    <label for="total" class="col">Total: </label>
+                    <input class="text-white col" type="text" id="total"
+                        value="{{ $totalPrice ? $totalPrice : '0.00' }}" disabled>
+                </div>
+                <div class="row">
+                    <label for="cash" class="col">Cash: </label>
+                    <input class="text-green col" type="text" id="cash" value="0.00" readonly>
+                </div>
+                <div class="row">
+                    <label for="change" class="col">Change: </label>
+                    <input class="text-danger col" type="text" id="change" value="0.00" disabled>
+                </div>
+
+                <!-- On-screen number keys -->
+                <div class="num-keys-grid mb-3">
+                    @for ($i = 1; $i <= 9; $i++)
+                        <button class="num-key" data-value="{{ $i }}">{{ $i }}</button>
+                    @endfor
+                    <button class="num-key" data-value="0">0</button>
+                    <button class="num-key" data-value=".">.</button>
+                    <button class="num-key" data-value="C">C</button>
+                </div>
+                <div class="row">
+                    <button class="btn-simple col">Checkout</button>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="side-panel row p-3">
-        <div class="col">
-            <div>
-                <form action="/cashier/add-to-cart" method="post">
-                    @csrf
-                    <label for="barcode">Barcode:</label>
-                    <input type="text" id="barcode" name="barcode" readonly>
-                    <input type="submit" value="Add" class="btn-simple">
-                </form>
-                @include('include.messages')
-            </div>
-            Cart:
-            <div class="order-list">
-                <ul>
-                    <!-- Cart items -->
-                    @foreach ($cart as $item)
-                        <li id="item">
-                            <img src="{{ asset('images/sample_image.jpg') }}" alt="Product Image" draggable="false">
-                            <div class="product-details">
-                                <h1>{{ $item->product_name }}</h1>
-                                <h2 id="unit-price">{{ $item->unit_price }}</h2>
-                            </div>
-                            <p>Qty:</p>
-                            <form action="/cashier/edit-qty/{{$item->item_id}}" method="post">
-                                @method('PUT')
-                                @csrf
-                                <input class="text-center quantity-input" type="text" id="quantity" value="{{$item->qty}}"
-                                    name="qty" style="width: 50px" readonly>
-                            </form>
-                            <form action="/cashier/remove-item/{{$item->item_id}}" method="post">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit">Remove</button>
-                            </form>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <label class="row" for="payment">Payment</label>
-                    <select class="row" name="payment" id="payment">
-                        <option value="cash" selected>Cash</option>
-                        <option value="gcash">G-Cash</option>
-                        <option value="paypal">PayPal</option>
-                        <option value="credit_card">Credit Card</option>
-                    </select>
-                </div>
-                <div class="col">
-                    <label class="row" for="discount">Discount</label>
-                    <select class="row" name="discount" id="discount">
-                        <option value="none" selected>None</option>
-                        <option value=".10">Senior Citizen</option>
-                        <option value=".50">50% Sale</option>
-                        <option value=".05">Loyal Customer Discount</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="calculator col">
-            <div class="row">
-                <label for="total" class="col">Total: </label>
-                <input class="text-white col" type="text" id="total" value="{{ $totalPrice ? $totalPrice : '0.00' }}"
-                    disabled>
-            </div>
-            <div class="row">
-                <label for="cash" class="col">Cash: </label>
-                <input class="text-green col" type="text" id="cash" value="0.00" readonly>
-            </div>
-            <div class="row">
-                <label for="change" class="col">Change: </label>
-                <input class="text-danger col" type="text" id="change" value="0.00" disabled>
-            </div>
-
-            <!-- On-screen number keys -->
-            <div class="num-keys-grid mb-3">
-                @for ($i = 1; $i <= 9; $i++)
-                    <button class="num-key" data-value="{{ $i }}">{{ $i }}</button>
-                @endfor
-                <button class="num-key" data-value="0">0</button>
-                <button class="num-key" data-value=".">.</button>
-                <button class="num-key" data-value="C">C</button>
-            </div>
-            <div class="row">
-                <button class="btn-simple col">Checkout</button>
-            </div>
-        </div>
     </div>
 
     <style>
-
         .num-keys-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -165,15 +169,16 @@
                 }
             }
 
-            discount.addEventListener('change', function(){
+            discount.addEventListener('change', function() {
                 console.log(discount.value)
-                totalInput.value = {{$totalPrice}} //This reset the total price each time the user change the value of discount
-                if(discount.value !== 'none'){ //Checks if the value is not set to none
+                totalInput.value =
+                    {{ $totalPrice }} //This reset the total price each time the user change the value of discount
+                if (discount.value !== 'none') { //Checks if the value is not set to none
                     console.log('select')
                     const discountPrice = totalInput.value * discount.value;
                     totalInput.value = totalInput.value - discountPrice.toFixed(2);
                 }
-                computeChange();//Automatically computes the change
+                computeChange(); //Automatically computes the change
             })
 
             cashInput.addEventListener('click', function() {

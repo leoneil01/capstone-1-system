@@ -56,17 +56,13 @@ body {
     max-width: 500px;
 }
 
-.side-panel {
-    position: fixed;
-    overflow-y: auto;
+.cashier-panel {
     height: calc(100vh - 60px);
-    max-width: 900px;
-    top: 60px;
-    right: 0;
+    width: fit-content;
     background-color: var(--primary);
 }
 
-.side-panel .order-list {
+.cashier-panel .order-list {
     padding: 5px 5px 0 5px;
     position: relative;
     margin: 10px auto;
@@ -78,13 +74,13 @@ body {
 }
 
 .product-list ul,
-.side-panel .order-list ul{
+.cashier-panel .order-list ul{
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.side-panel .order-list ul li {
+.cashier-panel .order-list ul li {
     background-color: var(--primary);
     height: 50px;
     border-radius: 10px;
@@ -95,31 +91,31 @@ body {
     grid-template-rows: 30px;
 }
 
-.side-panel .order-list ul li img {
+.cashier-panel .order-list ul li img {
     object-fit: contain;
     border-radius: 10px;
     width: 35px;
 }
-.side-panel .order-list ul li .product-details h1 {
+.cashier-panel .order-list ul li .product-details h1 {
     font-size: 1rem;
     margin: 0;
 }
 
-.side-panel .order-list ul li .product-details h2 {
+.cashier-panel .order-list ul li .product-details h2 {
     font-size: 1rem;
 }
 
-.side-panel .order-list ul li p {
+.cashier-panel .order-list ul li p {
     font-size: 1rem;
 }
 
-.side-panel .calculator {
+.cashier-panel .calculator {
     display: flex;
     flex-direction: column;
     align-items: end;
 }
 
-.side-panel .calculator input{
+.cashier-panel .calculator input{
     margin-right: 30px;
     margin-bottom: 3px;
     border: none;
@@ -128,7 +124,7 @@ body {
     font-size: 2rem;
 }
 
-.side-panel .calculator label {
+.cashier-panel .calculator label {
     font-size: 1rem;
 }
 
