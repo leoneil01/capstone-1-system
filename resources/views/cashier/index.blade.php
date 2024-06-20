@@ -12,14 +12,16 @@
     </div>
 
     <div class="product-list">
+        <ul>
         @foreach ($products as $product)
             <li>
-                {{ $product->product_name }}
-                {{ $product->unit_price }}
-                {{ $product->barcode }}
+                <div>{{ $product->product_name }}</div>
+                <div>{{ $product->unit_price }}</div>
+                <div>{{ $product->barcode }}</div>
             </li>
             </tr>
         @endforeach
+        </ul>
     </div>
 
     <div class="side-panel row p-3">
@@ -74,9 +76,9 @@
                     <label class="row" for="discount">Discount</label>
                     <select class="row" name="discount" id="discount">
                         <option value="none" selected>None</option>
-                        <option value="10%">Senior Citizen</option>
-                        <option value="50%">50% Sale</option>
-                        <option value="5%">Loyal Customer Discount</option>
+                        <option value=".10">Senior Citizen</option>
+                        <option value=".50">50% Sale</option>
+                        <option value=".05">Loyal Customer Discount</option>
                     </select>
                 </div>
             </div>
@@ -113,6 +115,21 @@
     </div>
 
     <style>
+        .product-list{
+            padding: 10px;
+            background-color: white;
+            border-radius: 15px;
+            max-height: 350px;
+            overflow-y: auto;
+        }
+
+        .product-list li{
+            height: 50px;
+            padding: 10px;
+            display: grid;
+            grid-template-columns: 100px 100px 100px;
+        }
+
         .num-keys-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
