@@ -11,17 +11,16 @@
         </div>
     </div>
 
-    <div class="product-list">
-        <ul>
+    <div class="card-list-container">
         @foreach ($products as $product)
-            <li>
+            <li class="card-item">
+                <div><img src="{{ asset('images/sample_image.jpg') }}" alt="Product Image" draggable="false" width="50px"></div>
                 <div>{{ $product->product_name }}</div>
                 <div>{{ $product->unit_price }}</div>
-                <div>{{ $product->barcode }}</div>
+                <div><button class="btn-simple">Add to cart</button></div>
             </li>
             </tr>
         @endforeach
-        </ul>
     </div>
 
     <div class="side-panel row p-3">
@@ -108,27 +107,12 @@
                 <button class="num-key" data-value="C">C</button>
             </div>
             <div class="row">
-                <button class="btn-simple-cancel col">Hold</button>
-                <button class="btn-simple col">Generate Receipt</button>
+                <button class="btn-simple col">Checkout</button>
             </div>
         </div>
     </div>
 
     <style>
-        .product-list{
-            padding: 10px;
-            background-color: white;
-            border-radius: 15px;
-            max-height: 350px;
-            overflow-y: auto;
-        }
-
-        .product-list li{
-            height: 50px;
-            padding: 10px;
-            display: grid;
-            grid-template-columns: 100px 100px 100px;
-        }
 
         .num-keys-grid {
             display: grid;
@@ -160,6 +144,7 @@
             const numKeys = document.querySelectorAll('.num-key');
             const changeInput = document.getElementById('change');
             const totalInput = document.getElementById('total');
+            const discount = document.getElementById('discount');
             let activeInput = document.getElementById('cash');
             let change = 0.00;
 
@@ -179,6 +164,17 @@
                     }
                 }
             }
+
+            discount.addEventListener('change', function(){
+                console.log(discount.value)
+                totalInput.value = {{$totalPrice}} //This reset the total price each time the user change the value of discount
+                if(discount.value !== 'none'){ //Checks if the value is not set to none
+                    console.log('select')
+                    const discountPrice = totalInput.value * discount.value;
+                    totalInput.value = totalInput.value - discountPrice.toFixed(2);
+                }
+                computeChange();//Automatically computes the change
+            })
 
             cashInput.addEventListener('click', function() {
                 activeInput = cashInput;

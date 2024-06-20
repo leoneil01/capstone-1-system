@@ -40,3 +40,23 @@
 .card-header .action .fas-icon {
     width: 25px;
 }
+
+.card-list-container{
+    width: fit-content;
+    height: calc(100vh - 60px); /*minus the height of topbar */
+    padding: 15px;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 10px;
+    
+}
+
+.card-item{
+    width: fit-content;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    display: grid;
+    grid-template-rows: 50px 30px 30px;
+}
