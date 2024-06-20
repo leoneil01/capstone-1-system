@@ -16,7 +16,7 @@
     <div class="row">
         <div class="col">
             <div>
-                <form action="/cashier/add-to-cart" method="post">
+                <form action="/cashier/add-to-cart" method="post" id="checkoutForm">
                     @csrf
                     <label for="barcode">Barcode:</label>
                     <input type="text" id="barcode" name="barcode" readonly>
@@ -96,7 +96,7 @@
                         <button class="num-key" data-value="C">C</button>
                 </div>
                 <div class="row">
-                    <button type="submit" class="btn-simple col">Checkout</button>
+                    <button type="submit" class="btn-simple col" onclick="printReceipt()">Checkout</button>
                 </div>
             </form>
         </div>
@@ -151,11 +151,18 @@
 
         document.querySelectorAll('input').forEach(input => {
             input.addEventListener('focus', function() {
-                if(input.id !== "change" && input.id !== "total"){
-                activeInput = this;
+                if (input.id !== "change" && input.id !== "total") {
+                    activeInput = this;
                 }
             })
         })
+
+        function printReceipt() {
+            document.getElementById('checkoutForm').submit();
+            setTimeout(function() {
+                window.print();
+            }, 1000);
+        }
 
         function computeChange() {
             if (activeInput.id == "cash") {

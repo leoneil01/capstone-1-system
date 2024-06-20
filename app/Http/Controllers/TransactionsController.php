@@ -40,7 +40,13 @@ class TransactionsController extends Controller
         if($validated){
             Cart::where('cashier_id', Auth::id())->delete();
             Transactions::create($validated);
-            return redirect('/cashier')->with('message_success', 'Success');
+
+            $receiptData = [
+                'total' => $validated['total'], // Total amount
+                'cash' => $validated['cash'], // Cash received
+                'change' => $validated['change'], // Change amount
+            ];
+            return view('cashier.receipt', compact('receiptData'));
         }
         return redirect('/cashier')->with('message_error', 'Error');
     }
