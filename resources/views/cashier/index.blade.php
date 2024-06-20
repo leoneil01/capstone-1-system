@@ -88,6 +88,7 @@
             <div class="col calculator">
                 <div class="row">
                     <label for="total" class="col">Total: </label>
+                    <input type="hidden" id="originalTotalPrice" value="{{$totalPrice}}">
                     <input class="text-white col" type="text" id="total"
                         value="{{ $totalPrice ? $totalPrice : '0.00' }}" disabled>
                 </div>
@@ -147,6 +148,7 @@
             const cashInput = document.getElementById('cash');
             const numKeys = document.querySelectorAll('.num-key');
             const changeInput = document.getElementById('change');
+            const originalTotalPrice = document.getElementById('originalTotalPrice')
             const totalInput = document.getElementById('total');
             const discount = document.getElementById('discount');
             let activeInput = document.getElementById('cash');
@@ -171,8 +173,7 @@
 
             discount.addEventListener('change', function() {
                 console.log(discount.value)
-                totalInput.value =
-                    {{ $totalPrice }} //This reset the total price each time the user change the value of discount
+                totalInput.value = originalTotalPrice.value; //This reset the total price each time the user change the value of discount
                 if (discount.value !== 'none') { //Checks if the value is not set to none
                     console.log('select')
                     const discountPrice = totalInput.value * discount.value;
