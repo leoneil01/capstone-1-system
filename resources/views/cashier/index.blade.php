@@ -5,13 +5,14 @@
         <img src="{{ asset('images/temporary_logo.png') }}" alt="Logo" class="topbar-logo" draggable="false">
         <h3 class="topbar-title">ShopNinja</h3>
     </div>
+    @include('include.messages')
     <div class="user">
         <span class="fullname">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</span>
         <img src="{{ asset('images/default_profile_image.jpg') }}" alt="User Image" class="user-img" draggable="false">
     </div>
 </div>
 
-<div class="cashier-panel p-1">
+<div class="cashier-panel p-3">
     <div class="row">
         <div class="col">
             <div>
@@ -21,7 +22,6 @@
                     <input type="text" id="barcode" name="barcode" readonly>
                     <input type="submit" value="Add" class="btn-simple">
                 </form>
-                @include('include.messages')
             </div>
             Cart:
             <div class="order-list">
@@ -50,6 +50,56 @@
                 </ul>
             </div>
         </div>
+        <div class="col calculator">
+            <form action="/cashier/create-transaction" method="post">
+                @csrf
+                <div class="row mb-3">
+                    <div class="col">
+                        <label class="row" for="payment">Payment</label>
+                        <select class="row" name="payment" id="payment">
+                            <option value="cash" selected>Cash</option>
+                            <option value="gcash">G-Cash</option>
+                            <option value="paypal">PayPal</option>
+                            <option value="credit_card">Credit Card</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label class="row" for="discount">Discount</label>
+                        <select class="row" name="discount" id="discount">
+                            <option value="none" selected>None</option>
+                            <option value=".10">Senior Citizen</option>
+                            <option value=".50">50% Sale</option>
+                            <option value=".05">Loyal Customer Discount</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <label for="total" class="col">Total: </label>
+                    <input type="hidden" id="originalTotalPrice" value="{{$totalPrice}}">
+                    <input class="text-white col" type="text" id="total" value="{{ $totalPrice ? $totalPrice : '0.00' }}" name="total" readonly>
+                </div>
+                <div class="row">
+                    <label for="cash" class="col">Cash: </label>
+                    <input class="text-green col" type="text" id="cash" value="0.00" name="cash" readonly>
+                </div>
+                <div class="row">
+                    <label for="change" class="col">Change: </label>
+                    <input class="text-danger col" type="text" id="change" value="0.00" name="change" readonly>
+                </div>
+
+                <!-- On-screen number keys -->
+                <div class="num-keys-grid mb-3">
+                    @for ($i = 1; $i <= 9; $i++) <button class="num-key" data-value="{{ $i }}">{{ $i }}</button>
+                        @endfor
+                        <button class="num-key" data-value="0">0</button>
+                        <button class="num-key" data-value=".">.</button>
+                        <button class="num-key" data-value="C">C</button>
+                </div>
+                <div class="row">
+                    <button type="submit" class="btn-simple col">Checkout</button>
+                </div>
+            </form>
+        </div>
         <div class="col card-list-container">
             @foreach ($products as $product)
             <li class="card-item">
@@ -59,53 +109,6 @@
                 <div><button class="btn-simple">Add to cart</button></div>
             </li>
             @endforeach
-        </div>
-        <div class="col calculator">
-            <div class="row mb-3">
-                <div class="col">
-                    <label class="row" for="payment">Payment</label>
-                    <select class="row" name="payment" id="payment">
-                        <option value="cash" selected>Cash</option>
-                        <option value="gcash">G-Cash</option>
-                        <option value="paypal">PayPal</option>
-                        <option value="credit_card">Credit Card</option>
-                    </select>
-                </div>
-                <div class="col">
-                    <label class="row" for="discount">Discount</label>
-                    <select class="row" name="discount" id="discount">
-                        <option value="none" selected>None</option>
-                        <option value=".10">Senior Citizen</option>
-                        <option value=".50">50% Sale</option>
-                        <option value=".05">Loyal Customer Discount</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row">
-                <label for="total" class="col">Total: </label>
-                <input type="hidden" id="originalTotalPrice" value="{{$totalPrice}}">
-                <input class="text-white col" type="text" id="total" value="{{ $totalPrice ? $totalPrice : '0.00' }}" disabled>
-            </div>
-            <div class="row">
-                <label for="cash" class="col">Cash: </label>
-                <input class="text-green col" type="text" id="cash" value="0.00" readonly>
-            </div>
-            <div class="row">
-                <label for="change" class="col">Change: </label>
-                <input class="text-danger col" type="text" id="change" value="0.00" disabled>
-            </div>
-
-            <!-- On-screen number keys -->
-            <div class="num-keys-grid mb-3">
-                @for ($i = 1; $i <= 9; $i++) <button class="num-key" data-value="{{ $i }}">{{ $i }}</button>
-                    @endfor
-                    <button class="num-key" data-value="0">0</button>
-                    <button class="num-key" data-value=".">.</button>
-                    <button class="num-key" data-value="C">C</button>
-            </div>
-            <div class="row">
-                <button class="btn-simple col">Checkout</button>
-            </div>
         </div>
     </div>
 </div>
@@ -148,7 +151,9 @@
 
         document.querySelectorAll('input').forEach(input => {
             input.addEventListener('focus', function() {
+                if(input.id !== "change" && input.id !== "total"){
                 activeInput = this;
+                }
             })
         })
 

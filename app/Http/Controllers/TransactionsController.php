@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Transactions;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TransactionsController extends Controller
 {
@@ -18,17 +20,29 @@ class TransactionsController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+   
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        $validated = $request->validate([
+            'payment' => ['required'],
+            'cash' => ['required', 'numeric', 'gt:total'],
+            'change' => ['required'],
+            'total' => ['required', 'gt:0'],
+        ]);
+
+        if($validated){
+            Cart::where('cashier_id', Auth::id())->delete();
+            Transactions::create($validated);
+            return redirect('/cashier')->with('message_success', 'Success');
+        }
+        return redirect('/cashier')->with('message_error', 'Error');
     }
 
     /**

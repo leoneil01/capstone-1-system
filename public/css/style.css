@@ -58,8 +58,8 @@ body {
 
 .cashier-panel {
     position: absolute;
-    height: calc(100vh - 60px);
-    width: fit-content;
+    height: fit-content;
+    width: auto;
     background-color: var(--primary);
 }
 
