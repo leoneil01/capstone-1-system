@@ -50,6 +50,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::controller(ProductController::class)->group(function () {
         Route::get('/admin/products', 'index');
         Route::get('/admin/product/edit', 'edit');
+        Route::post('/admin/product/store', 'store');
     });
 
     Route::controller(SupplierController::class)->group(function () {
