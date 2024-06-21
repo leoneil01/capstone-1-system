@@ -47,7 +47,8 @@ class TransactionsController extends Controller
                 'total' => $validated['total'], // Total amount
                 'cash' => $validated['cash'], // Cash received
                 'change' => $validated['change'], // Change amount
-                'date' => now()
+                'payment' => $validated['payment'],
+                'date' => now()//date now
             ];
             return view('cashier.receipt', compact('receiptData', 'cart'));
         }

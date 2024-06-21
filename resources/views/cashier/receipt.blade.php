@@ -116,6 +116,10 @@
             <p class="info">Roxas City, Capiz</p>
         </div>
         <div class="receipt-details">
+            <div class="grid">
+                <p><strong>Payment:</strong></p>
+                <p>{{ $receiptData['payment'] }}</p>
+            </div>
             <table class="receipt-table">
                 <thead>
                     <tr>

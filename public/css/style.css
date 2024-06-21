@@ -67,7 +67,7 @@ body {
     padding: 5px 5px 0 5px;
     position: relative;
     margin: 10px auto;
-    width: 350px;
+    width: fit-content;
     height: 350px;
     background-color: var(--tertiary);
     border-radius: 10px;
