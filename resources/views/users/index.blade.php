@@ -33,7 +33,7 @@
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <button class="btn btn-outline-primary" data-bs-toggle="modal"
-                                    data-bs-target="#showUser">View</button>
+                                    data-bs-target="#showUser{{ $user->user_id}}">View</button>
                                 <a href="/admin/user/edit" class="btn btn-outline-primary">Edit</a>
                                 <button class="btn btn-outline-primary" data-bs-toggle="modal"
                                     data-bs-target="#deleteUser">Delete</button>
@@ -41,6 +41,7 @@
                         </td>
 
                     </tr>
+                    @include('users.show', ['user' => $user])
                 @endforeach
             </tbody>
         </table>
