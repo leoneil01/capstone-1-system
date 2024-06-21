@@ -60,8 +60,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::controller(TransactionsController::class)->group(function () {
         Route::get('/admin/transactions', 'index');
-        Route::get('/admin/transaction/edit', 'edit');
+        Route::get('/admin/transaction/edit/{id}', 'edit');
+        Route::put('/admin/transaction/update/{id}', 'update');
         Route::post('/cashier/create-transaction', 'store');
+        Route::delete('/admin/transaction/destroy/{id}', 'destroy');
     });
 
     Route::controller(UserController::class)->group(function () {
