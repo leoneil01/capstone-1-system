@@ -66,5 +66,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::controller(UserController::class)->group(function () {
         Route::get('/admin/users', 'index');
         Route::get('/admin/user/edit', 'edit');
+        Route::get('/process/logout', 'proccesLogout');
     });
 });

@@ -106,4 +106,13 @@ class UserController extends Controller
             return back();
         }
     }
+
+    public function proccesLogout(Request $request) {
+        auth()->logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/');
+    }
 }

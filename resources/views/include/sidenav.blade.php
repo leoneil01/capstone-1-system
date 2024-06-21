@@ -35,8 +35,8 @@
                 <span class="sidenav-title">Transactions</span>
             </a>
         </li>
-        <li class="/admin/signout">
-            <a href="#">
+        <li>
+            <a href="/process/logout">
                 <span class="sidenav-icon"><x-fas-sign-out-alt class="fas-icon" /></span>
                 <span class="sidenav-title">Sign out</span>
             </a>
