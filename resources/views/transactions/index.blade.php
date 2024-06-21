@@ -4,12 +4,6 @@
     @include('include.topbar')
     <div class="card-lg">
         <table class="table">
-            <div class="card-header">
-                <form action="" method="post">
-                    <input type="text" class="input-search" placeholder="Search Transaction...">
-                    <button class="btn-search"><x-fas-search class="fas-icon" /></button>
-                </form>
-            </div>
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Transaction Id</th>
@@ -24,26 +18,29 @@
             <tbody>
                 @foreach ($transactions as $transaction)
                     <tr>
-                        <td>{{$transaction->transaction_id}}</td>
-                        <td>{{$transaction->payment}}</td>
-                        <td>{{$transaction->total}}</td>
-                        <td>{{$transaction->cash}}</td>
-                        <td>{{$transaction->change}}</td>
-                        <td>{{$transaction->created_at}}</td>
+                        <td>{{ $transaction->transaction_id }}</td>
+                        <td>{{ $transaction->payment }}</td>
+                        <td>{{ $transaction->total }}</td>
+                        <td>{{ $transaction->cash }}</td>
+                        <td>{{ $transaction->change }}</td>
+                        <td>{{ $transaction->created_at }}</td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <button class="btn btn-outline-primary" data-bs-toggle="modal"
-                                    data-bs-target="#showTransaction">View</button>
-                                <a href="/admin/transaction/edit" class="btn btn-outline-primary">Edit</a>
+                                    data-bs-target="#showTransaction{{ $transaction->transaction_id }}">View</button>
+                                <a href="/admin/transaction/edit/{{ $transaction->transaction_id }}"
+                                    class="btn btn-outline-primary">Edit</a>
                                 <button class="btn btn-outline-primary" data-bs-toggle="modal"
-                                    data-bs-target="#deleteTransaction">Delete</button>
+                                    data-bs-target="#deleteTransaction{{ $transaction->transaction_id }}">Delete</button>
                             </div>
                         </td>
                     </tr>
+                    @include('transactions.show')
+                    @include('transactions.delete')
                 @endforeach
             </tbody>
         </table>
     </div>
-    @extends('transactions.show')
-    @extends('transactions.delete')
+        {{-- @extends('transactions.show')
+        @extends('transactions.delete') --}}
 @endsection
