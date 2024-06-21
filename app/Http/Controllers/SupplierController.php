@@ -44,17 +44,35 @@ class SupplierController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Supplier $supplier)
+    public function edit(Supplier $supplier, $id)
     {
-        return view('supplier.edit');
+        $supplier = $supplier::find($id);
+        return view('supplier.edit', compact('supplier'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Supplier $supplier)
+    public function update(Request $request, Supplier $supplier, $id)
     {
-        //
+        $validated = $request->validate([
+            'supplier_name' => ['required'],
+            'contact_name' => ['required'],
+            'address' => ['required'],
+            'postal_code' => ['required', 'numeric'],
+            'country' => ['required'],
+            'contact_number' => ['required', 'numeric']
+        ]);
+
+        if($validated){
+            $supplier::find($id)->update($validated);
+            toast('Supplier updated successfully.','success');
+            return redirect('/admin/suppliers');
+        }
+        else{
+            toast('Transaction updating error.','error');
+            return redirect('/admin/suppliers/edit/' . $id);
+        }
     }
 
     /**

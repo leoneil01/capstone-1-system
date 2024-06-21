@@ -55,7 +55,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::controller(SupplierController::class)->group(function () {
         Route::get('/admin/suppliers', 'index');
-        Route::get('/admin/supplier/edit', 'edit');
+        Route::get('/admin/supplier/edit/{id}', 'edit');
+        Route::put('/admin/supplier/update/{id}', 'update');
     });
 
     Route::controller(TransactionsController::class)->group(function () {
