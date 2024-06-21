@@ -18,6 +18,7 @@
             padding: 20px;
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
         }
 
         .receipt-header {
@@ -37,6 +38,12 @@
             margin: 0;
             font-size: 18px;
             color: #777;
+        }
+
+        .receipt-header p {
+            margin: 5px 0;
+            font-size: 12px;
+            color: #999;
         }
 
         .receipt-details {
@@ -62,7 +69,7 @@
             color: #777;
         }
 
-        .receipt-footer .notice {
+        .info {
             font-size: 12px;
             color: #999;
         }
@@ -76,8 +83,27 @@
             color: #007BFF;
         }
 
-        .back-link:hover {
-            text-decoration: underline;
+        .receipt-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px
+        }
+
+        .receipt-table th,
+        .receipt-table td {
+            border: none;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .receipt-details p strong {
+            display: inline-block;
+            width: 120px;
+        }
+
+        .grid{
+            display: grid;
+            grid-template-columns: auto auto;
         }
     </style>
 </head>
@@ -87,22 +113,48 @@
         <div class="receipt-header">
             <h1>ShopNinja</h1>
             <h2>Receipt</h2>
+            <p class="info">Roxas City, Capiz</p>
         </div>
         <div class="receipt-details">
-            <p><strong>Total:</strong> ${{ $receiptData['total'] }}</p>
-            <p><strong>Cash Received:</strong> ${{ $receiptData['cash'] }}</p>
-            <p><strong>Change:</strong> ${{ $receiptData['change'] }}</p>
+            <table class="receipt-table">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($cart as $item)
+                        <tr>
+                            <td>{{ $item->product_name }}</td>
+                            <td>{{ $item->unit_price }}</td>
+                            <td>{{ $item->qty }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            <div class="grid">
+                <p><strong>Total:</strong></p>
+                <p>{{ $receiptData['total'] }}</p>
+                <p><strong>Cash Received:</strong></p>
+                <p>{{ $receiptData['cash'] }}</p>
+                <p><strong>Change:</strong></p>
+                <p>{{ $receiptData['change'] }}</p>
+            </div>
         </div>
         <div class="receipt-footer">
+            <p>{{ $receiptData['date'] }}</p>
             <p>Thank you for your purchase!</p>
-            <p class="notice">Please keep this receipt for your records.</p>
+            <p class="info">Please keep this receipt for your records.</p>
         </div>
     </div>
     <a href="/cashier" class="back-link">Go back</a>
 </body>
 <script>
-    document.addEventListener('DOMContentLoaded', function(){
+    document.addEventListener('DOMContentLoaded', function() {
         window.print();
     });
 </script>
+
 </html>

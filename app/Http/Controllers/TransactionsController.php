@@ -22,14 +22,13 @@ class TransactionsController extends Controller
      */
     public function create(Request $request)
     {
-   
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {   
+    {
         $validated = $request->validate([
             'payment' => ['required'],
             'cash' => ['required', 'numeric', 'gt:total'],
@@ -37,7 +36,10 @@ class TransactionsController extends Controller
             'total' => ['required', 'gt:0'],
         ]);
 
-        if($validated){
+        if ($validated) {
+            $cart = Cart::where('cashier_id', Auth::user()->user_id)
+                ->Leftjoin('products', 'carts.product_id', "=", 'products.product_id')->get(); //Returns all item added to cart by cashier
+
             Cart::where('cashier_id', Auth::id())->delete();
             Transactions::create($validated);
 
@@ -45,8 +47,9 @@ class TransactionsController extends Controller
                 'total' => $validated['total'], // Total amount
                 'cash' => $validated['cash'], // Cash received
                 'change' => $validated['change'], // Change amount
+                'date' => now()
             ];
-            return view('cashier.receipt', compact('receiptData'));
+            return view('cashier.receipt', compact('receiptData', 'cart'));
         }
         return redirect('/cashier')->with('message_error', 'Error');
     }
