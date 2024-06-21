@@ -17,34 +17,27 @@
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Product Name</th>
-                    {{-- <th scope="col">Supplier</th> --}}
-                    {{-- <th scope="col">Category</th> --}}
-                    {{-- <th scope="col">Brand</th> --}}
                     <th scope="col">Price</th>
                     <th scope="col">Stock</th>
-                    {{-- <th scope="col">Barcode</th> --}}
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
-
                 @foreach ($products as $product)
                     <tr>
                         <td>{{ $product->product_name }}</td>
-                        {{-- <td>{{ $product->supplier_name }}</td> --}}
-                        {{-- <td>{{ $product->category_name }}</td> --}}
-                        {{-- <td>{{ $product->brand_name }}</td> --}}
                         <td>{{ $product->unit_price }}</td>
                         <td>{{ $product->unit_in_stock }}</td>
-                        {{--<td>{{ $product->barcode }}</td> --}}
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#showProduct" data-bs-whatever={{$product->product_id}}>View</button>
-                                <a href="/admin/product/edit" class="btn btn-outline-primary">Edit</a>
-                                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#deleteProduct">Delete</button>
+                                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#showProduct{{ $product->product_id }}">View</button>
+                                <a href="/admin/product/edit/{{ $product->product_id }}" class="btn btn-outline-primary">Edit</a>
+                                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#deleteProduct{{ $product->product_id }}">Delete</button>
                             </div>
                         </td>
                     </tr>
+                    @include('products.show', ['product' => $product])
+                    @include('products.delete', ['product' => $product])
                 @endforeach
             </tbody>
         </table>
@@ -53,6 +46,4 @@
         </div>
     </div>
     @extends('products.create')
-    @extends('products.show')
-    @extends('products.delete')
 @endsection
