@@ -30,6 +30,8 @@
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <button class="btn btn-outline-primary" data-bs-toggle="modal"
+                                    data-bs-target="#showSupplier{{ $supplier->supplier_id }}">View</button>
+                                <a href="/admin/supplier/edit" class="btn btn-outline-primary">Edit</a>
                                     data-bs-target="#showSupplier">View</button>
                                 <a href="/admin/supplier/edit/{{ $supplier->supplier_id }}" class="btn btn-outline-primary">Edit</a>
                                 <button class="btn btn-outline-primary" data-bs-toggle="modal"
@@ -37,8 +39,6 @@
                             </div>
                         </td>
                     </tr>
-                    @include('supplier.show')
-                    @include('supplier.delete')
                 @endforeach
             </tbody>
         </table>
