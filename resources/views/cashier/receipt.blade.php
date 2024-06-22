@@ -129,7 +129,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($cart as $item)
+                    @foreach ($salesRecords as $item)
                         <tr>
                             <td>{{ $item->product_name }}</td>
                             <td>{{ $item->unit_price }}</td>

@@ -14,6 +14,17 @@
 
     <div class="cashier-panel p-3">
         <div class="row">
+            @if ($errors->any())
+                <div class="alert alert-danger" role="alert">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+        </div>
+        <div class="row">
             <div class="col">
                 <div>
                     <form action="/cashier/add-to-cart" method="post" id="checkoutForm">
@@ -97,11 +108,13 @@
                     </div>
                     <div class="row">
                         <label for="cash" class="col">Cash: </label>
-                        <input class="text-green col" type="text" id="cash" value="0.00" name="cash" readonly>
+                        <input class="text-green col" type="text" id="cash" value="0.00" name="cash"
+                            readonly>
                     </div>
                     <div class="row">
                         <label for="change" class="col">Change: </label>
-                        <input class="text-danger col" type="text" id="change" value="0.00" name="change" readonly>
+                        <input class="text-danger col" type="text" id="change" value="0.00" name="change"
+                            readonly>
                     </div>
 
                     <!-- On-screen number keys -->
@@ -179,7 +192,7 @@
             discount.addEventListener('change', function() {
                 console.log(discount.value)
                 totalInput.value = originalTotalPrice
-                .value; //This reset the total price each time the user change the value of discount
+                    .value; //This reset the total price each time the user change the value of discount
                 if (discount.value !== 'none') { //Checks if the value is not set to none
                     console.log('select')
                     const discountPrice = totalInput.value * discount.value;

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Product;
+use App\Models\Sales;
 use App\Models\Transactions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,23 +40,35 @@ class TransactionsController extends Controller
             'total' => ['required', 'gt:0'],
         ]);
 
-        if ($validated) {
-            $cart = Cart::where('cashier_id', Auth::user()->user_id)
-                ->Leftjoin('products', 'carts.product_id', "=", 'products.product_id')->get(); //Returns all item added to cart by cashier
+        $transaction = Transactions::create($validated);
 
-            Cart::where('cashier_id', Auth::id())->delete();
-            Transactions::create($validated);
+        $cart = Cart::where('cashier_id', Auth::user()->user_id)
+            ->Leftjoin('products', 'carts.product_id', "=", 'products.product_id')->get(); //Returns all item added to cart by cashier
+        foreach ($cart as $item) {
+            $salesItem = new Sales();
+            $salesItem->product_name = $item['product_name'];
+            $salesItem->qty = $item['qty'];
+            $salesItem->unit_price = $item['unit_price'];
+            $salesItem->transaction_id = $transaction->transaction_id;
+            $salesItem->save();
 
-            $receiptData = [
-                'total' => $validated['total'], // Total amount
-                'cash' => $validated['cash'], // Cash received
-                'change' => $validated['change'], // Change amount
-                'payment' => $validated['payment'],
-                'date' => now()//date now
-            ];
-            return view('cashier.receipt', compact('receiptData', 'cart'));
+            $product = Product::find($item->product_id);
+            $product->unit_in_stock -= $item['qty'];
+            $product->save();
         }
-        return redirect('/cashier')->with('message_error', 'Error');
+
+        Cart::where('cashier_id', Auth::id())->delete();
+
+        $receiptData = [
+            'total' => $validated['total'], // Total amount
+            'cash' => $validated['cash'], // Cash received
+            'change' => $validated['change'], // Change amount
+            'payment' => $validated['payment'],
+            'date' => now() //date now
+        ];
+
+        $salesRecords = Sales::where('transaction_id', $transaction->transaction_id)->get();
+        return view('cashier.receipt', compact('receiptData', 'salesRecords'));
     }
 
     /**
@@ -69,7 +83,7 @@ class TransactionsController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Transactions $transactions, $id)
-    {   
+    {
         $transaction = $transactions::find($id);
         return view('transactions.edit', compact('transaction'));
     }
@@ -86,14 +100,12 @@ class TransactionsController extends Controller
             'total' => ['required', 'gt:0'],
         ]);
 
-        if ($validated){
+        if ($validated) {
             $transactions::find($id)->update($validated);
-            toast('Transaction updated successfully.','success');
+            toast('Transaction updated successfully.', 'success');
             return redirect('/admin/transactions');
-        }
-        else
-        {
-            toast('Error updating transaction.','error');
+        } else {
+            toast('Error updating transaction.', 'error');
             return redirect('/admin/transactions');
         }
     }
@@ -104,7 +116,7 @@ class TransactionsController extends Controller
     public function destroy(Transactions $transactions, $id)
     {
         $transactions::destroy($id);
-        toast('User deleted successfully.','success');
+        toast('User deleted successfully.', 'success');
         return redirect('/admin/transactions');
     }
 }
