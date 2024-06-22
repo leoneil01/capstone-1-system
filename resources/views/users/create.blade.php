@@ -28,15 +28,19 @@
                             <div class="row mb-3">
                                 <label class="col" for="gender">Gender:</label>
                                 <select class="col" name="gender" id="gender">
-                                    <option value="1" selected>Male</option>
-                                    <option value="2">Female</option>
+                                    <option selected>Select gender</option>
+                                    @foreach ($genders as $gender)
+                                        <option value="{{$gender->gender_id}}">{{$gender->gender}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="row mb-3">
                                 <label class="col" for="role">Role:</label>
                                 <select class="col" name="role" id="role">
-                                    <option value="1" selected>Admin</option>
-                                    <option value="2">Cashier</option>
+                                    <option selected>Select role</option>
+                                    @foreach ($roles as $role)
+                                        <option value="{{$role->role_id}}">{{$role->role}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="row mb-3">

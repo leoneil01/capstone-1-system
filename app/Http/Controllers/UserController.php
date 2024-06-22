@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Gender;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +23,10 @@ class UserController extends Controller
             ->orderBy('users.first_name')
             ->get();
 
-        return view('users.index', compact('users'));
+            $roles = Role::all();
+            $genders = Gender::all();
+
+        return view('users.index', compact('users', 'roles', 'genders'));
     }
 
     /**
