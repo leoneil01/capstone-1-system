@@ -16,10 +16,26 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
+
         $products = Product::leftjoin('suppliers', 'products.supplier_id', '=', 'suppliers.supplier_id')
             ->leftjoin('categories', 'products.category_id', '=', 'categories.category_id')
-            ->leftjoin('brands', 'products.brand_id', '=', 'brands.brand_id')
-            ->orderBy('products.product_name')
+            ->leftjoin('brands', 'products.brand_id', '=', 'brands.brand_id');
+
+        if (request()->has('search')) {
+            $searchTerm = request()->get('search');
+            if ($searchTerm) {
+                $products = $products->where(function ($query) use ($searchTerm) {
+                    $query->where('products.product_name', 'like', "%$searchTerm")
+                        ->orwhere('categories.category_name', 'like', "%$searchTerm")
+                        ->orwhere('brands.brand_name', 'like', "%$searchTerm")
+                        ->orwhere('products.barcode', 'like', "%$searchTerm")
+                        ->orwhere('products.unit_price', 'like', "%$searchTerm")
+                        ->orwhere('products.unit_in_stock', 'like', "%$searchTerm");
+                });
+            }
+        }
+
+        $products = $products->orderBy('products.product_name')
             ->select('products.*', 'suppliers.supplier_name as supplier_name', 'categories.category_name as category_name', 'brands.brand_name as brand_name')
             ->paginate(7)
             ->appends(['search' => request()->get('search')]);
@@ -121,7 +137,6 @@ class ProductController extends Controller
         $product::find($id)->update($validated);
         toast('Product created successfully.', 'success');
         return redirect('/admin/products');
-        
     }
 
     /**

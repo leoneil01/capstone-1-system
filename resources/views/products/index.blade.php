@@ -4,9 +4,9 @@
     @include('include.topbar')
     <div class="card-lg">
         <div class="card-header">
-            <form action="" method="post">
-                <input type="text" class="input-search" placeholder="Search...">
-                <button class="btn-search"><x-fas-search class="fas-icon" /></button>
+            <form action="/admin/products" method="get">
+                <input type="text" class="input-search" placeholder="Search..." name="search">
+                <button type="submit" class="btn-search"><x-fas-search class="fas-icon" /></button>
             </form>
             <button class="action" data-bs-toggle="modal" data-bs-target="#createProduct">
                 Add Product
