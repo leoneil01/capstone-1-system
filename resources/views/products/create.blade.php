@@ -26,8 +26,8 @@
                             <div class="row mb-3">
                                 <label class="col" for="supplier_id">Supplier:</label>
                                 <select class="col form-control" name="supplier_id" id="supplier_id" required>
-                                    @foreach($products as $product)
-                                        <option value="{{ $product->supplier_id }}">{{ $product->supplier_name }}</option>
+                                    @foreach($suppliers as $supplier)
+                                        <option value="{{ $supplier->supplier_id }}">{{ $supplier->supplier_name }}</option>
                                     @endforeach
                                 </select>
                             </div>

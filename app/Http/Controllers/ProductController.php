@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -23,10 +24,11 @@ class ProductController extends Controller
             ->paginate(7)
             ->appends(['search' => request()->get('search')]);
 
+        $suppliers = Supplier::all();
         $categories = Category::all();
         $brands = Brand::all();
 
-        return view('products.index', compact('products', 'categories', 'brands'));
+        return view('products.index', compact('products', 'suppliers', 'categories', 'brands'));
     }
 
     /**
