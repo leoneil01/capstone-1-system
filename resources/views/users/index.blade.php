@@ -45,6 +45,9 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="paginator">
+            {{ $users->links() }}
+        </div>
     </div>
     @extends('users.create')
 @endsection
