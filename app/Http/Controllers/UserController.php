@@ -16,15 +16,32 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        //
-
         $users = User::leftjoin('genders', 'users.gender_id', '=', 'genders.gender_id')
             ->leftjoin('roles', 'users.role_id', '=', 'roles.role_id')
-            ->orderBy('users.first_name')
-            ->get();
+            ->orderBy('users.first_name');
+
+            if(request()->has('search')){
+                $searchTerm = request()->get('search');
+                if($searchTerm){
+                    $users = $users->where(function($query) use($searchTerm){
+                        $query->where('users.first_name', 'like', "%$searchTerm")
+                        ->orwhere('users.first_name', 'like', "%$searchTerm")
+                        ->orwhere('users.middle_name', 'like', "%$searchTerm")
+                        ->orwhere('users.last_name', 'like', "%$searchTerm")
+                        ->orwhere('genders.gender', 'like', "%$searchTerm")
+                        ->orwhere('roles.role', 'like', "%$searchTerm")
+                        ->orwhere('users.address', 'like', "%$searchTerm")
+                        ->orwhere('users.birth_date', 'like', "%$searchTerm")
+                        ->orwhere('users.email_address', 'like', "%$searchTerm")
+                        ->orwhere('users.username', 'like', "%$searchTerm");
+                    });
+                }
+            }
 
             $roles = Role::all();
             $genders = Gender::all();
+            $users = $users->paginate(10)
+            ->appends(['search' => request()->get('search')]);
 
         return view('users.index', compact('users', 'roles', 'genders'));
     }

@@ -5,10 +5,10 @@
     <div class="card-lg">
         <table class="table">
             <div class="card-header">
-                <form action="" method="post">
+                <form action="/admin/users" method="get">
                     @csrf
-                    <input type="text" class="input-search" placeholder="Search user...">
-                    <button class="btn-search"><x-fas-search class="fas-icon" /></button>
+                    <input type="text" class="input-search" placeholder="Search user..." name="search">
+                    <button type="submit" class="btn-search"><x-fas-search class="fas-icon" /></button>
                 </form>
                 <button class="action" data-bs-toggle="modal" data-bs-target="#createUser">
                     Add User
