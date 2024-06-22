@@ -26,6 +26,7 @@
                             <div class="row mb-3">
                                 <label class="col" for="supplier_id">Supplier:</label>
                                 <select class="col form-control" name="supplier_id" id="supplier_id" required>
+                                    <option selected>Select supplier</option>
                                     @foreach($suppliers as $supplier)
                                         <option value="{{ $supplier->supplier_id }}">{{ $supplier->supplier_name }}</option>
                                     @endforeach
@@ -34,6 +35,7 @@
                             <div class="row mb-3">
                                 <label class="col" for="category_id">Category:</label>
                                 <select class="col form-control" name="category_id" id="category_id" required>
+                                    <option selected>Select category</option>
                                     @foreach($categories as $category)
                                         <option value="{{ $category->category_id }}">{{ $category->category_name }}</option>
                                     @endforeach
@@ -42,6 +44,7 @@
                             <div class="row mb-3">
                                 <label class="col" for="brand_id">Brand:</label>
                                 <select class="col form-control" name="brand_id" id="brand_id" required>
+                                    <option selected>Select brand</option>
                                     @foreach($brands as $brand)
                                         <option value="{{ $brand->brand_id }}">{{ $brand->brand_name }}</option>
                                     @endforeach
