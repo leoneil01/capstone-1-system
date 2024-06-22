@@ -14,6 +14,15 @@
                     <x-fas-plus class="fas-icon" />
                 </button>
             </div>
+            @if ($errors->any())
+                    <div class="alert alert-danger" role="alert">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                               <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Supplier Name</th>
@@ -31,9 +40,10 @@
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <button class="btn btn-outline-primary" data-bs-toggle="modal"
                                     data-bs-target="#showSupplier{{ $supplier->supplier_id }}">View</button>
-                                <a href="/admin/supplier/edit/{{ $supplier->supplier_id }}" class="btn btn-outline-primary">Edit</a>
+                                <a href="/admin/supplier/edit/{{ $supplier->supplier_id }}"
+                                    class="btn btn-outline-primary">Edit</a>
                                 <button class="btn btn-outline-primary" data-bs-toggle="modal"
-                                    data-bs-target="#deleteSupplier">Delete</button>
+                                    data-bs-target="#deleteSupplier{{ $supplier->supplier_id }}">Delete</button>
                             </div>
                         </td>
                     </tr>

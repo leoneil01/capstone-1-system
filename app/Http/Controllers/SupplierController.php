@@ -30,7 +30,20 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'supplier_name' => ['required'],
+            'contact_name' => ['required'],
+            'address' => ['required'],
+            'postal_code' => ['required', 'numeric'],
+            'country' => ['required'],
+            'contact_number' => ['required', 'numeric'],
+        ]);
+
+        if($validated){
+            Supplier::create($validated);
+            toast('Supplier added successfuly!', 'success');
+            return redirect('/admin/suppliers');
+        }
     }
 
     /**
@@ -78,8 +91,9 @@ class SupplierController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Supplier $supplier)
+    public function destroy(Supplier $supplier, $id)
     {
-        //
+        $supplier::destroy($id);
+        return redirect('/admin/suppliers');
     }
 }
