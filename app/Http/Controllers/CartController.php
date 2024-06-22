@@ -14,7 +14,6 @@ class CartController extends Controller
         $cashier_id = Auth::id();
         
         if($product){
-            echo($product->product_id);
             Cart::create([
                 'product_id' => $product->product_id,
                 'cashier_id' => $cashier_id
