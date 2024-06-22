@@ -56,25 +56,46 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit(User $user, $id)
     {
-        return view('users.edit');
+        $genders = Gender::all();
+        $roles = Role::all();
+        $user = $user::find($id);
+        return view('users.edit', compact('user', 'genders', 'roles'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $user, $id)
     {
-        //
+        $validated = $request->validate([
+            'first_name' => ['required'],
+            'middle_name' => ['required'],
+            'last_name' => ['required'],
+            'gender_id' => ['required'],
+            'role_id' => ['required'],
+            'address'=> ['required'],
+            'birth_date' => ['required'],
+            'email_address' => ['required'],
+            'username' => ['required'],
+        ]);
+
+        if($validated){
+            $user::find($id)->update($validated);
+            toast('User updated successfully.','success');
+            return redirect('/admin/users');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(User $user, $id)
     {
-        //
+        $user::destroy($id);
+        toast('User deleted successfully.','success');
+        return redirect('/admin/users');
     }
 
     public function login()

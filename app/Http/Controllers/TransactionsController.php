@@ -104,6 +104,7 @@ class TransactionsController extends Controller
     public function destroy(Transactions $transactions, $id)
     {
         $transactions::destroy($id);
+        toast('User deleted successfully.','success');
         return redirect('/admin/transactions');
     }
 }

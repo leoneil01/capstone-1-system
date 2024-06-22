@@ -13,6 +13,15 @@
                 <x-fas-plus class="fas-icon" />
             </button>
         </div>
+        @if ($errors->any())
+            <div class="alert alert-danger" role="alert">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <table class="table">
             <thead class="thead-dark">
                 <tr>
@@ -30,9 +39,12 @@
                         <td>{{ $product->unit_in_stock }}</td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#showProduct{{ $product->product_id }}">View</button>
-                                <a href="/admin/product/edit/{{ $product->product_id }}" class="btn btn-outline-primary">Edit</a>
-                                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#deleteProduct{{ $product->product_id }}">Delete</button>
+                                <button class="btn btn-outline-primary" data-bs-toggle="modal"
+                                    data-bs-target="#showProduct{{ $product->product_id }}">View</button>
+                                <a href="/admin/product/edit/{{ $product->product_id }}"
+                                    class="btn btn-outline-primary">Edit</a>
+                                <button class="btn btn-outline-primary" data-bs-toggle="modal"
+                                    data-bs-target="#deleteProduct{{ $product->product_id }}">Delete</button>
                             </div>
                         </td>
                     </tr>

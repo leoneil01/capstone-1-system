@@ -3,7 +3,18 @@
     @include('include.sidenav')
     @include('include.topbar')
     <div class="card-lg p-5">
-        <form action="">
+        @if ($errors->any())
+            <div class="alert alert-danger" role="alert">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <form action="/admin/user/update/{{ $user->user_id }}" method="post">
+            @csrf
+            @method('PUT')
             <div class="row mb-5">
                 <div class="col mb-3">
                     <div>
@@ -17,38 +28,55 @@
                 </div>
                 <div class="col">
                     <div class="row mb-3">
-                        <label class="col" for="fullname">Fullname:</label>
-                        <input class="col" type="text" id="fullname" value="Juan Dela Cruz">
+                        <label class="col" for="first_name">First Name:</label>
+                        <input class="col" type="text" id="first_name" value="{{ $user->first_name }}"
+                            name="first_name">
                     </div>
                     <div class="row mb-3">
-                        <label class="col" for="gender">Gender:</label>
-                        <select class="col" name="gender" id="gender">
-                            <option value="1" selected>Male</option>
-                            <option value="2">Female</option>
+                        <label class="col" for="middle_name">Middle Name:</label>
+                        <input class="col" type="text" id="middle_name" value="{{ $user->middle_name }}"
+                            name="middle_name">
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col" for="last_name">Last Name:</label>
+                        <input class="col" type="text" id="last_name" value="{{ $user->last_name }}" name="last_name">
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col" for="gender_id">Gender:</label>
+                        <select class="col" name="gender_id" id="gender_id">
+                            @foreach ($genders as $gender)
+                                <option value="{{ $gender->gender_id }}"
+                                    {{ $user->gender_id == $gender->gender_id ? 'selected' : '' }}>{{ $gender->gender }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="row mb-3">
-                        <label class="col" for="role">Role:</label>
-                        <select class="col" name="role" id="role">
-                            <option value="1" selected>Admin</option>
-                            <option value="2">Cashier</option>
+                        <label class="col" for="role_id">Role:</label>
+                        <select class="col" name="role_id" id="role_id">
+                            @foreach ($roles as $role)
+                                <option value="{{ $role->role_id }}"
+                                    {{ $user->role_id == $role->role_id ? 'selected' : '' }}>{{ $role->role }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="row mb-3">
                         <label class="col" for="address">Address:</label>
-                        <input class="col" type="text" id="address" value="Roxas City">
+                        <input class="col" type="text" id="address" name="address" value="{{ $user->address }}">
                     </div>
                     <div class="row mb-3">
-                        <label class="col" for="birthdate">Birthdate:</label>
-                        <input class="col" type="date" id="birthdate">
+                        <label class="col" for="birth_date">Birthdate:</label>
+                        <input class="col" type="date" id="birth_date" name="birth_date"
+                            value="{{ $user->birth_date }}">
                     </div>
                     <div class="row mb-3">
-                        <label class="col" for="email">Email</label>
-                        <input class="col" type="text" id="email" value="juan@gmail.com">
+                        <label class="col" for="email_address">Email</label>
+                        <input class="col" type="text" id="email_address" name="email_address"
+                            value="{{ $user->email_address }}">
                     </div>
                     <div class="row mb-3">
                         <label class="col" for="username">Username</label>
-                        <input class="col" type="text" id="username" value="juan">
+                        <input class="col" type="text" id="username" name="username" value="{{ $user->username }}">
                     </div>
                 </div>
             </div>

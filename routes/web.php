@@ -49,7 +49,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::controller(ProductController::class)->group(function () {
         Route::get('/admin/products', 'index');
-        Route::get('/admin/product/edit', 'edit');
+        Route::get('/admin/product/edit/{id}', 'edit');
+        Route::put('/admin/product/update/{id}', 'update');
+        Route::delete('/admin/product/destroy/{id}', 'destroy');
         Route::post('/admin/product/store', 'store');
     });
 
@@ -71,7 +73,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::controller(UserController::class)->group(function () {
         Route::get('/admin/users', 'index');
-        Route::get('/admin/user/edit', 'edit');
+        Route::get('/admin/user/edit/{id}', 'edit');
+        Route::put('/admin/user/update/{id}', 'update');
+        Route::delete('/admin/user/destroy/{id}', 'destroy');
         Route::get('/process/logout', 'proccesLogout');
     });
 });

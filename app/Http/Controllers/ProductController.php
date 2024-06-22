@@ -93,24 +93,44 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public function edit(Product $product, $id)
     {
-        return view('products.edit');
+        $suppliers = Supplier::all();
+        $categories = Category::all();
+        $brands = Brand::all();
+        $product = $product::find($id);
+        return view('products.edit', compact('product', 'suppliers', 'categories', 'brands'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Product $product, $id)
     {
-        //
+        $validated = $request->validate([
+            'product_name' => 'required|string|max:55',
+            'supplier_id' => 'required|integer|exists:suppliers,supplier_id',
+            'category_id' => 'required|integer|exists:categories,category_id',
+            'brand_id' => 'required|integer|exists:brands,brand_id',
+            'barcode' => 'required|string|max:255',
+            'unit_price' => 'required|numeric',
+            'unit_in_stock' => 'required|integer',
+            'product_image' => 'nullable|image|mimes:jpg,jpeg,png,biff,bmp',
+        ]);
+
+        $product::find($id)->update($validated);
+        toast('Product created successfully.', 'success');
+        return redirect('/admin/products');
+        
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy(Product $product, $id)
     {
-        //
+        $product::destroy($id);
+        toast('Product deleted successfully.', 'success');
+        return redirect('/admin/products');
     }
 }
