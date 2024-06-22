@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Product;
+use App\Models\Transactions;
 use App\Models\User;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -22,7 +24,12 @@ class AdminController extends Controller
         $users = User::leftjoin('genders', 'users.gender_id', '=', 'genders.gender_id')
         ->orderBy('users.first_name');
 
-        return view('admin.index', compact('users'));
+        $totalSales = Transactions::sum('total');
+        $totalTransactions = Transactions::count();
+        $totalProducts = Product::count();
+        $lowStockProduct = Product::orderBy('unit_in_stock', 'asc')->first();
+
+        return view('admin.index', compact('users', 'totalSales', 'totalProducts', 'totalTransactions', 'lowStockProduct'));
     }
 
     /**
