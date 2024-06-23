@@ -18,7 +18,8 @@ class UserController extends Controller
     {
         $users = User::leftjoin('genders', 'users.gender_id', '=', 'genders.gender_id')
             ->leftjoin('roles', 'users.role_id', '=', 'roles.role_id')
-            ->orderBy('users.first_name');
+            ->orderBy('users.first_name')
+            ->where('isDeleted', false);
 
             if(request()->has('search')){
                 $searchTerm = request()->get('search');
@@ -110,7 +111,7 @@ class UserController extends Controller
      */
     public function destroy(User $user, $id)
     {
-        $user::destroy($id);
+        $user::where('user_id', $id)->update(['isDeleted' => true]);
         toast('User deleted successfully.','success');
         return redirect('/admin/users');
     }

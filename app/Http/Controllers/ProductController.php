@@ -19,7 +19,8 @@ class ProductController extends Controller
 
         $products = Product::leftjoin('suppliers', 'products.supplier_id', '=', 'suppliers.supplier_id')
             ->leftjoin('categories', 'products.category_id', '=', 'categories.category_id')
-            ->leftjoin('brands', 'products.brand_id', '=', 'brands.brand_id');
+            ->leftjoin('brands', 'products.brand_id', '=', 'brands.brand_id')
+            ->where('isDeleted', false);
 
         if (request()->has('search')) {
             $searchTerm = request()->get('search');
@@ -144,7 +145,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product, $id)
     {
-        $product::destroy($id);
+        $product::where('product_id', $id)->update(['isDeleted' => true]);
         toast('Product deleted successfully.', 'success');
         return redirect('/admin/products');
     }

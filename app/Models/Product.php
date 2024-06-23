@@ -19,6 +19,7 @@ class Product extends Model
         'brand_id',
         'barcode',
         'unit_price',
-        'unit_in_stock'
+        'unit_in_stock',
+        'isDeleted'
     ];
 }

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('barcode', 255);
             $table->decimal('unit_price', 10, 2);
             $table->integer('unit_in_stock');
+            $table->boolean('isDeleted')->default(false);
             $table->timestamps();
 
             $table->foreign('supplier_id')

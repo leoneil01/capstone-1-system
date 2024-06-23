@@ -23,7 +23,8 @@ class User extends Authenticatable
         'birth_date',
         'email_address',
         'username',
-        'password'
+        'password',
+        'isDeleted'
     ];
     protected $hidden = [ 'password' ];
 }

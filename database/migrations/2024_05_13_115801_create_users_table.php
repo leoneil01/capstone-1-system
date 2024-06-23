@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('email_address', 55);
             $table->string('username', 55);
             $table->string('password', 255);
+            $table->boolean('isDeleted')->default(false);
             $table->timestamps();
 
             $table->foreign('gender_id')
