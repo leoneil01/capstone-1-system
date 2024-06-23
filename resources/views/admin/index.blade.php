@@ -35,6 +35,14 @@
                 {{$lowStockProduct->product_name}} <span class="card-sub-result">Stock: {{number_format($lowStockProduct->unit_in_stock)}}</span>
             </div>
         </div>
+        <div class="card-info">
+            <div class="card-label">
+                Top Selling Product:
+            </div>
+            <div class="card-result">
+                {{$topSellingProduct ? $topSellingProduct->product_name : 'No Sales'}} <span class="card-sub-result">{{$topSellingProduct ? 'Stock:'.number_format($topSellingProduct->total_qty) : ''}}</span>
+            </div>
+        </div>
     </div>
     </script>
 @endsection
