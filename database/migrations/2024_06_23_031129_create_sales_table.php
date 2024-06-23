@@ -20,9 +20,9 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('transaction_id')
-            ->references('transaction_id')
-            ->on('transactions')
-            ->onDelete('cascade');
+                ->references('transaction_id')
+                ->on('transactions')
+                ->onDelete('cascade');
         });
     }
 

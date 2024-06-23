@@ -12,7 +12,8 @@ class Transactions extends Model
     protected $table = 'transactions';
     protected $primaryKey = 'transaction_id';
     protected $fillable = [
-        'payment',
+        'payment_id',
+        'discount_id',
         'total',
         'cash',
         'change'

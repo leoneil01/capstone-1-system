@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Cashier;
+use App\Models\Discount;
+use App\Models\Payment;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -22,19 +24,29 @@ class CashierController extends Controller
         Alert::toast('Welcome, ' . $firstName . '!', 'Toast Type');
 
         $users = User::leftjoin('genders', 'users.gender_id', '=', 'genders.gender_id')
-        ->orderBy('users.first_name');
+            ->orderBy('users.first_name');
+
+        $payments = Payment::all();
+        $discounts = Discount::all();
 
         $products = Product::all();
 
         $cart = Cart::where('cashier_id', Auth::user()->user_id)
-        ->Leftjoin('products', 'carts.product_id', "=", 'products.product_id')->get(); //Returns all item added to cart by cashier
+            ->Leftjoin('products', 'carts.product_id', "=", 'products.product_id')->get(); //Returns all item added to cart by cashier
 
         $totalPrice = 0.00;
-        foreach($cart as $item){
+        foreach ($cart as $item) {
             $totalPrice += $item->unit_price * $item->qty;
         }
 
-        return view('cashier.index', compact('users', 'products', 'cart', 'totalPrice'));
+        return view('cashier.index', compact(
+            'users',
+            'payments',
+            'discounts',
+            'products',
+            'cart',
+            'totalPrice'
+        ));
     }
 
     /**

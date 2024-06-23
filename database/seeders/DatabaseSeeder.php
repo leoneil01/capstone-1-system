@@ -4,8 +4,10 @@ namespace Database\Seeders;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Discount;
 use App\Models\User;
 use App\Models\Gender;
+use App\Models\Payment;
 use App\Models\Product;
 use App\Models\Role;
 use App\Models\Supplier;
@@ -24,6 +26,39 @@ class DatabaseSeeder extends Seeder
         $this->createProductSuppliers();
         $this->createBrandNames();
         Product::factory(15)->create();
+        $this->createDiscounts();
+        $this->createPayments();
+    }
+
+    private function createPayments(): void
+    {
+        Payment::factory()->create([
+            'payment' => 'Cash',
+        ]);
+
+        Payment::factory()->create([
+            'payment' => 'GCash',
+        ]);
+    }
+
+    private function createDiscounts(): void
+    {
+        Discount::factory()->create([
+            'discount_name' => 'Senior Citizen',
+            'discount' => '0.2'
+        ]);
+        Discount::factory()->create([
+            'discount_name' => 'PWD',
+            'discount' => '0.2'
+        ]);
+        Discount::factory()->create([
+            'discount_name' => 'Loyal Customer',
+            'discount' => '0.1'
+        ]);
+        Discount::factory()->create([
+            'discount_name' => 'Promo',
+            'discount' => '0.05'
+        ]);
     }
 
     private function createGenders(): void
@@ -62,7 +97,8 @@ class DatabaseSeeder extends Seeder
         ]);
     }
 
-    private function createCategories(): void {
+    private function createCategories(): void
+    {
         Category::factory()->create(['category_name' => 'Fruits']);
         Category::factory()->create(['category_name' => 'Canned Goods']);
         Category::factory()->create(['category_name' => 'Dairy Products']);
@@ -81,7 +117,8 @@ class DatabaseSeeder extends Seeder
         Category::factory()->create(['category_name' => 'Pet Care']);
     }
 
-    private function createProductSuppliers(): void {
+    private function createProductSuppliers(): void
+    {
         $this->createSupplier('UNIVERSAL ROBINA CORPORATION', 'Quezon, Manila', 'Philippines');
         $this->createSupplier('SAN MIGUEL FOODS, INC.', 'Pasig, Manila', 'Philippines');
         $this->createSupplier('COCA-COLA BEVERAGES PHILIPPINES, INC.', 'Taguig, Manila', 'Philippines');
@@ -91,7 +128,8 @@ class DatabaseSeeder extends Seeder
         $this->createSupplier('BOUNTY FRESH FOOD, INC.', 'Caloocan City, Manila', 'Philippines');
     }
 
-    private function createSupplier($supplierName, $address, $country): void {
+    private function createSupplier($supplierName, $address, $country): void
+    {
         Supplier::factory()->create([
             'supplier_name' => $supplierName,
             'contact_name' => fake()->name(),
@@ -102,7 +140,8 @@ class DatabaseSeeder extends Seeder
         ]);
     }
 
-    private function createBrandNames(): void {
+    private function createBrandNames(): void
+    {
         Brand::factory()->create(['brand_name' => 'Jack n Jill']);
         Brand::factory()->create(['brand_name' => 'C2']);
         Brand::factory()->create(['brand_name' => 'Great Taste']);

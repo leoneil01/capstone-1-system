@@ -34,13 +34,15 @@ class TransactionsController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'payment' => ['required'],
             'cash' => ['required', 'numeric', 'gt:total'],
             'change' => ['required'],
             'total' => ['required', 'gt:0'],
+            'payment_id' => ['nullable'],
+            'discount_id' => ['nullable']
         ]);
 
         $transaction = Transactions::create($validated);
+        //dd($transaction);
 
         $cart = Cart::where('cashier_id', Auth::user()->user_id)
             ->Leftjoin('products', 'carts.product_id', "=", 'products.product_id')->get(); //Returns all item added to cart by cashier
@@ -59,13 +61,11 @@ class TransactionsController extends Controller
 
         Cart::where('cashier_id', Auth::id())->delete();
 
-        $receiptData = [
-            'total' => $validated['total'], // Total amount
-            'cash' => $validated['cash'], // Cash received
-            'change' => $validated['change'], // Change amount
-            'payment' => $validated['payment'],
-            'date' => now() //date now
-        ];
+        $receiptData = Transactions::Leftjoin('payments', 'transactions.payment_id', "=", 'payments.payment_id')
+        ->Leftjoin('discounts', 'transactions.discount_id', "=", 'discounts.discount_id')
+        ->where('transaction_id', $transaction->transaction_id)
+        ->first();
+        //dd($receiptData);
 
         $salesRecords = Sales::where('transaction_id', $transaction->transaction_id)->get();
         return view('cashier.receipt', compact('receiptData', 'salesRecords'));

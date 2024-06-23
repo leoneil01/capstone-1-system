@@ -83,20 +83,23 @@
                     <div class="row mb-3">
                         <div class="col">
                             <label class="row" for="payment">Payment</label>
-                            <select class="row" name="payment" id="payment">
-                                <option value="cash" selected>Cash</option>
-                                <option value="gcash">G-Cash</option>
-                                <option value="paypal">PayPal</option>
-                                <option value="credit_card">Credit Card</option>
+                            <select class="row" name="payment_id" id="payment">
+                                @foreach ($payments as $payment)
+                                    <option value="{{ $payment->payment_id }}"
+                                        {{ $payment->payment_name == 'Cash' ? selected : '' }}>
+                                        {{ $payment->payment }}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col">
                             <label class="row" for="discount">Discount</label>
-                            <select class="row" name="discount" id="discount">
-                                <option value="none" selected>None</option>
-                                <option value=".10">Senior Citizen</option>
-                                <option value=".50">50% Sale</option>
-                                <option value=".05">Loyal Customer Discount</option>
+                            <select class="row" name="discount_id" id="discount">
+                                <option value="" selected>None</option>
+                                @foreach ($discounts as $discount)
+                                    <option value="{{ $discount->discount_id }}"
+                                        data-discount="{{ $discount->discount }}">{{ $discount->discount_name }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -108,8 +111,7 @@
                     </div>
                     <div class="row">
                         <label for="cash" class="col">Cash: </label>
-                        <input class="text-green col" type="text" id="cash" value="0.00" name="cash"
-                            readonly>
+                        <input class="text-green col" type="text" id="cash" value="0.00" name="cash" readonly>
                     </div>
                     <div class="row">
                         <label for="change" class="col">Change: </label>
@@ -190,14 +192,17 @@
             }
 
             discount.addEventListener('change', function() {
-                console.log(discount.value)
-                totalInput.value = originalTotalPrice
-                    .value; //This reset the total price each time the user change the value of discount
-                if (discount.value !== 'none') { //Checks if the value is not set to none
+                totalInput.value = originalTotalPrice.value
+                const selectedOption = discount.selectedOptions[0];
+                const discountValue = selectedOption.getAttribute(
+                'data-discount'); //This reset the total price each time the user change the value of discount
+                if (discountValue) { //Checks if the value is not set to none
                     console.log('select')
-                    const discountPrice = totalInput.value * discount.value;
-                    totalInput.value = totalInput.value - discountPrice.toFixed(2);
+                    const discountPrice = parseFloat(totalInput.value) * parseFloat(discountValue);
+                    console.log(discountPrice);
+                    totalInput.value = (parseFloat(totalInput.value) - discountPrice).toFixed(2);
                 }
+                
                 computeChange(); //Automatically computes the change
             })
 

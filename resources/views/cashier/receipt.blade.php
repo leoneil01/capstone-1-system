@@ -118,7 +118,7 @@
         <div class="receipt-details">
             <div class="grid">
                 <p><strong>Payment:</strong></p>
-                <p>{{ $receiptData['payment'] }}</p>
+                <p>{{ $receiptData->payment }}</p>
             </div>
             <table class="receipt-table">
                 <thead>
@@ -139,16 +139,18 @@
                 </tbody>
             </table>
             <div class="grid">
+                <p><strong>Discount:</strong></p>
+                <p>{{ $receiptData->discount_name ?? 'None'}}</p>
                 <p><strong>Total:</strong></p>
-                <p>{{ $receiptData['total'] }}</p>
+                <p>{{ $receiptData->total }}</p>
                 <p><strong>Cash Received:</strong></p>
-                <p>{{ $receiptData['cash'] }}</p>
+                <p>{{ $receiptData->cash }}</p>
                 <p><strong>Change:</strong></p>
-                <p>{{ $receiptData['change'] }}</p>
+                <p>{{ $receiptData->change }}</p>
             </div>
         </div>
         <div class="receipt-footer">
-            <p>{{ $receiptData['date'] }}</p>
+            <p>{{ $receiptData->created_at }}</p>
             <p>Thank you for your purchase!</p>
             <p class="info">Please keep this receipt for your records.</p>
         </div>
