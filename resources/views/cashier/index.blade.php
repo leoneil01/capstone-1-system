@@ -5,7 +5,6 @@
             <img src="{{ asset('images/temporary_logo.png') }}" alt="Logo" class="topbar-logo" draggable="false">
             <h3 class="topbar-title">ShopNinja</h3>
         </div>
-        @include('include.messages')
         <div class="user">
             <span class="fullname">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</span>
             <img src="{{ asset('images/default_profile_image.jpg') }}" alt="User Image" class="user-img" draggable="false">
@@ -14,6 +13,7 @@
 
     <div class="cashier-panel p-3">
         <div class="row">
+            @include('include.messages')
             @if ($errors->any())
                 <div class="alert alert-danger" role="alert">
                     <ul>
@@ -30,7 +30,7 @@
                     <form action="/cashier/add-to-cart" method="post" id="checkoutForm">
                         @csrf
                         <label for="barcode">Barcode:</label>
-                        <input type="text" id="barcode" name="barcode" readonly>
+                        <input type="text" id="barcode" name="barcode">
                         <input type="submit" value="Add" class="btn-simple">
                     </form>
                 </div>
@@ -50,7 +50,7 @@
                                     @method('PUT')
                                     @csrf
                                     <input class="text-center quantity-input" type="text" id="quantity"
-                                        value="{{ $item->qty }}" name="qty" style="width: 50px" readonly>
+                                        value="{{ $item->qty }}" name="qty" style="width: 50px">
                                 </form>
                                 <form action="/cashier/remove-item/{{ $item->item_id }}" method="post">
                                     @csrf
@@ -122,11 +122,12 @@
                     <!-- On-screen number keys -->
                     <div class="num-keys-grid mb-3">
                         @for ($i = 1; $i <= 9; $i++)
-                            <button class="num-key" data-value="{{ $i }}">{{ $i }}</button>
+                            <button type="button" class="num-key"
+                                data-value="{{ $i }}">{{ $i }}</button>
                         @endfor
-                        <button class="num-key" data-value="0">0</button>
-                        <button class="num-key" data-value=".">.</button>
-                        <button class="num-key" data-value="C">C</button>
+                        <button type="button" class="num-key" data-value="0">0</button>
+                        <button type="button" class="num-key" data-value=".">.</button>
+                        <button type="button" class="num-key" data-value="C">C</button>
                     </div>
                     <div class="row">
                         <button type="submit" class="btn-simple col" onclick="printReceipt()">Checkout</button>
@@ -195,14 +196,15 @@
                 totalInput.value = originalTotalPrice.value
                 const selectedOption = discount.selectedOptions[0];
                 const discountValue = selectedOption.getAttribute(
-                'data-discount'); //This reset the total price each time the user change the value of discount
+                    'data-discount'
+                    ); //This reset the total price each time the user change the value of discount
                 if (discountValue) { //Checks if the value is not set to none
                     console.log('select')
                     const discountPrice = parseFloat(totalInput.value) * parseFloat(discountValue);
                     console.log(discountPrice);
                     totalInput.value = (parseFloat(totalInput.value) - discountPrice).toFixed(2);
                 }
-                
+
                 computeChange(); //Automatically computes the change
             })
 
@@ -238,13 +240,15 @@
 
             document.addEventListener('keydown', function(event) {
                 const key = event.key;
-                if (key === 'Backspace') {
-                    activeInput.value = activeInput.value.slice(0, -1);
-                    computeChange();
-                }
+                if (activeInput.id == 'cash') {
+                    if (key === 'Backspace') {
+                        activeInput.value = activeInput.value.slice(0, -1);
+                        computeChange();
+                    }
 
-                if (!isNaN(key) || key === '.') {
-                    updateInput(key);
+                    if (!isNaN(key) || key === '.') {
+                        updateInput(key);
+                    }
                 }
             });
         });
