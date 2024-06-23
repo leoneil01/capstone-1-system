@@ -67,7 +67,6 @@ body {
     padding: 5px 5px 0 5px;
     position: relative;
     margin: 10px auto;
-    width: fit-content;
     height: 350px;
     background-color: var(--tertiary);
     border-radius: 10px;
@@ -87,8 +86,8 @@ body {
     border-radius: 10px;
     padding: 5px;
     margin-bottom: 5px;
-    display: grid;
-    grid-template-columns: auto auto auto auto auto;
+    display: flex;
+    flex-wrap: wrap;
     gap: 5px;
 }
 
