@@ -87,9 +87,53 @@ class CashierController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Cashier $cashier)
+    public function update(Request $request, User $user, $id)
     {
-        //
+        // Validate the request
+        $validated = $request->validate([
+            'user_image' => 'nullable|mimes:jpg,jpeg,png,bmp',
+            'first_name' => 'required|string|max:255',
+            'middle_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'gender_id' => 'required|integer|exists:genders,gender_id',
+            'address' => 'required|string|max:255',
+            'birth_date' => 'required|date',
+            'email_address' => 'required|string|email|max:255|unique:users,email_address,' . $id . ',user_id',
+            'username' => 'required|string|max:255|unique:users,username,' . $id . ',user_id',
+            'password' => 'nullable|string|min:8|confirmed',
+        ]);
+    
+        // Handle file upload
+        if ($request->hasFile('user_image')) {
+            $file = $request->file('user_image');
+            $filenameWithExtension = $file->getClientOriginalName();
+            $filename = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
+            $extension = $file->getClientOriginalExtension();
+            $filenameToStore = $filename . '_' . time() . '.' . $extension;
+    
+            // Store the file in the public storage
+            $file->storeAs('public/img/user', $filenameToStore);
+    
+            // Add the filename to the validated data
+            $validated['user_image'] = $filenameToStore;
+        }
+    
+        // Check if the password field is filled
+        if (!empty($validated['password'])) {
+            $validated['password'] = bcrypt($request->password);
+        } else {
+            // Remove password from validated data to avoid updating it
+            unset($validated['password']);
+        }
+    
+        // Update the user
+        User::where('user_id', $id)->update($validated);
+    
+        // Show success message
+        toast('User updated successfully.', 'success');
+    
+        // Redirect to the users page
+        return redirect('/cashier');
     }
 
     /**

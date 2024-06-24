@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -60,7 +61,50 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate the request
+        $validated = $request->validate([
+            'user_image' => 'nullable|image|mimes:jpg,jpeg,png,bmp',
+            'first_name' => 'required|string|max:255',
+            'middle_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'gender_id' => 'required|integer|exists:genders,id',
+            'role_id' => 'required|integer|exists:roles,id',
+            'address' => 'required|string|max:255',
+            'birth_date' => 'required|date',
+            'email_address' => 'required|string|email|max:255|unique:users,email_address',
+            'username' => 'required|string|max:255|unique:users,username',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+    
+        // Handle file upload
+        if ($request->hasFile('user_image')) {
+            $file = $request->file('user_image');
+            $filenameWithExtension = $file->getClientOriginalName();
+            $filename = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
+            $extension = $file->getClientOriginalExtension();
+            $filenameToStore = $filename . '_' . time() . '.' . $extension;
+    
+            // Store the file in the public storage
+            $file->storeAs('public/img/user', $filenameToStore);
+    
+            // Add the filename to the validated data
+            $validated['user_image'] = $filenameToStore;
+        } else {
+            // No image uploaded, use default image path
+            $validated['user_image'] = 'images/default_profile_image.jpg';
+        }
+    
+        // Hash the password before storing
+        $validated['password'] = bcrypt($request->password);
+    
+        // Create the user
+        User::create($validated);
+    
+        // Show success message
+        toast('User created successfully.', 'success');
+    
+        // Redirect to the users page
+        return redirect('/admin/users');
     }
 
     /**
@@ -87,23 +131,52 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user, $id)
     {
+        // Validate the request
         $validated = $request->validate([
-            'first_name' => ['required'],
-            'middle_name' => ['required'],
-            'last_name' => ['required'],
-            'gender_id' => ['required'],
-            'role_id' => ['required'],
-            'address'=> ['required'],
-            'birth_date' => ['required'],
-            'email_address' => ['required'],
-            'username' => ['required'],
+            'user_image' => 'nullable|mimes:jpg,jpeg,png,bmp',
+            'first_name' => 'required|string|max:255',
+            'middle_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'gender_id' => 'required|integer|exists:genders,gender_id',
+            'role_id' => 'required|integer|exists:roles,role_id',
+            'address' => 'required|string|max:255',
+            'birth_date' => 'required|date',
+            'email_address' => 'required|string|email|max:255|unique:users,email_address,' . $id . ',user_id',
+            'username' => 'required|string|max:255|unique:users,username,' . $id . ',user_id',
+            'password' => 'nullable|string|min:8|confirmed',
         ]);
-
-        if($validated){
-            $user::find($id)->update($validated);
-            toast('User updated successfully.','success');
-            return redirect('/admin/users');
+    
+        // Handle file upload
+        if ($request->hasFile('user_image')) {
+            $file = $request->file('user_image');
+            $filenameWithExtension = $file->getClientOriginalName();
+            $filename = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
+            $extension = $file->getClientOriginalExtension();
+            $filenameToStore = $filename . '_' . time() . '.' . $extension;
+    
+            // Store the file in the public storage
+            $file->storeAs('public/img/user', $filenameToStore);
+    
+            // Add the filename to the validated data
+            $validated['user_image'] = $filenameToStore;
         }
+    
+        // Check if the password field is filled
+        if (!empty($validated['password'])) {
+            $validated['password'] = bcrypt($request->password);
+        } else {
+            // Remove password from validated data to avoid updating it
+            unset($validated['password']);
+        }
+    
+        // Update the user
+        $user::where('user_id', $id)->update($validated);
+    
+        // Show success message
+        toast('User updated successfully.', 'success');
+    
+        // Redirect to the users page
+        return redirect('/admin/users');
     }
 
     /**
@@ -111,6 +184,15 @@ class UserController extends Controller
      */
     public function destroy(User $user, $id)
     {
+        // Find the user by id
+        $user = User::findOrFail($id);
+    
+        // Check if the user has an image and if it exists in storage
+        if ($user->user_image && Storage::disk('public')->exists('img/user/' . $user->user_image)) {
+            // Delete the image from storage
+            Storage::disk('public')->delete('img/user/' . $user->user_image);
+        }
+
         $user::where('user_id', $id)->update(['isDeleted' => true]);
         toast('User deleted successfully.','success');
         return redirect('/admin/users');
