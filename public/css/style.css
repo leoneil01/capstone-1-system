@@ -88,6 +88,7 @@ body {
     margin-bottom: 5px;
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: 5px;
 }
 
@@ -96,16 +97,17 @@ body {
     border-radius: 10px;
     width: 35px;
 }
+
+.cashier-panel .order-list ul li .product-details{
+    width: 100px;
+}
+
 .cashier-panel .order-list ul li .product-details h1 {
     font-size: 1rem;
     margin: 0;
 }
 
 .cashier-panel .order-list ul li .product-details h2 {
-    font-size: 1rem;
-}
-
-.cashier-panel .order-list ul li p {
     font-size: 1rem;
 }
 

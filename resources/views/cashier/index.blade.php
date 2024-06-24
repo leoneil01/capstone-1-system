@@ -58,10 +58,10 @@
                                     <h1>{{ $item->product_name }}</h1>
                                     <h2 id="unit-price">{{ $item->unit_price }}</h2>
                                 </div>
-                                <p>Qty:</p>
                                 <form action="/cashier/edit-qty/{{ $item->item_id }}" method="post">
                                     @method('PUT')
                                     @csrf
+                                    <label for="quantity">Qty:</label>
                                     <input class="text-center quantity-input" type="text" id="quantity"
                                         value="{{ $item->qty }}" name="qty" style="width: 50px">
                                 </form>
