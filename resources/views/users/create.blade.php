@@ -12,12 +12,11 @@
                     <div class="row mb-5">
                         <div class="col mb-3">
                             <div>
-                                <img src="{{ asset('images/default_profile_image.jpg') }}" id="image"
-                                    alt="User Image">
+                                <img src="{{ $user->user_image ? asset('storage/img/user/' . $user->user_image) : asset('images/default_profile_image.jpg') }}" id="preview_image" alt="User Image" width="300">
                             </div>
                             <div>
-                                <label for="new-image">Upload Image:</label>
-                                <input id="new-image" type="file">
+                                <label for="user_image">Upload Image:</label>
+                                <input id="user_image" type="file">
                             </div>
                         </div>
                         <div class="col">
@@ -67,3 +66,16 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('user_image').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('preview_image').src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+</script>

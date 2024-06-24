@@ -39,6 +39,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::controller(CashierController::class)->group(function () {
         Route::get('/cashier', 'index');
+        Route::put('/cashier/profile/update/{id}', 'update')->name('cashier.profile.update');
     });
 
     Route::controller(CartController::class)->group(function () {
