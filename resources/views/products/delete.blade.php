@@ -13,7 +13,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn-simple">Yes</button>
-                    <button class="btn-simple-cancel" data-bs-dismiss="modal">No</button>
+                    <button type="button" class="btn-simple-cancel" data-bs-dismiss="modal">No</button>
                 </div>
             </form>
         </div>
