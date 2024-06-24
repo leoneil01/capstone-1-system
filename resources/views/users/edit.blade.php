@@ -90,9 +90,9 @@
                         @error('password') <p class="text-danger">{{ $message }}</p> @enderror
                     </div>
                     <div class="row mb-3">
-                        <label class="col" for="confirm_password">Confirm Password:</label>
-                        <input class="col form-control" type="password" id="confirm_password" name="confirm_password" value="{{ $user->password }}">
-                        @error('confirm_password') <p class="text-danger">{{ $message }}</p> @enderror
+                        <label class="col" for="password_confirmation">Confirm Password:</label>
+                        <input class="col form-control" type="password" id="password_confirmation" name="password_confirmation" value="{{ $user->password }}">
+                        @error('password_confirmation') <p class="text-danger">{{ $message }}</p> @enderror
                     </div>
                 </div>
             </div>
