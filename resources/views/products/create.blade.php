@@ -11,7 +11,7 @@
                     <div class="row mb-5">
                         <div class="col mb-3">
                             <div>
-                                <img src="{{ asset('images/sample_image.jpg') }}" id="image" alt="Product Image">
+                                <img src="{{ $product->product_image ? asset('storage/img/product/' . $product->product_image) : asset('images/image-gallery.png') }}" id="preview_image" alt="Product Image" width="200">
                             </div>
                             <div>
                                 <label for="product_image">Upload Image:</label>
@@ -65,8 +65,22 @@
                         </div>
                     </div>
                     <button type="submit" class="btn-simple">Save</button>
+                    <a class="btn-simple-cancel" href="/admin/products">Cancel</a>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('product_image').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('preview_image').src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+</script>

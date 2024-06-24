@@ -8,7 +8,7 @@
             <div class="modal-body row">
                 <div class="col">
                     <div class="row d-flex justify-content-center align-items-center">
-                        <img src="{{ $product->product_image ? asset('storage/img/product/' . $product->product_image) : asset('images/sample_image.jpg') }}" id="preview_image" alt="Product Image" width="200">
+                        <img src="{{ $product->product_image ? asset('storage/img/product/' . $product->product_image) : asset('images/image-gallery.png') }}" id="preview_image" alt="Product Image" width="200">
                     </div>
                 </div>
                 <div class="col">

@@ -62,9 +62,8 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
         // Validate the request
-        $request->validate([
+        $validated = $request->validate([
             'product_name' => 'required|string|max:55',
             'supplier_id' => 'required|integer|exists:suppliers,supplier_id',
             'category_id' => 'required|integer|exists:categories,category_id',
@@ -72,31 +71,34 @@ class ProductController extends Controller
             'barcode' => 'required|string|max:255',
             'unit_price' => 'required|numeric',
             'unit_in_stock' => 'required|integer',
-            'product_image' => 'nullable|image|mimes:jpg,jpeg,png,biff,bmp',
+            'product_image' => 'nullable|image|mimes:jpg,jpeg,png,bmp',
         ]);
-
-        // Handle the file upload
+    
+        // Handle file upload
         if ($request->hasFile('product_image')) {
-            $fileName = time() . '.' . $request->product_image->extension();
-            $request->product_image->move(public_path('images/products'), $fileName);
+            $file = $request->file('product_image');
+            $filenameWithExtension = $file->getClientOriginalName();
+            $filename = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
+            $extension = $file->getClientOriginalExtension();
+            $filenameToStore = $filename . '_' . time() . '.' . $extension;
+    
+            // Store the file
+            $file->storeAs('public/img/product', $filenameToStore);
+    
+            // Add the filename to the validated data
+            $validated['product_image'] = $filenameToStore;
         } else {
-            $fileName = 'default.jpg';
+            // No image uploaded
+            $validated['product_image'] = null;
         }
-
+    
         // Create the product
-        Product::create([
-            'product_name' => $request->product_name,
-            'supplier_id' => $request->supplier_id,
-            'category_id' => $request->category_id,
-            'brand_id' => $request->brand_id,
-            'barcode' => $request->barcode,
-            'unit_price' => $request->unit_price,
-            'unit_in_stock' => $request->unit_in_stock,
-            'product_image' => $fileName,
-        ]);
-
+        Product::create($validated);
+    
+        // Show success message
         toast('Product created successfully.', 'success');
-
+    
+        // Redirect to the products page
         return redirect('/admin/products');
     }
 
