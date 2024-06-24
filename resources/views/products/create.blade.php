@@ -22,53 +22,53 @@
                         <div class="col">
                             <div class="row mb-3">
                                 <label class="col" for="product_name">Product Name:</label>
-                                <input class="col form-control" type="text" id="product_name" name="product_name">
+                                <input class="col form-control" type="text" id="product_name" name="product_name" value="{{ old('product_name') }}">
                                 @error('product_name') <p class="text-danger">{{ $message }}</p> @enderror
                             </div>
                             <div class="row mb-3">
                                 <label class="col" for="supplier_id">Supplier:</label>
-                                <select class="col form-control" name="supplier_id" id="supplier_id" >
-                                    <option selected>Select supplier</option>
+                                <select class="col form-control" name="supplier_id" id="supplier_id">
+                                    <option value="">Select supplier</option>
                                     @foreach($suppliers as $supplier)
-                                        <option value="{{ $supplier->supplier_id }}">{{ $supplier->supplier_name }}</option>
+                                        <option value="{{ $supplier->supplier_id }}" {{ old('supplier_id') == $supplier->supplier_id ? 'selected' : '' }}>{{ $supplier->supplier_name }}</option>
                                     @endforeach
                                 </select>
-                                @error('supplier_id') <p class="text-danger">The supplier field must not be an empty.</p> @enderror
+                                @error('supplier_id') <p class="text-danger">The supplier field must not be empty.</p> @enderror
                             </div>
                             <div class="row mb-3">
                                 <label class="col" for="category_id">Category:</label>
-                                <select class="col form-control" name="category_id" id="category_id" >
-                                    <option selected>Select category</option>
+                                <select class="col form-control" name="category_id" id="category_id">
+                                    <option value="">Select category</option>
                                     @foreach($categories as $category)
-                                        <option value="{{ $category->category_id }}">{{ $category->category_name }}</option>
+                                        <option value="{{ $category->category_id }}" {{ old('category_id') == $category->category_id ? 'selected' : '' }}>{{ $category->category_name }}</option>
                                     @endforeach
                                 </select>
-                                @error('category_id') <p class="text-danger">The category field must not be an empty.</p> @enderror
+                                @error('category_id') <p class="text-danger">The category field must not be empty.</p> @enderror
                             </div>
                             <div class="row mb-3">
                                 <label class="col" for="brand_id">Brand:</label>
-                                <select class="col form-control" name="brand_id" id="brand_id" >
-                                    <option selected>Select brand</option>
+                                <select class="col form-control" name="brand_id" id="brand_id">
+                                    <option value="">Select brand</option>
                                     @foreach($brands as $brand)
-                                        <option value="{{ $brand->brand_id }}">{{ $brand->brand_name }}</option>
+                                        <option value="{{ $brand->brand_id }}" {{ old('brand_id') == $brand->brand_id ? 'selected' : '' }}>{{ $brand->brand_name }}</option>
                                     @endforeach
                                 </select>
-                                @error('brand_id') <p class="text-danger">The brand field must not be an empty.</p> @enderror
+                                @error('brand_id') <p class="text-danger">The brand field must not be empty.</p> @enderror
                             </div>
                             <div class="row mb-3">
                                 <label class="col" for="barcode">Barcode:</label>
-                                <input class="col form-control" type="text" id="barcode" name="barcode" >
-                                @error('product_name') <p class="text-danger">{{ $message }}</p> @enderror
+                                <input class="col form-control" type="text" id="barcode" name="barcode" value="{{ old('barcode') }}">
+                                @error('barcode') <p class="text-danger">{{ $message }}</p> @enderror
                             </div>
                             <div class="row mb-3">
                                 <label class="col" for="unit_price">Price:</label>
-                                <input class="col form-control" type="text" id="unit_price" name="unit_price" >
-                                @error('product_name') <p class="text-danger">{{ $message }}</p> @enderror
+                                <input class="col form-control" type="text" id="unit_price" name="unit_price" value="{{ old('unit_price') }}">
+                                @error('unit_price') <p class="text-danger">{{ $message }}</p> @enderror
                             </div>
                             <div class="row mb-3">
                                 <label class="col" for="unit_in_stock">Stock:</label>
-                                <input class="col form-control" type="text" id="unit_in_stock" name="unit_in_stock" >
-                                @error('product_name') <p class="text-danger">{{ $message }}</p> @enderror
+                                <input class="col form-control" type="text" id="unit_in_stock" name="unit_in_stock" value="{{ old('unit_in_stock') }}">
+                                @error('unit_in_stock') <p class="text-danger">{{ $message }}</p> @enderror
                             </div>
                         </div>
                     </div>

@@ -71,7 +71,7 @@ class ProductController extends Controller
             'barcode' => 'required|string|max:255',
             'unit_price' => 'required|numeric',
             'unit_in_stock' => 'required|integer',
-            'product_image' => 'nullable|image|mimes:jpg,jpeg,png,bmp',
+            'product_image' => 'nullable|mimes:jpg,jpeg,png,bmp',
         ]);
     
         // Handle file upload
