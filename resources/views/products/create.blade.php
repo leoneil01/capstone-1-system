@@ -16,51 +16,59 @@
                             <div>
                                 <label for="product_image">Upload Image:</label>
                                 <input id="product_image" type="file" name="product_image" class="form-control">
+                                @error('product_image') <p class="text-danger">{{ $message }}</p> @enderror
                             </div>
                         </div>
                         <div class="col">
                             <div class="row mb-3">
                                 <label class="col" for="product_name">Product Name:</label>
-                                <input class="col form-control" type="text" id="product_name" name="product_name" required>
+                                <input class="col form-control" type="text" id="product_name" name="product_name">
+                                @error('product_name') <p class="text-danger">{{ $message }}</p> @enderror
                             </div>
                             <div class="row mb-3">
                                 <label class="col" for="supplier_id">Supplier:</label>
-                                <select class="col form-control" name="supplier_id" id="supplier_id" required>
+                                <select class="col form-control" name="supplier_id" id="supplier_id" >
                                     <option selected>Select supplier</option>
                                     @foreach($suppliers as $supplier)
                                         <option value="{{ $supplier->supplier_id }}">{{ $supplier->supplier_name }}</option>
                                     @endforeach
                                 </select>
+                                @error('supplier_id') <p class="text-danger">The supplier field must not be an empty.</p> @enderror
                             </div>
                             <div class="row mb-3">
                                 <label class="col" for="category_id">Category:</label>
-                                <select class="col form-control" name="category_id" id="category_id" required>
+                                <select class="col form-control" name="category_id" id="category_id" >
                                     <option selected>Select category</option>
                                     @foreach($categories as $category)
                                         <option value="{{ $category->category_id }}">{{ $category->category_name }}</option>
                                     @endforeach
                                 </select>
+                                @error('category_id') <p class="text-danger">The category field must not be an empty.</p> @enderror
                             </div>
                             <div class="row mb-3">
                                 <label class="col" for="brand_id">Brand:</label>
-                                <select class="col form-control" name="brand_id" id="brand_id" required>
+                                <select class="col form-control" name="brand_id" id="brand_id" >
                                     <option selected>Select brand</option>
                                     @foreach($brands as $brand)
                                         <option value="{{ $brand->brand_id }}">{{ $brand->brand_name }}</option>
                                     @endforeach
                                 </select>
+                                @error('brand_id') <p class="text-danger">The brand field must not be an empty.</p> @enderror
                             </div>
                             <div class="row mb-3">
                                 <label class="col" for="barcode">Barcode:</label>
-                                <input class="col form-control" type="text" id="barcode" name="barcode" required>
+                                <input class="col form-control" type="text" id="barcode" name="barcode" >
+                                @error('product_name') <p class="text-danger">{{ $message }}</p> @enderror
                             </div>
                             <div class="row mb-3">
                                 <label class="col" for="unit_price">Price:</label>
-                                <input class="col form-control" type="text" id="unit_price" name="unit_price" required>
+                                <input class="col form-control" type="text" id="unit_price" name="unit_price" >
+                                @error('product_name') <p class="text-danger">{{ $message }}</p> @enderror
                             </div>
                             <div class="row mb-3">
                                 <label class="col" for="unit_in_stock">Stock:</label>
-                                <input class="col form-control" type="text" id="unit_in_stock" name="unit_in_stock" required>
+                                <input class="col form-control" type="text" id="unit_in_stock" name="unit_in_stock" >
+                                @error('product_name') <p class="text-danger">{{ $message }}</p> @enderror
                             </div>
                         </div>
                     </div>
