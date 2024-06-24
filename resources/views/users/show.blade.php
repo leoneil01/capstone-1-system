@@ -8,12 +8,12 @@
             <div class="modal-body p-5">
                 <div class="row">
                     <div class="col d-flex justify-content-center align-items-center">
-                        <img class="img-fluid" src="{{ asset('images/default_profile_image.jpg') }}" id="image" alt="User Image">
+                        <img src="{{ $user->user_image ? asset('storage/img/user/' . $user->user_image) : asset('images/image-gallery.png') }}" id="preview_image" alt="User Image" width="200">
                     </div>
                     <div class="col">
                         <div class="row mb-3">
                             <label class="col" for="fullname">Fullname:</label>
-                            <input class="col form-control" type="text" id="fullname" value="{{ $user->first_name . ' ' . $user->last_name }}" disabled>
+                            <input class="col form-control" type="text" id="fullname" value="{{ $user->first_name . ($user->middle_name ? ' ' . ucfirst($user->middle_name[0]) . '. ' : ' ') . $user->last_name }}" disabled>
                         </div>
                         <div class="row mb-3">
                             <label class="col" for="gender">Gender:</label>

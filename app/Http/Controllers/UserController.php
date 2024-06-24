@@ -65,10 +65,10 @@ class UserController extends Controller
         $validated = $request->validate([
             'user_image' => 'nullable|image|mimes:jpg,jpeg,png,bmp',
             'first_name' => 'required|string|max:255',
-            'middle_name' => 'required|string|max:255',
+            'middle_name' => 'nullable|string|max:255',
             'last_name' => 'required|string|max:255',
-            'gender_id' => 'required|integer|exists:genders,id',
-            'role_id' => 'required|integer|exists:roles,id',
+            'gender_id' => 'required|integer|exists:genders,gender_id',
+            'role_id' => 'required|integer|exists:roles,role_id',
             'address' => 'required|string|max:255',
             'birth_date' => 'required|date',
             'email_address' => 'required|string|email|max:255|unique:users,email_address',
@@ -95,13 +95,13 @@ class UserController extends Controller
         }
     
         // Hash the password before storing
-        $validated['password'] = bcrypt($request->password);
+        $validated['password'] = bcrypt($validated['password']);
     
         // Create the user
         User::create($validated);
     
-        // Show success message
-        toast('User created successfully.', 'success');
+        // Show success message (assuming you're using Toastr or similar for toast messages)
+        toast()->success('User created successfully.');
     
         // Redirect to the users page
         return redirect('/admin/users');
