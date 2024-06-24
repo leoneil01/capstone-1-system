@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -132,8 +133,22 @@ class ProductController extends Controller
             'barcode' => 'required|string|max:255',
             'unit_price' => 'required|numeric',
             'unit_in_stock' => 'required|integer',
-            'product_image' => 'nullable|image|mimes:jpg,jpeg,png,biff,bmp',
+            'product_image' => 'nullable|mimes:jpg,jpeg,png,biff,bmp',
         ]);
+
+        if(request()->hasFile('product_image')) {
+            $filenameWithExtension = $request->file('product_image');
+
+            $filename = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
+
+            $extension = $request->file('product_image')->getClientOriginalExtension();
+
+            $filenameToStore = $filename . '_' . time() . '.' . $extension;
+
+            $request->file('product_image')->storeAs('public/img/product/' . $filenameToStore);
+
+            $validated['product_image'] = $filenameToStore;
+        }
 
         $product::find($id)->update($validated);
         toast('Product created successfully.', 'success');
@@ -145,8 +160,22 @@ class ProductController extends Controller
      */
     public function destroy(Product $product, $id)
     {
-        $product::where('product_id', $id)->update(['isDeleted' => true]);
+        // Find the product by id
+        $product = Product::findOrFail($id);
+    
+        // Check if the product has an image and if it exists in storage
+        if ($product->product_image && Storage::disk('public')->exists('img/product/' . $product->product_image)) {
+            // Delete the image from storage
+            Storage::disk('public')->delete('img/product/' . $product->product_image);
+        }
+    
+        // Update the product's isDeleted attribute
+        $product->update(['isDeleted' => true]);
+    
+        // Display a success message
         toast('Product deleted successfully.', 'success');
+    
+        // Redirect to the products page
         return redirect('/admin/products');
     }
 }

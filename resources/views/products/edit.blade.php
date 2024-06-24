@@ -9,8 +9,13 @@
             <div class="row mb-5">
                 <div class="col">
                     <div class="row d-flex justify-content-center align-items-center">
-                        <img src="{{ asset('images/sample_image.jpg') }}" alt="Product Image" width="200">
+                        <img src="{{ $product->product_image ? asset('storage/img/product/' . $product->product_image) : asset('images/sample_image.jpg') }}" id="preview_image" alt="Product Image" width="200">
                     </div>
+                    <div>
+                        <label for="product_image">Upload Image:</label>
+                        <input id="product_image" name="product_image" type="file">
+                    </div>
+                    @error('product_image') <p class="text-danger">{{ $message }}</p> @enderror
                 </div>
                 <div class="col">
                     <div class="row mb-3">
@@ -62,12 +67,29 @@
                     </div>
                     <div class="row mb-3">
                         <label class="col" for="stock">Stock:</label>
-                        <input class="col form-control" type="text" id="stock" value="{{ $product->unit_in_stock }}"
+                        <input class="col form-control" type="text" id="unit_in_stock" value="{{ $product->unit_in_stock }}"
                             name="unit_in_stock">
+
+                        @error('unit_in_stock') <p class="text-danger">{{ $message }}</p> @enderror
                     </div>
                 </div>
             </div>
             <button type="submit" class="btn-simple">Save</button>
+            <a class="btn-simple-cancel" href="/admin/products">Cancel</a>
         </form>
     </div>
+
+
+    <script>
+        document.getElementById('product_image').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('preview_image').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
 @endsection
