@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Cashier;
 use App\Models\Discount;
+use App\Models\Gender;
 use App\Models\Payment;
 use App\Models\Product;
 use App\Models\User;
@@ -28,6 +29,7 @@ class CashierController extends Controller
 
         $payments = Payment::all();
         $discounts = Discount::all();
+        $genders = Gender::all();
 
         $products = Product::all();
 
@@ -45,7 +47,8 @@ class CashierController extends Controller
             'discounts',
             'products',
             'cart',
-            'totalPrice'
+            'totalPrice',
+            'genders'
         ));
     }
 

@@ -1,13 +1,26 @@
 @extends('layout.main')
 @section('cashier-content')
+    <link rel="stylesheet" href="{{ asset('css/cashier.css') }}">
     <div class="topbar">
         <div class="topbar-header">
             <img src="{{ asset('images/temporary_logo.png') }}" alt="Logo" class="topbar-logo" draggable="false">
             <h3 class="topbar-title">ShopNinja</h3>
         </div>
-        <div class="user">
-            <span class="fullname">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</span>
+        <div class="user" id="user">
+            <span class="fullname user-select-none">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</span>
             <img src="{{ asset('images/default_profile_image.jpg') }}" alt="User Image" class="user-img" draggable="false">
+            <div class="menu" id="menu">
+                <div class="menu-options">
+                    <ul>
+                        <a data-bs-toggle="modal" data-bs-target="#editProfile">
+                            <li>Edit Profile</li>
+                        </a>
+                        <a data-bs-toggle="modal" data-bs-target="#logout">
+                            <li>Logout</li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -111,7 +124,8 @@
                     </div>
                     <div class="row">
                         <label for="cash" class="col">Cash: </label>
-                        <input class="text-green col" type="text" id="cash" value="0.00" name="cash" readonly>
+                        <input class="text-green col" type="text" id="cash" value="0.00" name="cash"
+                            readonly>
                     </div>
                     <div class="row">
                         <label for="change" class="col">Change: </label>
@@ -136,121 +150,27 @@
             </div>
         </div>
     </div>
+    @include('cashier.edit')
+    @include('cashier.logout')
 
     <style>
-        .num-keys-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 10px;
-            min-width: 250px;
-            align-self: center;
-        }
-
-        .num-key {
-            padding: 20px;
-            font-size: 18px;
-            text-align: center;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .num-key:hover {
-            background-color: #e0e0e0;
+        .toggle-menu {
+            display: block;
         }
     </style>
 
+    <script src="{{ asset('js/cashier.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const cashInput = document.getElementById('cash');
-            const numKeys = document.querySelectorAll('.num-key');
-            const changeInput = document.getElementById('change');
-            const originalTotalPrice = document.getElementById('originalTotalPrice')
-            const totalInput = document.getElementById('total');
-            const discount = document.getElementById('discount');
-            let activeInput = document.getElementById('cash');
-            let change = 0.00;
+            const btn = document.getElementById('user');
+            let menu = document.getElementById('menu');
 
-            document.querySelectorAll('input').forEach(input => {
-                input.addEventListener('focus', function() {
-                    if (input.id !== "change" && input.id !== "total") {
-                        activeInput = this;
-                    }
-                })
+            btn.style.cursor = 'pointer'
+
+            btn.addEventListener('click', function() {
+                console.log('toggle')
+                menu.classList.toggle('toggle-menu');
             })
-
-            function computeChange() {
-                if (activeInput.id == "cash") {
-                    change = cashInput.value - totalInput.value;
-                    if (change > 0) {
-                        changeInput.value = change.toFixed(2);
-                    } else {
-                        changeInput.value = "0.00"
-                    }
-                }
-            }
-
-            discount.addEventListener('change', function() {
-                totalInput.value = originalTotalPrice.value
-                const selectedOption = discount.selectedOptions[0];
-                const discountValue = selectedOption.getAttribute(
-                    'data-discount'
-                    ); //This reset the total price each time the user change the value of discount
-                if (discountValue) { //Checks if the value is not set to none
-                    console.log('select')
-                    const discountPrice = parseFloat(totalInput.value) * parseFloat(discountValue);
-                    console.log(discountPrice);
-                    totalInput.value = (parseFloat(totalInput.value) - discountPrice).toFixed(2);
-                }
-
-                computeChange(); //Automatically computes the change
-            })
-
-            cashInput.addEventListener('click', function() {
-                activeInput = cashInput;
-            })
-
-            function updateInput(value) {
-                console.log(value)
-                if (value === 'C') {
-                    if (activeInput.id == 'cash') {
-                        activeInput.value = '0.00'
-                        changeInput.value = '0.00'
-                    } else {
-                        activeInput.value = '';
-                    }
-                } else {
-                    if (activeInput.value === '0.00' && activeInput.id == 'cash') {
-                        activeInput.value = value;
-                    } else {
-                        activeInput.value += value;
-                        computeChange();
-                    }
-                }
-            }
-
-            numKeys.forEach(key => {
-                key.addEventListener('click', function() {
-                    const value = this.getAttribute('data-value');
-                    updateInput(value);
-                });
-            });
-
-            document.addEventListener('keydown', function(event) {
-                const key = event.key;
-                if (activeInput.id == 'cash') {
-                    if (key === 'Backspace') {
-                        activeInput.value = activeInput.value.slice(0, -1);
-                        computeChange();
-                    }
-
-                    if (!isNaN(key) || key === '.') {
-                        updateInput(key);
-                    }
-                }
-            });
         });
     </script>
 @endsection

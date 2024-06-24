@@ -154,6 +154,41 @@ body {
     object-fit: cover;
 }
 
+.menu{
+    position: absolute;
+    padding: 10px 0;
+    height: fit-content;
+    width: fit-content;
+    border-radius: 5px;
+    background-color: #222;
+    right: 20px;
+    top: 55px;
+    z-index: 2;
+    display: none;
+}
+
+.menu-options ul{
+    margin: 0;
+    padding: 0;
+
+}
+
+.menu-options a{
+    text-decoration: none;
+    color: var(--primary);
+}
+
+.menu-options li{
+    list-style: none;
+    font-size: 15px;
+    margin-bottom: 3px;
+    padding: 3px 10px;
+}
+
+.menu-options li:hover{
+    background-color: #555;
+}
+
 @media screen and (max-width: 600px) {
     .admin-page {
         left: 0;

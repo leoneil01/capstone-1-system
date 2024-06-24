@@ -42,6 +42,7 @@
 }
 
 .card-list-container {
+    border: 1px solid var(--disabled);
     min-width: 110px;
     padding: 5px;
     height: 500px;

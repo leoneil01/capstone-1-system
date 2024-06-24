@@ -1,0 +1,22 @@
+.num-keys-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+    min-width: 250px;
+    align-self: center;
+}
+
+.num-key {
+    padding: 20px;
+    font-size: 18px;
+    text-align: center;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.num-key:hover {
+    background-color: #e0e0e0;
+}
