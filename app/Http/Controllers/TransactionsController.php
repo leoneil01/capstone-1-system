@@ -40,7 +40,7 @@ class TransactionsController extends Controller
         $validated = $request->validate([
             'cash' => ['required', 'numeric', 'gt:total'],
             'change' => ['required'],
-            'total' => ['required', 'gt:0'],
+            'total' => ['required', 'gte:0'],
             'payment_id' => ['nullable'],
             'discount_id' => ['nullable']
         ]);
@@ -99,7 +99,7 @@ class TransactionsController extends Controller
     {
         $validated = $request->validate([
             'payment' => ['required'],
-            'cash' => ['required', 'numeric', 'gt:total'],
+            'cash' => ['required', 'numeric', 'gte:total'],
             'change' => ['required'],
             'total' => ['required', 'gt:0'],
         ]);
