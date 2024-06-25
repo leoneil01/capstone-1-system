@@ -38,7 +38,7 @@ class TransactionsController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'cash' => ['required', 'numeric', 'gt:total'],
+            'cash' => ['required', 'numeric', 'gte:total'],
             'change' => ['required'],
             'total' => ['required', 'gte:0'],
             'payment_id' => ['nullable'],
