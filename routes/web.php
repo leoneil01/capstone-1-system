@@ -7,6 +7,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TransactionsController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\CashierMiddleware;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -28,6 +30,7 @@ Route::controller(UserController::class)->group(function () {
     Route::post('/process/login/cashier', function (Request $request) {
         return app()->call('App\Http\Controllers\UserController@processLogin', ['request' => $request, 'role' => 2]);
     });
+    Route::get('/process/logout', 'proccesLogout');
 });
 
 //make routes for admincontroller and cashier controller
@@ -35,17 +38,6 @@ Route::controller(UserController::class)->group(function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::controller(AdminController::class)->group(function () {
         Route::get('/admin', 'index');
-    });
-
-    Route::controller(CashierController::class)->group(function () {
-        Route::get('/cashier', 'index');
-        Route::put('/cashier/profile/update/{id}', 'update')->name('cashier.profile.update');
-    });
-
-    Route::controller(CartController::class)->group(function () {
-        Route::post('/cashier/add-to-cart', 'store');
-        Route::put('/cashier/edit-qty/{id}', 'update');
-        Route::delete('/cashier/remove-item/{id}', 'destroy');
     });
 
     Route::controller(ProductController::class)->group(function () {
@@ -68,7 +60,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/admin/transactions', 'index');
         Route::get('/admin/transaction/edit/{id}', 'edit');
         Route::put('/admin/transaction/update/{id}', 'update');
-        Route::post('/cashier/create-transaction', 'store');
         Route::delete('/admin/transaction/destroy/{id}', 'destroy');
     });
 
@@ -77,6 +68,23 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/admin/user/edit/{id}', 'edit');
         Route::put('/admin/user/update/{id}', 'update');
         Route::delete('/admin/user/destroy/{id}', 'destroy');
-        Route::get('/process/logout', 'proccesLogout');
     });
-});
+})->middleware(AdminMiddleware::class);
+
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::controller(CashierController::class)->group(function () {
+        Route::get('/cashier', 'index');
+        Route::put('/cashier/profile/update/{id}', 'update')->name('cashier.profile.update');
+    });
+
+    Route::controller(CartController::class)->group(function () {
+        Route::post('/cashier/add-to-cart', 'store');
+        Route::put('/cashier/edit-qty/{id}', 'update');
+        Route::delete('/cashier/remove-item/{id}', 'destroy');
+    });
+
+    Route::controller(TransactionsController::class)->group(function () {
+        Route::post('/cashier/create-transaction', 'store');
+    });
+})->middleware(CashierMiddleware::class);
