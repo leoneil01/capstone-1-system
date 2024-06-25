@@ -76,7 +76,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/admin/users', 'index');
         Route::get('/admin/user/edit/{id}', 'edit');
         Route::put('/admin/user/update/{id}', 'update');
-        Route::post('/admin/user/store', 'store');
         Route::delete('/admin/user/destroy/{id}', 'destroy');
         Route::get('/process/logout', 'proccesLogout');
     });

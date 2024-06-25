@@ -4,6 +4,6 @@
     </div>
     <div class="user">
         <span class="fullname">{{Auth::user()->first_name . ' ' . Auth::user()->last_name}}</span>
-        <img src="{{ asset('images/default_profile_image.jpg') }}" alt="User Image" class="user-img" draggable="false">
+        <img src="{{ asset('storage/img/user/' . Auth::user()->user_image) ?? asset('images/default_profile_image.jpg') }}" alt="User Image" class="user-img" draggable="false">
     </div>
 </div>

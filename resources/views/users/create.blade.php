@@ -11,7 +11,7 @@
                     <div class="row mb-5">
                         <div class="col mb-3">
                             <div>
-                                <img src="{{ $user->user_image ? asset('storage/img/user/' . $user->user_image) : asset('images/default_profile_image.jpg') }}" id="preview_image" alt="User Image" width="300">
+                                <img src="{{asset('images/default_profile_image.jpg') }}" id="preview_image" alt="User Image" width="300">
                             </div>
                             <div>
                                 <label for="user_image">Upload Image:</label>
@@ -21,7 +21,7 @@
                         </div>
                         <div class="col">
                             <div class="row mb-3">
-                                <label class="col" for="text">First Name:</label>
+                                <label class="col" for="first_name">First Name:</label>
                                 <input class="col form-control" type="text" id="first_name" name="first_name" value="{{ old('first_name') }}">
                                 @error('first_name') <p class="text-danger">{{ $message }}</p> @enderror
                             </div>

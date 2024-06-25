@@ -12,32 +12,32 @@
                     </div>
                     <div class="col">
                         <div class="row mb-3">
-                            <label class="col" for="fullname">Fullname:</label>
-                            <input class="col form-control" type="text" id="fullname" value="{{ $user->first_name . ($user->middle_name ? ' ' . ucfirst($user->middle_name[0]) . '. ' : ' ') . $user->last_name }}" disabled>
+                            <label class="col" for="fullname{{ $user->user_id }}">Fullname:</label>
+                            <input class="col form-control" type="text" id="fullname{{ $user->user_id }}" value="{{ $user->first_name . ($user->middle_name ? ' ' . ucfirst($user->middle_name[0]) . '. ' : ' ') . $user->last_name }}" disabled>
                         </div>
                         <div class="row mb-3">
-                            <label class="col" for="gender">Gender:</label>
-                            <input class="col form-control" type="text" id="gender" value="{{ $user->gender }}" disabled>
+                            <label class="col" for="gender{{ $user->user_id }}">Gender:</label>
+                            <input class="col form-control" type="text" id="gender{{ $user->user_id }}" value="{{ $user->gender }}" disabled>
                         </div>
                         <div class="row mb-3">
-                            <label class="col" for="role">Role:</label>
-                            <input class="col form-control" type="text" id="role" value="{{ $user->role }}" disabled>
+                            <label class="col" for="role{{ $user->user_id }}">Role:</label>
+                            <input class="col form-control" type="text" id="role{{ $user->user_id }}" value="{{ $user->role }}" disabled>
                         </div>
                         <div class="row mb-3">
-                            <label class="col" for="address">Address:</label>
-                            <input class="col form-control" type="text" id="address" value="{{ $user->address }}" disabled>
+                            <label class="col" for="address{{ $user->user_id }}">Address:</label>
+                            <input class="col form-control" type="text" id="address{{ $user->user_id }}" value="{{ $user->address }}" disabled>
                         </div>
                         <div class="row mb-3">
-                            <label class="col" for="birthdate">Birthdate:</label>
-                            <input class="col form-control" type="date" id="birth_date" value="{{ $user->birth_date }}" disabled>
+                            <label class="col" for="birthdate{{ $user->user_id }}">Birthdate:</label>
+                            <input class="col form-control" type="date" id="birthdate{{ $user->user_id }}" value="{{ $user->birth_date }}" disabled>
                         </div>
                         <div class="row mb-3">
-                            <label class="col" for="email">Email:</label>
-                            <input class="col form-control" type="email" id="email_address" value="{{ $user->email_address }}" disabled>
+                            <label class="col" for="email{{ $user->user_id }}">Email:</label>
+                            <input class="col form-control" type="email" id="email{{ $user->user_id }}" value="{{ $user->email_address }}" disabled>
                         </div>
                         <div class="row mb-3">
-                            <label class="col" for="username">Username:</label>
-                            <input class="col form-control" type="text" id="username" value="{{ $user->username }}" disabled>
+                            <label class="col" for="username{{ $user->user_id }}">Username:</label>
+                            <input class="col form-control" type="text" id="username{{ $user->user_id }}" value="{{ $user->username }}" disabled>
                         </div>
                     </div>
                 </div>

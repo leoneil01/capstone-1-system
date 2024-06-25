@@ -100,7 +100,6 @@ class CashierController extends Controller
             'birth_date' => 'required|date',
             'email_address' => 'required|string|email|max:255|unique:users,email_address,' . $id . ',user_id',
             'username' => 'required|string|max:255|unique:users,username,' . $id . ',user_id',
-            'password' => 'nullable|string|min:8|confirmed',
         ]);
     
         // Handle file upload

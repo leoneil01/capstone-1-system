@@ -49,5 +49,5 @@
             {{ $users->links() }}
         </div>
     </div>
-    @extends('users.create')
+    @include('users.create')
 @endsection

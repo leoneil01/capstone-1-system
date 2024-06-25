@@ -1,5 +1,5 @@
 <div class="modal fade" id="editProfile" tabindex="-1" aria-labelledby="editProfileLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header bg-dark text-white">
                 <h5 class="modal-title" id="editProfileLabel">Edit Profile</h5>
@@ -80,20 +80,6 @@
                                 <div class="col-sm-9">
                                     <input class="form-control" type="text" id="username" name="username" value="{{ Auth::user()->username }}">
                                     @error('username') <p class="text-danger">{{ $message }}</p> @enderror
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label" for="password">Password:</label>
-                                <div class="col-sm-9">
-                                    <input class="form-control" type="password" id="password" name="password">
-                                    @error('password') <p class="text-danger">{{ $message }}</p> @enderror
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label" for="password_confirmation">Confirm Password:</label>
-                                <div class="col-sm-9">
-                                    <input class="form-control" type="password" id="password_confirmation" name="password_confirmation">
-                                    @error('password_confirmation') <p class="text-danger">{{ $message }}</p> @enderror
                                 </div>
                             </div>
                         </div>

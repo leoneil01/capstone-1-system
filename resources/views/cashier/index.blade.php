@@ -8,7 +8,7 @@
         </div>
         <div class="user" id="user">
             <span class="fullname user-select-none">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</span>
-            <img src="{{ asset('images/default_profile_image.jpg') }}" alt="User Image" class="user-img" draggable="false">
+            <img src="{{ Auth::user()->user_image ? asset('storage/img/user/' . Auth::user()->user_image) : asset('images/default_profile_image.jpg') }}" alt="User Image" class="user-img" draggable="false">
             <div class="menu" id="menu">
                 <div class="menu-options">
                     <ul>
