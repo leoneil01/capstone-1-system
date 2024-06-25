@@ -101,9 +101,32 @@
             width: 120px;
         }
 
-        .grid{
+        .grid {
             display: grid;
             grid-template-columns: auto auto;
+        }
+
+        .print-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .fab {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .fab:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
@@ -130,17 +153,19 @@
                 </thead>
                 <tbody>
                     @foreach ($salesRecords as $item)
-                        <tr>
-                            <td>{{ $item->product_name }}</td>
-                            <td>{{ $item->unit_price }}</td>
-                            <td>{{ $item->qty }}</td>
-                        </tr>
+                    @if ($item->transaction_id == $receiptData->transaction_id)
+                    <tr>
+                        <td>{{ $item->product_name }}</td>
+                        <td>{{ $item->unit_price }}</td>
+                        <td>{{ $item->qty }}</td>
+                    </tr>
+                    @endif
                     @endforeach
                 </tbody>
             </table>
             <div class="grid">
                 <p><strong>Discount:</strong></p>
-                <p>{{ $receiptData->discount_name ?? 'None'}}</p>
+                <p>{{ $receiptData->discount_name ?? 'None' }}</p>
                 <p><strong>Total:</strong></p>
                 <p>{{ $receiptData->total }}</p>
                 <p><strong>Cash Received:</strong></p>
@@ -155,12 +180,10 @@
             <p class="info">Please keep this receipt for your records.</p>
         </div>
     </div>
+    <div class="print-container">
+        <button class="fab" onclick="window.print()">Print</button>
+    </div>
     <a href="/cashier" class="back-link">Go back</a>
 </body>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        window.print();
-    });
-</script>
 
 </html>

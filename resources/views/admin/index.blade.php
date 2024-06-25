@@ -40,7 +40,7 @@
                 Top Selling Product:
             </div>
             <div class="card-result">
-                {{$topSellingProduct ? $topSellingProduct->product_name : 'No Sales'}} <span class="card-sub-result">{{$topSellingProduct ? 'Stock:'.number_format($topSellingProduct->total_qty) : ''}}</span>
+                {{$topSellingProduct ? $topSellingProduct->product_name : 'No Sales'}} <span class="card-sub-result">{{$topSellingProduct ? 'Qty:'.number_format($topSellingProduct->total_qty) : ''}}</span>
             </div>
         </div>
     </div>

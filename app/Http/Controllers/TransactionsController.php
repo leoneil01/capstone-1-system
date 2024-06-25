@@ -17,8 +17,12 @@ class TransactionsController extends Controller
      */
     public function index()
     {
-        $transactions = Transactions::all();
-        return view('transactions.index', compact('transactions'));
+        $transactions = Transactions::Leftjoin('payments', 'transactions.payment_id', "=", 'payments.payment_id')
+        ->Leftjoin('discounts', 'transactions.discount_id', "=", 'discounts.discount_id')
+        ->get();
+
+        $salesRecords = Sales::all();
+        return view('transactions.index', compact('transactions','salesRecords'));
     }
 
     /**
@@ -74,7 +78,7 @@ class TransactionsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Transactions $transactions)
+    public function show(Transactions $transactions, $id)
     {
         //
     }

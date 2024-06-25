@@ -9,8 +9,7 @@
                     <th scope="col">Transaction Id</th>
                     <th scope="col">Payment</th>
                     <th scope="col">Total</th>
-                    <th scope="col">Cash</th>
-                    <th scope="col">Change</th>
+                    <th scope="col">Discount</th>
                     <th scope="col">Date</th>
                     <th scope="col">Actions</th>
                 </tr>
@@ -21,9 +20,7 @@
                         <td>{{ $transaction->transaction_id }}</td>
                         <td>{{ $transaction->payment }}</td>
                         <td>{{ $transaction->total }}</td>
-                        <td>{{ $transaction->cash }}</td>
-                        <td>{{ $transaction->change }}</td>
-                        <td>{{ $transaction->created_at }}</td>
+                        <td>{{ $transaction->discount_name ?? 'None' }}</td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <button class="btn btn-outline-primary" data-bs-toggle="modal"
