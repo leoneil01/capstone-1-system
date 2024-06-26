@@ -19,7 +19,7 @@
                 <tr>
                     <th scope="col">Fullname</th>
                     <th scope="col">Role</th>
-                    <th scope="col">Email</th>
+                    <!-- <th scope="col">Email</th> -->
                     <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -29,7 +29,7 @@
                     <tr>
                         <td>{{ $user->first_name . ' ' . $user->last_name }}</td>
                         <td>{{ $user->role }}</td>
-                        <td>{{ $user->email_address }}</td>
+                        <!-- <td>{{ $user->email_address }}</td> -->
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <button class="btn btn-outline-primary" data-bs-toggle="modal"

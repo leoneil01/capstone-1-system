@@ -9,25 +9,21 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    public function store(Request $request){
+    public function store(Request $request) {
         $product = Product::where('barcode', $request->barcode)->first();
-        $cashier_id = Auth::id();
         
-        if($product){
+        if ($product) {
             Cart::create([
                 'product_id' => $product->product_id,
-                'cashier_id' => $cashier_id
+                'cashier_id' => Auth::id()
             ]);
-        }
-        else{
+        } else {
             return redirect('/cashier')->with('message_error', 'Product not found.');
         }
-        
-
-
+    
         return redirect('/cashier');
-
     }
+    
 
     public function update(Request $request, $id){
         $validated = $request->validate(['qty' => ['required', 'numeric']]);
