@@ -31,7 +31,7 @@ class CashierController extends Controller
         $discounts = Discount::all();
         $genders = Gender::all();
 
-        $products = Product::all();
+        $products = Product::where('isDeleted', false)->get();
 
         $cart = Cart::where('cashier_id', Auth::user()->user_id)
             ->Leftjoin('products', 'carts.product_id', "=", 'products.product_id')->get(); //Returns all item added to cart by cashier

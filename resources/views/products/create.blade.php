@@ -11,7 +11,7 @@
                     <div class="row mb-5">
                         <div class="col mb-3">
                             <div>
-                                <img src="{{ $product->product_image ? asset('storage/img/product/' . $product->product_image) : asset('images/image-gallery.png') }}" id="preview_image" alt="Product Image" width="200">
+                                <img src="{{ asset('images/image-gallery.png') }}" id="preview_image" alt="Product Image" width="200">
                             </div>
                             <div>
                                 <label for="product_image">Upload Image:</label>

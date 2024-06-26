@@ -53,7 +53,7 @@
                         <!-- Cart items -->
                         @foreach ($cart as $item)
                             <li id="item">
-                                <img src="{{ asset('images/sample_image.jpg') }}" alt="Product Image" draggable="false">
+                                <img src="{{$item->product_image ? asset('storage/img/product/' . $item->product_image) : asset('images/shopping_bag.png') }}" alt="Product Image" draggable="false">
                                 <div class="product-details">
                                     <h1>{{ $item->product_name }}</h1>
                                     <h2 id="unit-price">{{ $item->unit_price }}</h2>
@@ -80,7 +80,7 @@
                     <li class="card-item">
                         <form action="/cashier/add-to-cart" method="post">
                             @csrf
-                            <div><img src="{{ asset('images/sample_image.jpg') }}" alt="Product Image" draggable="false"
+                            <div><img src="{{$product->product_image ? asset('storage/img/product/' . $product->product_image) : asset('images/shopping_bag.png') }}" alt="Product Image" draggable="false"
                                     width="50px"></div>
                             <div>{{ $product->product_name }}</div>
                             <div>{{ $product->unit_price }}</div>
