@@ -36,7 +36,7 @@ Route::controller(UserController::class)->group(function () {
 //make routes for admincontroller and cashier controller
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::middleware(AdminMiddleware::class)->group(function () {
+    Route::middleware('admin')->group(function () {
         Route::controller(AdminController::class)->group(function () {
             Route::get('/admin', 'index');
         });
@@ -76,7 +76,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::middleware(CashierMiddleware::class)->group(function () {
+    Route::middleware('cashier')->group(function () {
         Route::controller(CashierController::class)->group(function () {
             Route::get('/cashier', 'index');
             Route::put('/cashier/profile/update/{id}', 'update')->name('cashier.profile.update');
