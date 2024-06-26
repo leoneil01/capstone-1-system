@@ -42,7 +42,7 @@ class UserController extends Controller
 
             $roles = Role::all();
             $genders = Gender::all();
-            $users = $users->paginate(10)
+            $users = $users->paginate(5)
             ->appends(['search' => request()->get('search')]);
 
         return view('users.index', compact('users', 'roles', 'genders'));

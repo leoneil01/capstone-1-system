@@ -39,7 +39,7 @@ class ProductController extends Controller
 
         $products = $products->orderBy('products.product_name')
             ->select('products.*', 'suppliers.supplier_name as supplier_name', 'categories.category_name as category_name', 'brands.brand_name as brand_name')
-            ->paginate(7)
+            ->paginate(5)
             ->appends(['search' => request()->get('search')]);
 
         $suppliers = Supplier::all();
