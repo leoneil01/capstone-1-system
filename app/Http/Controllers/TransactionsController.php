@@ -78,9 +78,16 @@ class TransactionsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Transactions $transactions, $id)
+    public function show($id)
     {
-        //
+        $receiptData = Transactions::Leftjoin('payments', 'transactions.payment_id', "=", 'payments.payment_id')
+        ->Leftjoin('discounts', 'transactions.discount_id', "=", 'discounts.discount_id')
+        ->where('transaction_id', $id)
+        ->first();
+        //dd($receiptData);
+
+        $salesRecords = Sales::where('transaction_id', $id)->get();
+        return view('cashier.receipt', compact('receiptData', 'salesRecords'));
     }
 
     /**

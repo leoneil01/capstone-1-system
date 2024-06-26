@@ -23,8 +23,10 @@
                         <td>{{ $transaction->discount_name ?? 'None' }}</td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <button class="btn btn-outline-primary" data-bs-toggle="modal"
-                                    data-bs-target="#showTransaction{{ $transaction->transaction_id }}">View</button>
+                                {{-- <button class="btn btn-outline-primary" data-bs-toggle="modal"
+                                    data-bs-target="#showTransaction{{ $transaction->transaction_id }}">View</button> --}}
+                                <a href="/admin/transaction/show/{{ $transaction->transaction_id }}"
+                                    class="btn btn-outline-primary">View</a>
                                 <a href="/admin/transaction/edit/{{ $transaction->transaction_id }}"
                                     class="btn btn-outline-primary">Edit</a>
                                 <button class="btn btn-outline-primary" data-bs-toggle="modal"
@@ -38,6 +40,6 @@
             </tbody>
         </table>
     </div>
-        {{-- @extends('transactions.show')
+    {{-- @extends('transactions.show')
         @extends('transactions.delete') --}}
 @endsection
