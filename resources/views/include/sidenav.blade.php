@@ -19,14 +19,14 @@
         </li>
         <li>
             <a href="#">
-                <span class="sidenav-icon"><x-entypo-bar-graph class="fas-icon" /></span>
-                <span class="sidenav-title">Student Progress</span>
+                <span class="sidenav-icon"><x-forkawesome-book class="fas-icon" /></span>
+                <span class="sidenav-title">Grades</span>
             </a>
         </li>
         <li>
             <a href="#">
-                <span class="sidenav-icon"><x-forkawesome-book class="fas-icon" /></span>
-                <span class="sidenav-title">Grades</span>
+                <span class="sidenav-icon"><x-tabler-device-desktop-analytics class="fas-icon" /></span>
+                <span class="sidenav-title">Reports</span>
             </a>
         </li>
         <li>
@@ -37,8 +37,8 @@
         </li>
         <li>
             <a href="#">
-                <span class="sidenav-icon"><x-tabler-device-desktop-analytics class="fas-icon" /></span>
-                <span class="sidenav-title">Reports</span>
+                <span class="sidenav-icon"><x-entypo-bar-graph class="fas-icon" /></span>
+                <span class="sidenav-title">Student Progress</span>
             </a>
         </li>
         <li>
