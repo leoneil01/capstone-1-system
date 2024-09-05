@@ -1,7 +1,7 @@
 @extends('layout.main')
 @section('admin-content')
     @include('include.sidenav')
-    @include('include.topbar')
+    {{-- @include('include.topbar')
     <div class="card-info-container">
         <div class="card-info">
             <div class="card-label">
@@ -44,5 +44,5 @@
             </div>
         </div>
     </div>
-    </script>
+    </script> --}}
 @endsection
