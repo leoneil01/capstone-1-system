@@ -41,30 +41,6 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/admin', 'index');
         });
 
-        Route::controller(ProductController::class)->group(function () {
-            Route::get('/admin/products', 'index');
-            Route::get('/admin/product/edit/{id}', 'edit');
-            Route::put('/admin/product/update/{id}', 'update');
-            Route::delete('/admin/product/destroy/{id}', 'destroy');
-            Route::post('/admin/product/store', 'store');
-        });
-
-        Route::controller(SupplierController::class)->group(function () {
-            Route::get('/admin/suppliers', 'index');
-            Route::get('/admin/supplier/edit/{id}', 'edit');
-            Route::post('/admin/supplier/store', 'store');
-            Route::put('/admin/supplier/update/{id}', 'update');
-            Route::delete('/admin/supplier/destroy/{id}', 'destroy');
-        });
-
-        Route::controller(TransactionsController::class)->group(function () {
-            Route::get('/admin/transaction/show/{id}', 'show');
-            Route::get('/admin/transactions', 'index');
-            Route::get('/admin/transaction/edit/{id}', 'edit');
-            Route::put('/admin/transaction/update/{id}', 'update');
-            Route::delete('/admin/transaction/destroy/{id}', 'destroy');
-        });
-
         Route::controller(UserController::class)->group(function () {
             Route::get('/admin/users', 'index');
             Route::get('/admin/user/edit/{id}', 'edit');

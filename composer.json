@@ -6,11 +6,16 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "codeat3/blade-forkawesome": "^1.10",
+        "codeat3/blade-game-icons": "^1.4",
+        "davidhsianturi/blade-bootstrap-icons": "^1.5",
         "laravel/framework": "^11.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
+        "owenvoke/blade-entypo": "^2.2",
         "owenvoke/blade-fontawesome": "^2.6",
-        "realrashid/sweet-alert": "^7.1"
+        "realrashid/sweet-alert": "^7.1",
+        "ryangjchandler/blade-tabler-icons": "^2.3"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

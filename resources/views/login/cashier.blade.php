@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content bg-dark text-white">
             <div class="modal-header border-bottom-0">
-                <h1 class="modal-title fs-5" id="cashierLoginModalLabel">Cashier Login</h1>
+                <h1 class="modal-title fs-5" id="cashierLoginModalLabel">Teacher Login</h1>
             </div>
             <form action="/process/login/cashier" method="POST">
                 @csrf
